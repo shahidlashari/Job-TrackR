@@ -1,11 +1,11 @@
 import { AUTH_USER } from '../types';
 
-export const signOut = () => {
+const signOut = () => {
   localStorage.removeItem('token');
   return {
     type: AUTH_USER,
-    payload: ''
+    payload: '',
   };
 };
 
-
+export default signOut;
