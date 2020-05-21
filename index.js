@@ -10,7 +10,6 @@ const app = express();
 // Setup middlewares
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-
 app.use(routes);
 
 // This will make it so that passport knows that we have strategies defined
