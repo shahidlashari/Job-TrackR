@@ -1,21 +1,21 @@
 import {
-  // eslint-disable-next-line import/named
+
   GET_EMPLOYER_DATA,
-  // eslint-disable-next-line import/named
+
   GET_EMPLOYER_DATA_ERROR,
-  // eslint-disable-next-line import/named
+
   GET_REGIONAL_DATA,
-  // eslint-disable-next-line import/named
+
   GET_REGIONAL_DATA_ERROR,
-  // eslint-disable-next-line import/named
+
   GET_HISTORICAL_DATA,
-  // eslint-disable-next-line import/named
+
   GET_HISTORICAL_DATA_ERROR,
-  // eslint-disable-next-line import/named
+
   GET_HISTOGRAM_DATA,
-  // eslint-disable-next-line import/named
+
   GET_HISTOGRAM_DATA_ERROR,
-} from '../actions/trendingActions';
+} from '../actions/types';
 
 const INITIAL_STATE = {
   employerData: [],

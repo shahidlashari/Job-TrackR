@@ -2,14 +2,14 @@ import { combineReducers } from 'redux';
 import { reducer as formReducer } from 'redux-form';
 
 import authReducer from './authReducer';
-import dataReducer from './dataReducers';
+import trendingReducers from './trendingReducers';
 import jobsReducer from './jobsReducers';
 
 // import { ADD_USER_TODO } from '../actions/types';
 
 export default combineReducers({
   auth: authReducer,
-  data: dataReducer,
+  data: trendingReducers,
   jobs: jobsReducer,
   form: formReducer,
   // .plugin({
