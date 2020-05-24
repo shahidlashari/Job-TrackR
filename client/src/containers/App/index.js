@@ -1,28 +1,28 @@
 import React, { Component } from 'react';
-import { Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { Grid } from 'semantic-ui-react';
 
+import Navbar from '../../components/Navbar';
+import Home from '../Home';
+import Dashboard from '../Dashboard';
 import SignUp from '../SignUp';
 import SignIn from '../SignIn';
 import SignOut from '../SignOut';
-import Navbar from '../../components/Navbar';
+import Footer from '../../components/Footer';
 
 class App extends Component {
   render() {
     return (
-      <Grid
-        textAlign="center"
-        style={{ height: '100vh' }}
-        verticalAlign="middle"
-      >
-        <Grid.Column style={{ maxWidth: 700 }}>
-          <Navbar authenticated={this.props.authenticated} />
-          <Route exact path="/" component={SignUp} />
-          <Route exact path="/signin" component={SignIn} />
-          <Route exact path="/signout" component={SignOut} />
-        </Grid.Column>
-      </Grid>
+      <Router>
+        <Navbar authenticated={this.props.authenticated} />
+        <Route exact path="/" component={Home} />
+        <Route exact path="/home" component={Home} />
+        <Route exact path="/dashboard" component={Dashboard} />
+        <Route exact path="/signin" component={SignIn} />
+        <Route exact path="/signout" component={SignOut} />
+        <Route exact path="/signup" component={SignUp} />
+        <Footer />
+      </Router>
     );
   }
 }
