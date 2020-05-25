@@ -5,6 +5,7 @@ import { Grid, Header, Image, Container, Message, Button } from 'semantic-ui-rea
 import { Helmet } from 'react-helmet';
 import LogoImg from '../../images/logoAppTitle.png';
 import signOut from '../../actions/auth';
+// import requireAuth from '../../hoc/requireAuth';
 
 class SignOut extends Component {
   componentDidMount() {
@@ -40,4 +41,5 @@ class SignOut extends Component {
   }
 }
 
+// export default requireAuth(connect(null, { signOut })(SignOut));
 export default connect(null, { signOut })(SignOut);
