@@ -3,6 +3,11 @@ const { isEmail, isLength } = require('validator');
 const { compare, genSalt, hash } = require('bcryptjs');
 
 const UserSchema = new Schema({
+  name: {
+    type: String,
+    lowercase: true,
+    required: [true, 'You must provide name'],
+  },
   email: {
     type: String,
     unique: true,
@@ -19,7 +24,7 @@ const UserSchema = new Schema({
     type: Date,
     default: Date.now(),
   },
-  // todos: [{ type: Schema.Types.ObjectId, ref: 'Todo' }],
+  jobs: [{ type: Schema.Types.ObjectId, ref: 'Jobs' }],
 });
 
 // UserSchema.methods.toJSON = function() {
