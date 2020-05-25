@@ -21,6 +21,12 @@ mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/jobTrackR', {
   useCreateIndex: true,
   useUnifiedTopology: true,
   useFindAndModify: false,
+}, (error) => {
+  if (error) {
+    console.log(error);
+  } else {
+    console.log('Hello');
+  }
 });
 
 app.listen(PORT);
