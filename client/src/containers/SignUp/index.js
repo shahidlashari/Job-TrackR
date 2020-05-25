@@ -23,6 +23,22 @@ class SignUp extends Component {
     }
   }
 
+  renderUsername = ({ input, meta }) => {
+    // console.log(formProps);
+    // console.log(meta);
+    return (
+      <Form.Input
+        {...input}
+        fluid
+        error={meta.touched && meta.error}
+        icon="user"
+        iconPosition="left"
+        autoComplete="off"
+        placeholder="Username"
+      />
+    );
+  }
+
   renderEmail = ({ input, meta }) => {
     // console.log(formProps);
     // console.log(meta);
@@ -57,6 +73,8 @@ class SignUp extends Component {
   render() {
     const { handleSubmit, invalid, submitting, submitFailed } = this.props;
     return (
+
+
       <div>
         <Helmet>
           <style>{'body { background-color: #37373b; }'}</style>
@@ -69,6 +87,15 @@ class SignUp extends Component {
             </Header>
             <Form size="large" onSubmit={handleSubmit(this.onSubmit)}>
               <Segment stacked>
+                <Field
+                  name="username"
+                  validate={
+                    [
+                      required({ msg: 'Username is required' }),
+                    ]
+                  }
+                  component={this.renderUsername}
+                />
                 <Field
                   name="email"
                   validate={
