@@ -3,7 +3,7 @@ const { isEmail, isLength } = require('validator');
 const { compare, genSalt, hash } = require('bcryptjs');
 
 const UserSchema = new Schema({
-  name: {
+  username: {
     type: String,
     lowercase: true,
     required: [true, 'You must provide name'],
