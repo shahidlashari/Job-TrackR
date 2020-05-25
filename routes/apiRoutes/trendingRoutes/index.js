@@ -3,19 +3,19 @@ const trendingController = require('../../../controllers/trendingController');
 
 // /api/trending
 router.route('/employer')
-  .get(trendingController.topEmployers);
+  .get(trendingController.getEmployerData);
 
 // /api/trending
-router.route('/regiona')
-  .get(trendingController.regionalData);
+router.route('/regional')
+  .get(trendingController.getRegionalData);
 
 // /api/trending
 router.route('/historical')
-  .get(trendingController.historicalData);
+  .get(trendingController.getHistoricalData);
 
 // /api/trending
 router.route('/histogram')
-  .get(trendingController.histogramData);
+  .get(trendingController.getHistogramData);
 
 
 module.exports = router;
