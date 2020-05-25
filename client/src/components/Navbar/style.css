@@ -14,6 +14,7 @@
 
 .navbar-item-home,
 .navbar-item-dashboard,
-.navbar-item-chat {
+.navbar-item-chat,
+.navbar-item-trending {
   font-size: 18px;
 }
