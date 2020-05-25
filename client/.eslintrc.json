@@ -36,9 +36,11 @@
         "import/prefer-default-export": ["off"],
         "react/jsx-filename-extension": ["off"],
         "react/jsx-wrap-multilines": ["off"],
+        "react/jsx-closing-tag-location": ["off"],
         "react/state-in-constructor": ["off"],
         "react/prop-types": ["off"],
         "react/destructuring-assignment": ["off"],
+        "react/no-unescaped-entities": ["off"],
         "react/jsx-props-no-spreading": ["off"],
         "react/prefer-stateless-function": ["off"]
     }
