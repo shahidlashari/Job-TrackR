@@ -21,6 +21,22 @@ class SignUp extends Component {
     }
   }
 
+  renderName = ({ input, meta }) => {
+    // console.log(formProps);
+    // console.log(meta);
+    return (
+      <Form.Input
+        {...input}
+        fluid
+        error={meta.touched && meta.error}
+        icon="user"
+        iconPosition="left"
+        autoComplete="off"
+        placeholder="User Name"
+      />
+    );
+  }
+
   renderEmail = ({ input, meta }) => {
     // console.log(formProps);
     // console.log(meta);
@@ -57,6 +73,15 @@ class SignUp extends Component {
     return (
       <Form size="large" onSubmit={handleSubmit(this.onSubmit)}>
         <Segment stacked>
+          <Field
+            name="name"
+            validate={
+              [
+                required({ msg: 'Name is required' }),
+              ]
+            }
+            component={this.renderName}
+          />
           <Field
             name="email"
             validate={
