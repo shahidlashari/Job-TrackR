@@ -7,20 +7,19 @@ import SignUp from '../SignUp';
 import SignIn from '../SignIn';
 import SignOut from '../SignOut';
 import Navbar from '../../components/Navbar';
+import Dashboard from '../Dashboard';
+import ModalScrollingExample from '../../components/Modals';
 
 class App extends Component {
   render() {
     return (
-      <Grid
-        textAlign="center"
-        style={{ height: '100vh' }}
-        verticalAlign="middle"
-      >
-        <Grid.Column style={{ maxWidth: 700 }}>
+      <Grid>
+        <Grid.Column>
           <Navbar authenticated={this.props.authenticated} />
           <Route exact path="/" component={SignUp} />
           <Route exact path="/signin" component={SignIn} />
           <Route exact path="/signout" component={SignOut} />
+          <Route exact path="/dashboard" component={Dashboard} />
         </Grid.Column>
       </Grid>
     );
