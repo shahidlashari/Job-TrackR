@@ -1,9 +1,37 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { Segment, Container, Header, Button, Icon, Grid, Divider } from 'semantic-ui-react';
+import { Segment, Container, Header, Message, Button, Icon, Grid, Divider } from 'semantic-ui-react';
 import './style.css';
 
 class Home extends Component {
+  state = {
+    messageVisible: true,
+  }
+
+  handleDismiss = () => this.setState({ messageVisible: false });
+
+  warningMessage() {
+    if (this.state.messageVisible && !this.props.authenticated) {
+      return (
+        <Grid container stackable style={{ marginTop: '2em' }}>
+          <Grid.Row>
+            <Grid.Column>
+              <Message
+                icon="attention"
+                warning
+                onDismiss={this.handleDismiss}
+                header="You don't have access to the Job Dashboard page!"
+                content="Please create an account in the Sign-Up page in order to start tracking your job applications"
+              />
+            </Grid.Column>
+          </Grid.Row>
+        </Grid>
+      );
+    } else {
+      return null;
+    }
+  }
+
   render() {
     return (
       <div>
@@ -44,7 +72,10 @@ class Home extends Component {
             </Button>
           </Container>
         </Segment>
-        <Segment style={{ padding: '7em 0em' }} vertical>
+
+        { this.props.authenticated ? null : this.warningMessage() }
+
+        <Segment style={{ padding: '5em 0em' }} vertical>
           <Grid container stackable verticalAlign="middle">
             <Grid.Row>
               <Grid.Column textAlign="center">
@@ -61,9 +92,13 @@ class Home extends Component {
                 <p style={{ fontSize: '1.33em' }}>
                   Join the community and tell others all the cool job searches you've done and give tips for your fellow users!
                 </p>
+                <Button as={Link} to="/chatroom" size="large" color="blue">
+                  Head to Chat Room
+                  <Icon name="right arrow" />
+                </Button>
               </Grid.Column>
               <Grid.Column floated="right" width={6}>
-                Placeholder Socket.io Chat
+                Placeholder Image of Chat Room (or something)
               </Grid.Column>
             </Grid.Row>
           </Grid>

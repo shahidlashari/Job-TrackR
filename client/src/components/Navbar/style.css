@@ -9,10 +9,11 @@
 
 .navbar-title {
   margin-top: -3px;
-  margin-right: 0.5em;
+  margin-right: 1.5em;
 }
 
 .navbar-item-home,
-.navbar-item-dashboard {
+.navbar-item-dashboard,
+.navbar-item-chat {
   font-size: 18px;
 }
