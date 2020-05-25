@@ -16,7 +16,8 @@ module.exports = {
 
   jobSave: async (req, res) => {
 
-    const { jobTitle, publishedId, publishedDate, level, categories, location, companyName, description, coverLetter, resume, deadline, salary, note} = req.body;
+    const {
+      jobTitle, publishedId, publishedDate, level, categories, location, companyName, description, coverLetter, resume, deadline, salary, note} = req.body;
     console.log(jobTitle);
     try {
       const saveJobs = new Jobs({ jobTitle, publishedId, publishedDate, level, categories, location, companyName, description, coverLetter, resume, deadline, salary, note, user: req.user._id });
