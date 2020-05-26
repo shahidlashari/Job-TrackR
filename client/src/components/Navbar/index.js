@@ -33,9 +33,13 @@ const Navbar = (props) => {
         <Icon name="chat" />
         Chat Room
       </Menu.Item>
-      <Menu.Item as={Link} to="/trending" className="navbar-item-trending">
+      {/* <Menu.Item as={Link} to="/trending" className="navbar-item-trending">
         <Icon name="chart bar" />
         Trending
+      </Menu.Item> */}
+      <Menu.Item as={Link} to="/search" className="navbar-item-search">
+        <Icon name="search" />
+        Search
       </Menu.Item>
       { props.authenticated ? <Menu.Item as={Link} to="/dashboard" className="navbar-item-dashboard">
         <Icon name="cogs" />

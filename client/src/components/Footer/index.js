@@ -11,7 +11,7 @@ import pfp5 from '../../images/pfp5.png';
 const Footer = () => {
   return (
     <div>
-      <Segment inverted vertical style={{ padding: '3em 0em' }}>
+      <Segment inverted vertical style={{ padding: '-10000em 0em' }}>
         <Container>
           <Grid divided inverted stackable>
             <Grid.Row>
