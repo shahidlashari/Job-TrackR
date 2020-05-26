@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Card, Grid, Header, Container, GridColumn, GridRow } from 'semantic-ui-react';
 import CardExampleGroups from '../JobCards';
-import MiniMenu from '../../components/Menu';
 import Drag from '../../components/DragnDrop';
 
 class Dashboard extends Component {
