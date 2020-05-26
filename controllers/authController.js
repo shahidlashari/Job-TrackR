@@ -20,9 +20,8 @@ function tokenForUser(user) {
 module.exports = {
   signUp: async (req, res) => {
     const { username, email, password } = req.body;
-
     if (!username || !email || !password) {
-      return res.status(400).json({ error: 'You must provide name, email and password' });
+      return res.status(400).json({ error: 'You must provide username, email and password' });
     }
 
     if (!isEmail(email)) {
@@ -34,6 +33,9 @@ module.exports = {
     }
 
     try {
+      // See if a user with the given username exists
+      const existingUserName = await User.findOne({ username });
+      if (existingUserName) { return res.status(401).json({ error: 'User username already exists' }); }
       // See if a user with the given email exists
       const existingUser = await User.findOne({ email });
       if (existingUser) { return res.status(401).json({ error: 'User email already exists' }); }

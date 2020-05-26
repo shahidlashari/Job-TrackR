@@ -57,7 +57,7 @@ class Home extends Component {
             />
             <Header
               as="h2"
-              content="Keep in track of your Job Applications and Job Searches"
+              content="Search for a job that you always have dreamed of and keep track forever"
               inverted
               style={{
                 fontSize: '1.8em',
@@ -68,6 +68,10 @@ class Home extends Component {
             />
             <Button as={Link} to="/signup" primary size="massive">
               Get Started
+              <Icon name="right arrow" />
+            </Button>
+            <Button as={Link} to="/search" primary size="massive">
+              Search Job
               <Icon name="right arrow" />
             </Button>
           </Container>
@@ -102,44 +106,6 @@ class Home extends Component {
               </Grid.Column>
             </Grid.Row>
           </Grid>
-        </Segment>
-
-        <Segment style={{ padding: '8em 0em' }} vertical>
-          <Container text>
-            <Header as="h3" style={{ fontSize: '2em' }}>
-              Top Industries
-            </Header>
-            <p style={{ fontSize: '1.33em' }}>
-              Discover the current top industries for job posts
-            </p>
-            <Button as="a" size="large" inverted color="blue">
-              Find Out More
-            </Button>
-
-            <Divider style={{ margin: '2em 0em' }} />
-
-            <Header as="h3" style={{ fontSize: '2em' }}>
-              Top Cities
-            </Header>
-            <p style={{ fontSize: '1.33em' }}>
-              Discover the current top cities for job posts
-            </p>
-            <Button as="a" size="large" inverted color="blue">
-              Find Out More
-            </Button>
-
-            <Divider style={{ margin: '2em 0em' }} />
-
-            <Header as="h3" style={{ fontSize: '2em' }}>
-              Top Employers
-            </Header>
-            <p style={{ fontSize: '1.33em' }}>
-              Discover the current top employers for job posts
-            </p>
-            <Button as="a" size="large" inverted color="blue">
-              Find Out More
-            </Button>
-          </Container>
         </Segment>
       </div>
     );

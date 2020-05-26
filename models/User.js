@@ -5,8 +5,7 @@ const { compare, genSalt, hash } = require('bcryptjs');
 const UserSchema = new Schema({
   username: {
     type: String,
-    lowercase: true,
-    required: [true, 'You must provide name'],
+    required: [true, 'You must provide username'],
   },
   email: {
     type: String,

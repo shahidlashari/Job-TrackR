@@ -36,7 +36,7 @@ module.exports = {
     }
   },
   updateSavedJob: async (req, res) => {
-    console.log('Im hit');
+    console.log('Im hi');
     const { jobId } = req.body;
     console.log(jobId);
     const { status, coverLetter, resume } = req.body;
@@ -45,6 +45,15 @@ module.exports = {
         { status, coverLetter, resume },
         { new: true });
       return res.json(updatedJob);
+    } catch (e) {
+      return res.status(403).json({ e });
+    }
+  },
+  deleteSavedJob: async (req, res) => {
+    const { jobId } = req.body;
+    try {
+      const deletedJob = await Jobs.findByIdAndDelete(jobId);
+      return res.status(200).json({ deletedJob});
     } catch (e) {
       return res.status(403).json({ e });
     }
