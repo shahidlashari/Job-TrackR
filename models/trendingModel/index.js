@@ -16,7 +16,7 @@ const TrendingSchema = new Schema({
   month: {
     type: String,
     date: String,
-},
+  },
 
 
 });

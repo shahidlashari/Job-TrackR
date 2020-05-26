@@ -60,7 +60,6 @@ const JobsSchema = new Schema(
 // adds a dynamically-created property to schema
 JobsSchema.virtual('jobUrl').get(function () {
   return `https://www.themuse.com/job/redirect/${this.publishedId.toString()}`;
-
 });
 
 const Jobs = model('Jobs', JobsSchema);

@@ -1,7 +1,7 @@
 const { isEmail, isLength } = require('validator');
 const jwt = require('jwt-simple');
-const { User } = require('../models');
-const { secret } = require('../config');
+const { User } = require('../../models');
+const { secret } = require('../../config');
 
 function tokenForUser(user) {
   // 1st argument is the information we want to encode

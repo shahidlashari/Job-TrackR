@@ -1,6 +1,6 @@
 const axios = require('axios');
 
-const { Jobs, User } = require('../models/index');
+const { Jobs, User } = require('../../models');
 
 module.exports = {
   jobSearch: async (req, res) => {
@@ -15,9 +15,7 @@ module.exports = {
   },
 
   jobSave: async (req, res) => {
-
-    const {
-      jobTitle, publishedId, publishedDate, level, categories, location, companyName, description, coverLetter, resume, deadline, salary, note} = req.body;
+    const { jobTitle, publishedId, publishedDate, level, categories, location, companyName, description, coverLetter, resume, deadline, salary, note } = req.body;
     console.log(jobTitle);
     try {
       const saveJobs = new Jobs({ jobTitle, publishedId, publishedDate, level, categories, location, companyName, description, coverLetter, resume, deadline, salary, note, user: req.user._id });
@@ -53,7 +51,7 @@ module.exports = {
     const { jobId } = req.body;
     try {
       const deletedJob = await Jobs.findByIdAndDelete(jobId);
-      return res.status(200).json({ deletedJob});
+      return res.status(200).json({ deletedJob });
     } catch (e) {
       return res.status(403).json({ e });
     }
