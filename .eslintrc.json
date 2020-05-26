@@ -25,6 +25,8 @@
     "rules": {
         "linebreak-style": ["off"],
         "func-names": ["off"],
+        "max-len": ["off"],
+        "object-curly-newline": ["off"],
         "no-underscore-dangle": ["off"],
         "no-console": ["off"]
     }

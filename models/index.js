@@ -1,7 +1,6 @@
-const User = require('./User');
-const Trending = require('./Trending');
-// eslint-disable-next-line import/no-unresolved
-const Jobs = require('./Jobs');
+const User = require('./userModel');
+const Trending = require('./trendingModel');
+const Jobs = require('./jobsModel');
 
 module.exports = {
   User,

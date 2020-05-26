@@ -1,6 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
-
+const cors = require('cors');
 const routes = require('./routes');
 
 const PORT = process.env.PORT || 3001;
@@ -10,6 +10,8 @@ const app = express();
 // Setup middlewares
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(cors());
+
 app.use(routes);
 
 // This will make it so that passport knows that we have strategies defined
@@ -21,12 +23,8 @@ mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/jobTrackR', {
   useCreateIndex: true,
   useUnifiedTopology: true,
   useFindAndModify: false,
-}, (error) => {
-  if (error) {
-    console.log(error);
-  } else {
-    console.log('Hello');
-  }
+}, (err) => {
+  if (err) console.log(err);
 });
 
 app.listen(PORT);
