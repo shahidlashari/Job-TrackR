@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Segment, Container, Header, Message, Button, Icon, Grid, Divider } from 'semantic-ui-react';
+import { connect } from "react-redux";
 import './style.css';
 
 class Home extends Component {
@@ -112,4 +113,8 @@ class Home extends Component {
   }
 }
 
-export default Home;
+function mapStateToProps(state) {
+  return { authenticated: state.auth.authenticated }
+}
+
+export default connect(mapStateToProps, {})(Home);

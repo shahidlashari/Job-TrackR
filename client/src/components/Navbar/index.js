@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Menu, Image, Icon, Button } from 'semantic-ui-react';
 import LogoImg from '../../images/logo.png';
+import { connect } from "react-redux";
 import './style.css';
 
 // export default (props) => (
@@ -61,5 +62,9 @@ const Navbar = (props) => {
     </Menu>
   );
 };
+function mapStateToProps(state) {
+  return { authenticated: state.auth.authenticated }
+}
 
-export default Navbar;
+export default connect(mapStateToProps, {})(Navbar);
+
