@@ -1,21 +1,26 @@
 const router = require('express').Router();
-const trendingController = require('../../../controllers/trendingController');
+const {
+  getEmployerData,
+  getRegionalData,
+  getHistoricalData,
+  getHistogramData,
+} = require('../../../controllers/trendingController');
 
 // /api/trending
 router.route('/employer')
-  .get(trendingController.getEmployerData);
+  .get(getEmployerData);
 
 // /api/trending
 router.route('/regional')
-  .get(trendingController.getRegionalData);
+  .get(getRegionalData);
 
 // /api/trending
 router.route('/historical')
-  .get(trendingController.getHistoricalData);
+  .get(getHistoricalData);
 
 // /api/trending
 router.route('/histogram')
-  .get(trendingController.getHistogramData);
+  .get(getHistogramData);
 
 
 module.exports = router;

@@ -23,6 +23,8 @@ const UserSchema = new Schema({
     type: Date,
     default: Date.now(),
   },
+  messages: [{ type: Schema.Types.ObjectId, ref: 'Message' }],
+  room: { type: Schema.Types.ObjectId, ref: 'Room' },
   jobs: [{ type: Schema.Types.ObjectId, ref: 'Jobs' }],
 });
 

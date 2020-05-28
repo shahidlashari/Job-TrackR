@@ -17,8 +17,6 @@ const TrendingSchema = new Schema({
     type: String,
     date: String,
   },
-
-
 });
 
 
