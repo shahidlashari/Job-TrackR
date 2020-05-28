@@ -4,10 +4,18 @@ const { Jobs, User } = require('../../models');
 
 module.exports = {
   jobSearch: async (req, res) => {
-    const location = 'San Francisco, CA';
-    const fixedLocation = location.replace(' ', '%20').replace(',', '%2C');
+    const { role, level, location } = req.query;
+    console.log(role, level, location);
+    console.log(location);
+    const newRole = role.replace(' ', '%20').replace(',', '%2C');
+    const newLevel = level.replace(' ', '%20').replace(',', '%2C');
+    const newLocation = location.replace(' ', '%20').replace(',', '%2C').replace(' ', '%20');
+    console.log(newLocation);
+
     try {
-      const { data } = await axios.get(`https://www.themuse.com/api/public/jobs?location=${fixedLocation}&page=1`);
+      const { data } = await axios.get(`https://www.themuse.com/api/public/jobs?location=${newLocation}&page=2`);
+
+      // const { data } = await axios.get(`https://www.themuse.com/api/public/jobs?category=${newRole}&level=${newLevel}&location=${newLocation}&page=1`);
       return res.status(200).json({ data });
     } catch (e) {
       return res.status(403).json({ e });

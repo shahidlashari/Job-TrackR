@@ -1,4 +1,6 @@
 import {
+  SEARCH_JOBS,
+  SEARCH_JOBS_ERROR,
   GET_USER_JOBS,
   GET_USER_JOBS_ERROR,
   ADD_USER_JOBS,
@@ -8,8 +10,12 @@ import {
 } from '../actions/types';
 
 const INITIAL_STATE = {
+  searchJob: [],
+  searchJobError: '',
   jobs: [],
   userJobs: [],
+  searchJobServerError: '',
+  searchJobClientError: '',
   getUserJobsServerError: '',
   getUserJobsClientError: '',
   getAllJobsError: '',
@@ -21,9 +27,13 @@ const INITIAL_STATE = {
 export default function (state = INITIAL_STATE, action) {
   switch (action.type) {
     // case GET_ALL_JOBS:
-    //   return {...state, Jobs: action.payload, getAllJobsError: '' };
+    //   return {...state, Jobs: action.payload, getAllJobsError:  '' };
     // case GET_ALL_JOBS_ERROR:
     //   return {...state, getAllJobsError: action.payload };
+    case SEARCH_JOBS:
+      return { ...state, searchJob: action.payload, searchJobError: '' };
+    case SEARCH_JOBS_ERROR:
+      return { ...state, searchJobServerError: action.serverError, searchJobClientError: action.clientError };
     case GET_USER_JOBS:
       return { ...state, userJobs: action.payload, getUserJobsClientError: '', getUserJobsServerError: '', updateJobsCompleteError: '', deleteJobsError: '' };
     case GET_USER_JOBS_ERROR:
