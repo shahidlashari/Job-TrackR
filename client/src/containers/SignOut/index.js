@@ -29,9 +29,9 @@ class SignOut extends Component {
             <Container>
               <Message error header="Leaving so soon? You're always welcome to come back!" style={{ marginTop: '20px' }} />
               <Button.Group style={{ marginTop: '20px' }}>
-                <Button as={Link} to="/signin" color="blue" positive content="Go back to Sign In" />
+                <Button as={Link} to="/signin" inverted color="blue" content="Go back to Sign In" />
                 <Button.Or />
-                <Button as={Link} to="/signup" color="blue" negative content="Go back to Sign Up" />
+                <Button as={Link} to="/signup" inverted color="red" content="Go back to Sign Up" />
               </Button.Group>
             </Container>
           </Grid.Column>

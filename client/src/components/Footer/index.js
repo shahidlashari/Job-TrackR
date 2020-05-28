@@ -21,10 +21,10 @@ const Footer = () => {
                   Job TrackR
                 </Header>
                 <p>
-                With Job TrackR, Search Thousands of Employers in the area of your choice to find the Job thats right for you.
+                  Job TrackR allows you to search specific job categories in the area of your choice to find the job that's right for you.
                 </p>
                 <p>
-                Register and Ramp-up your Job Search with Job TrackR Tools, Collaborative Chat Rooms, Access to relevant Job Trends, Track and Update Job Search Details and Progress on your Job Dashboard.
+                  Register and ramp-up your job search with Job TrackR tools: collaborative live chat messaging with other users, access to relevant job trends, and track and update job search details to make proress in your Job Dashboard page!
                 </p>
               </Grid.Column>
               <Grid.Column width={3}>

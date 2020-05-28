@@ -40,11 +40,15 @@ module.exports = {
       const existingUser = await User.findOne({ email });
       if (existingUser) { return res.status(401).json({ error: 'User email already exists' }); }
       const user = await new User({ username, email, password }).save();
+      const currentUser = await User.findById(user._id).select('-password');
       // Eventually we will send a token
-      return res.status(200).json({ token: tokenForUser(user) });
+      return res.status(200).json({ token: tokenForUser(user), user: currentUser });
     } catch (e) {
       return res.status(403).json(e);
     }
   },
-  signIn: (req, res) => res.status(200).json({ token: tokenForUser(req.user) }),
+  signIn: async (req, res) => {
+    const currentUser = await User.findById(req.user._id).select('-password');
+    res.status(200).json({ token: tokenForUser(req.user), user: currentUser });
+  },
 };
