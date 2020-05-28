@@ -26,6 +26,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@dicebear/avatars": "^4.2.0",
+    "@dicebear/avatars-avataaars-sprites": "^4.2.0",
     "axios": "^0.19.2",
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
