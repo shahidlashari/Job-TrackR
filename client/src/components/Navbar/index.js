@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 import { Menu, Image, Icon, Button } from 'semantic-ui-react';
 import LogoImg from '../../images/logo.png';
 import './style.css';
@@ -62,4 +63,8 @@ const Navbar = (props) => {
   );
 };
 
-export default Navbar;
+function mapStateToProps(state) {
+  return { authenticated: state.auth.authenticated };
+}
+
+export default connect(mapStateToProps, {})(Navbar);

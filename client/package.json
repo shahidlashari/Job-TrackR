@@ -4,6 +4,9 @@
   "private": true,
   "proxy": "http://localhost:3001",
   "dependencies": {
+    "@dicebear/avatars": "^4.2.0",
+    "@dicebear/avatars-avataaars-sprites": "^4.2.0",
+    "@dicebear/avatars-male-sprites": "^4.2.0",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
