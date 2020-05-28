@@ -16,7 +16,7 @@ class SignUp extends Component {
       const { data } = await axios.post('/api/auth/signup', formValues);
       console.log(data);
       localStorage.setItem('token', data.token);
-      dispatch({ type: AUTH_USER, payload: data.token });
+      dispatch({ type: AUTH_USER, payload: data });
       this.props.history.push('/dashboard');
     } catch (e) {
       dispatch({ type: AUTH_USER_ERROR, payload: e });
@@ -73,8 +73,6 @@ class SignUp extends Component {
   render() {
     const { handleSubmit, invalid, submitting, submitFailed } = this.props;
     return (
-
-
       <div>
         <Helmet>
           <style>{'body { background-color: #37373b; }'}</style>

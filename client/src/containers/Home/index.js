@@ -58,7 +58,7 @@ class Home extends Component {
             />
             <Header
               as="h2"
-              content="Search for a job that you always have dreamed of and keep track forever"
+              content="Search for a job that you have always dreamed of and keep track of it forever"
               inverted
               style={{
                 fontSize: '1.8em',

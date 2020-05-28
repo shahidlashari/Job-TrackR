@@ -11,6 +11,9 @@ module.exports = {
       return res.status(403).json({ e });
     }
   },
+  getUser: async (data, callback) => {
+
+  },
   // addTodo: async (req, res) => {
   //   const { text } = req.body;
   //   if (!text) {
