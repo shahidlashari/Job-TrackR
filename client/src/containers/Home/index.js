@@ -77,9 +77,7 @@ class Home extends Component {
             </Button>
           </Container>
         </Segment>
-
         { this.props.authenticated ? null : this.warningMessage() }
-
         <Segment style={{ padding: '5em 0em' }} vertical>
           <Grid container stackable verticalAlign="middle">
             <Grid.Row>

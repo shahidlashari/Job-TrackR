@@ -13,6 +13,8 @@ import SignUp from '../SignUp';
 import SignIn from '../SignIn';
 import SignOut from '../SignOut';
 import Footer from '../../components/Footer';
+import Trending from '../Trending';
+
 
 class App extends Component {
   render() {
@@ -23,10 +25,9 @@ class App extends Component {
         <Route exact path="/" component={Home} authenticated={this.props.authenticated} />
         <Route exact path="/home" component={Home} authenticated={this.props.authenticated} />
         <Route exact path="/chatroom" component={ChatRoom} />
-        {/* <Route exact path="/trending" component={Trending} /> */}
+        <Route exact path="/trending" component={Trending} />
         <Route exact path="/dashboard" component={Dashboard} />
         <Route exact path="/search" component={Search} />
-
         <Route exact path="/signin" component={SignIn} />
         <Route exact path="/signout" component={SignOut} />
         <Route exact path="/signup" component={SignUp} />
