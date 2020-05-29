@@ -5,3 +5,7 @@
   background-attachment: fixed;
   background-size: cover;
 }
+
+.slick-prev:before, .slick-next:before { 
+  color:black !important;
+}
