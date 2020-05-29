@@ -1,4 +1,4 @@
-import React from 'react';
+import { React } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Menu, Image, Icon, Button } from 'semantic-ui-react';
@@ -27,11 +27,11 @@ const Navbar = (props) => {
         <Image src={LogoImg} width="65" height="60" className="navbar-logo" />
         <h1 className="navbar-title">Job TrackR</h1>
       </Menu.Item>
-      <Menu.Item as={NavLink} to="/home" activeClassName="active"className="navbar-item-home">
+      <Menu.Item as={NavLink} to="/home" activeClassName="active" className="navbar-item-home">
         <Icon name="home" />
         Home
       </Menu.Item>
-      <Menu.Item as={NavLink} to="/chatroom"activeClassName="active" className="navbar-item-chat">
+      <Menu.Item as={NavLink} to="/chatroom" activeClassName="active" className="navbar-item-chat">
         <Icon name="chat" />
         Chat Room
       </Menu.Item>
@@ -39,7 +39,7 @@ const Navbar = (props) => {
         <Icon name="chart bar" />
         Trending
       </Menu.Item> */}
-      <Menu.Item as={NavLink} to="/search" activeClassName="active"className="navbar-item-search">
+      <Menu.Item as={NavLink} to="/search" activeClassName="active" className="navbar-item-search">
         <Icon name="search" />
         Search
       </Menu.Item>
