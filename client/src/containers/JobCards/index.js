@@ -25,7 +25,7 @@ const CardExampleGroups = () => (
           <Modal.Actions>
             <Button primary>
               Save
-              <Icon name='right chevron' />
+              <Icon name="right chevron" />
             </Button>
           </Modal.Actions>
         </Modal>
@@ -53,7 +53,7 @@ const CardExampleGroups = () => (
           <Modal.Actions>
             <Button primary>
               Save
-              <Icon name='right chevron' />
+              <Icon name="right chevron" />
             </Button>
           </Modal.Actions>
         </Modal>
@@ -81,7 +81,7 @@ const CardExampleGroups = () => (
           <Modal.Actions>
             <Button primary>
               Save
-              <Icon name='right chevron' />
+              <Icon name="right chevron" />
             </Button>
           </Modal.Actions>
         </Modal>

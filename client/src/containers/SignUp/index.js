@@ -14,7 +14,6 @@ class SignUp extends Component {
     // console.log(formsProps);
     try {
       const { data } = await axios.post('/api/auth/signup', formValues);
-      console.log(data);
       localStorage.setItem('token', data.token);
       dispatch({ type: AUTH_USER, payload: data });
       this.props.history.push('/dashboard');

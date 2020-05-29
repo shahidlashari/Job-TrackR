@@ -11,22 +11,22 @@ export default class MiniMenu extends Component {
     const { activeItem } = this.state;
 
     return (
-      <Menu size='medium'>
-        <Menu.Item 
-          as={Link} 
+      <Menu size="medium">
+        <Menu.Item
+          as={Link}
           to="/dashboard"
-          name='savedjobs'
+          name="savedjobs"
           active={activeItem === 'savedjobs'}
           onClick={this.handleItemClick}
         >
-          <Label color='teal'>3</Label>
+          <Label color="teal">3</Label>
           Saved Jobs
         </Menu.Item>
 
         <Menu.Item
           as={Link}
-          to="/trending"
-          name='available'
+          to="/search"
+          name="available"
           active={activeItem === 'available'}
           onClick={this.handleItemClick}
         >
@@ -35,7 +35,7 @@ export default class MiniMenu extends Component {
         </Menu.Item>
 
         <Menu.Item
-          name='updates'
+          name="updates"
           active={activeItem === 'updates'}
           onClick={this.handleItemClick}
         >
@@ -43,9 +43,9 @@ export default class MiniMenu extends Component {
           Updates
         </Menu.Item>
         <Menu.Item>
-          <Input icon='search' placeholder='Search jobs...' />
+          <Input icon="search" placeholder="Search jobs..." />
         </Menu.Item>
       </Menu>
-    )
+    );
   }
 }

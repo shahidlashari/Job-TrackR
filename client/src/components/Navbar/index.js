@@ -31,19 +31,19 @@ const Navbar = (props) => {
         <Icon name="home" />
         Home
       </Menu.Item>
-      <Menu.Item as={NavLink} to="/chatroom" activeClassName="active" className="navbar-item-chat">
-        <Icon name="chat" />
-        Chat Room
-      </Menu.Item>
-      {/* <Menu.Item as={NavLink} to="/trending" className="navbar-item-trending">
-        <Icon name="chart bar" />
-        Trending
-      </Menu.Item> */}
-      <Menu.Item as={NavLink} to="/search" activeClassName="active" className="navbar-item-search">
+      <Menu.Item as={Link} to="/search" className="navbar-item-search">
         <Icon name="search" />
         Search
       </Menu.Item>
-      { props.authenticated ? <Menu.Item as={NavLink} to="/dashboard" className="navbar-item-dashboard">
+      <Menu.Item as={Link} to="/trending" className="navbar-item-trending">
+        <Icon name="industry" />
+        Trending
+      </Menu.Item>
+      { props.authenticated ? <Menu.Item as={Link} to="/chatroom" className="navbar-item-chat">
+        <Icon name="chat" />
+        Chat Room
+      </Menu.Item> : null }
+      { props.authenticated ? <Menu.Item as={Link} to="/dashboard" className="navbar-item-dashboard">
         <Icon name="cogs" />
         Job Dashboard
       </Menu.Item> : null }

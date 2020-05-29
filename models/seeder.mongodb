@@ -1,0 +1,26 @@
+// MongoDB Playground
+// To disable this template go to Settings | MongoDB | Use Default Template For Playground.
+// Make sure you are connected to enable completions and to be able to run a playground.
+// Use Ctrl+Space inside a snippet or a string literal to trigger completions.
+
+// Select the database to use.
+use('jobTrackR');
+
+// The drop() command destroys all data from a collection.
+// Make sure you run it against proper database and collection.
+db.rooms.drop();
+
+// Insert a few documents into the sales collection.
+db.rooms.insertOne(
+  { text: 'Career and Advice Chat', code: '12345' },
+);
+
+// Run a find command to view items sold on April 4th, 2014.
+// db.sales.find({ date: { $gte: new Date('2014-04-04'), $lt: new Date('2014-04-05') } });
+
+// // Run an aggregation to view total sales for each product in 2014.
+// const aggregation = [
+//   { $match: { date: { $gte: new Date('2014-01-01'), $lt: new Date('2015-01-01') } } },
+//   { $group: { _id : '$item', totalSaleAmount: { $sum: { $multiply: [ '$price', '$quantity' ] } } } }
+// ];
+// db.sales.aggregate(aggregation);
