@@ -1,5 +1,5 @@
 const router = require('express').Router();
-// eslint-disable-next-line import/no-unresolved
+const { requireAuth } = require('../../../middlewares/authMiddlewares');
 const {
   jobSearch,
   jobSave,
@@ -7,11 +7,9 @@ const {
   getSavedJobs,
   deleteSavedJob,
 } = require('../../../controllers/jobSearchController');
-const { requireAuth } = require('../../../middlewares/authMiddlewares');
 
 // api/job
 router.get('/search', jobSearch);
-
 
 router.route('/save')
   .get(requireAuth, getSavedJobs)
@@ -22,6 +20,5 @@ router.route('/update')
 
 router.route('/delete')
   .delete(requireAuth, deleteSavedJob);
-
 
 module.exports = router;

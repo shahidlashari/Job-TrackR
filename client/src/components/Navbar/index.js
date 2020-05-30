@@ -5,13 +5,6 @@ import { Menu, Image, Icon, Button } from 'semantic-ui-react';
 import LogoImg from '../../images/logo.png';
 import './style.css';
 
-// export default (props) => (
-//   <Menu widths={4}>
-//     { props.authenticated ? null : <Menu.Item as={NavLink} to="/" content="Sign Up" /> }
-//     { props.authenticated ? <Menu.Item as={NavLink} to="/signout" content="Sign Out" /> : <Menu.Item as={NavLink} to="/signin" content="Sign In" />}
-//     { props.authenticated ? <Menu.Item as={NavLink} to="/dashboard" content="Job Dashboard" /> : <Menu.Item as={NavLink} to="/" content="Dashboard" /> }
-//   </Menu>
-// );
 const Navbar = (props) => {
   return (
     <Menu
@@ -48,6 +41,11 @@ const Navbar = (props) => {
         Job Dashboard
       </Menu.Item> : null }
       <Menu.Item position="right">
+        {/* <Dropdown text={props.user.username}>
+          <Dropdown.Menu>
+            <Dropdown.Item as={NavLink} to="/signout" icon="sign-out" text="Sign Out" />
+          </Dropdown.Menu>
+        </Dropdown> */}
         { props.authenticated ? <Button as={NavLink} to="/signout" inverted>
           <Icon name="sign-out" />
           Sign Out

@@ -30,8 +30,6 @@ class SignIn extends Component {
   // Dispatch the action to the reducer to set the token as the state for authentication
   // Redirect the user to the '/counter' route
   renderUsername = ({ input, meta }) => {
-    // console.log(formProps);
-    // console.log(meta);
     return (
       <Form.Input
         {...input}
@@ -46,8 +44,6 @@ class SignIn extends Component {
   }
 
   renderEmail = ({ input, meta }) => {
-    // console.log(formProps);
-    // console.log(meta);
     return (
       <Form.Input
         {...input}
@@ -74,6 +70,12 @@ class SignIn extends Component {
         placeholder="Password"
       />
     );
+  }
+
+  handlePressEnter(e) {
+    if (e.keyCode === 13 && !e.shiftKey) {
+      this.onSubmit(e);
+    }
   }
 
   render() {

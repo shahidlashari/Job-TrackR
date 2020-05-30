@@ -7,15 +7,13 @@ import jobsReducer from './jobsReducers';
 import chatReducer from './chatReducer';
 import { GET_MESSAGES } from '../actions/types';
 
-// import { ADD_USER_TODO } from '../actions/types';
-
 export default combineReducers({
   auth: authReducer,
   data: trendingReducers,
   jobs: jobsReducer,
   chat: chatReducer,
   form: formReducer.plugin({
-    clearMessage: (state, action) => {
+    messageInput: (state, action) => {
       switch (action.type) {
         case GET_MESSAGES:
           return undefined;
