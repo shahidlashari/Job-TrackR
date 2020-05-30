@@ -9,8 +9,6 @@ import { GET_MESSAGES, GET_MESSAGES_ERROR } from '../../actions/types';
 
 class ChatRoomMessageInput extends Component {
   onSubmit = async (formValues, dispatch) => {
-    // console.log(formValues);
-    // console.log(formsProps);
     try {
       const message = {
         text: formValues.message,
@@ -18,27 +16,28 @@ class ChatRoomMessageInput extends Component {
         username: this.props.user.username,
       };
 
-      this.props.socket.emit('createMessage', message, (newMessage) => {
-        console.log(newMessage);
+      this.props.socket.emit('createMessage', message, () => {
+        // console.log(newMessage);
         this.props.socket.emit('loadRoom', null, (roomData) => {
-          console.log(roomData);
+          // console.log(roomData);
           dispatch({ type: GET_MESSAGES, payload: roomData.messages });
           // console.log('Room refreshed');
         });
       });
+
+      this.props.resetForm();
     } catch (e) {
       dispatch({ type: GET_MESSAGES_ERROR, payload: e });
     }
   }
 
   renderInput = ({ input }) => {
-    // console.log(formProps);
-    // console.log(meta);
     return (
       <Segment inverted>
         <Form.Input
           {...input}
           fluid
+          size="large"
           autoComplete="off"
           placeholder="Type a message here"
           action={{
@@ -76,5 +75,5 @@ class ChatRoomMessageInput extends Component {
 
 export default compose(
   connect(null, { createMessage }),
-  reduxForm({ form: 'SignIn ' }),
+  reduxForm({ form: 'messageInput' }),
 )(ChatRoomMessageInput);

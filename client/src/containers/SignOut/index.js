@@ -9,12 +9,10 @@ import signOut from '../../actions/auth';
 
 class SignOut extends Component {
   componentDidMount() {
-    console.log('Did mount');
     this.props.signOut();
   }
 
   render() {
-    console.log('render');
     return (
       <div>
         <Helmet>

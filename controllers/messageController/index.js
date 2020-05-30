@@ -11,10 +11,4 @@ module.exports = {
     console.log(newMessage);
     cb(newMessage);
   },
-  // loadMessage: async (message, cb) => {
-  //   const { userId } = message;
-  //   const messageWithUsername = await Message.findOne({ _id: userId }).populate('user');
-  //   console.log(messageWithUsername);
-  //   cb(messageWithUsername);
-  // },
 };

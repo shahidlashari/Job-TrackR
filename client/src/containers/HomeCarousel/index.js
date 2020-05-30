@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import Slider from 'react-slick';
 import { Image } from 'semantic-ui-react';
-import Carousel1 from '../../images/Carousel1.jpg';
-import Carousel2 from '../../images/Carousel2.png';
-import Carousel3 from '../../images/Carousel3.jpg';
-import Carousel4 from '../../images/Carousel4.jpg';
-import Carousel5 from '../../images/Carousel5.jpg';
-import Carousel6 from '../../images/Carousel6.png';
-import Carousel7 from '../../images/Carousel7.png';
-import Carousel8 from '../../images/Carousel8.jpg';
+import carousel1 from '../../images/carousel1.jpg';
+import carousel2 from '../../images/carousel2.png';
+import carousel3 from '../../images/carousel3.jpg';
+import carousel4 from '../../images/carousel4.jpg';
+import carousel5 from '../../images/carousel5.jpg';
+import carousel6 from '../../images/carousel6.png';
+import carousel7 from '../../images/carousel7.png';
+import carousel8 from '../../images/carousel8.jpg';
 
 export default class AutoPlay extends Component {
   render() {
@@ -26,28 +26,28 @@ export default class AutoPlay extends Component {
       <div>
         <Slider {...settings}>
           <div>
-            <Image src={Carousel1} height="300" width="300" />
+            <Image src={carousel1} height="350" width="400" />
           </div>
           <div>
-            <Image src={Carousel2} height="300" width="300" />
+            <Image src={carousel2} height="350" width="400" />
           </div>
           <div>
-            <Image src={Carousel3} height="300" width="300" />
+            <Image src={carousel3} height="350" width="400" />
           </div>
           <div>
-            <Image src={Carousel4} height="300" width="300" />
+            <Image src={carousel4} height="350" width="400" />
           </div>
           <div>
-            <Image src={Carousel5} height="300" width="300" />
+            <Image src={carousel5} height="350" width="400" />
           </div>
           <div>
-            <Image src={Carousel6} height="300" width="300" />
+            <Image src={carousel6} height="350" width="400" />
           </div>
           <div>
-            <Image src={Carousel7} height="300" width="300" />
+            <Image src={carousel7} height="350" width="400" />
           </div>
           <div>
-            <Image src={Carousel8} height="300" width="300" />
+            <Image src={carousel8} height="350" width="400" />
           </div>
         </Slider>
       </div>

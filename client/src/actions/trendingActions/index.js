@@ -1,5 +1,4 @@
 import axios from 'axios';
-
 import {
   GET_EMPLOYER_DATA,
   GET_EMPLOYER_DATA_ERROR,
@@ -10,7 +9,6 @@ import {
   GET_HISTOGRAM_DATA,
   GET_HISTOGRAM_DATA_ERROR,
 } from '../types';
-
 
 export const getEmployerData = () => async (dispatch) => {
   try {

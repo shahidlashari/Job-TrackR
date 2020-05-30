@@ -1,15 +1,12 @@
 import React, { Component } from 'react';
 import io from 'socket.io-client';
 import { connect } from 'react-redux';
-// import { ReactDOM } from 'react-dom';
-// import moment from 'moment';
 import { Grid, Segment, Divider } from 'semantic-ui-react';
 import ChatRoomUsers from '../../components/ChatRoomUsers';
 import ChatRoomMessageBox from '../../components/ChatRoomMessageBox';
 import ChatRoomMessageInput from '../../components/ChatRoomMessageInput';
-import requireAuth from '../../hoc/requireAuth';
-import './style.css';
 import { loadRoom, getUsers, createMessage } from '../../actions/chatActions';
+import requireAuth from '../../hoc/requireAuth';
 
 const socket = io();
 
@@ -95,11 +92,5 @@ function mapStateToProps(state) {
     user: state.auth.user,
   };
 }
-
-// const mapDispatchToProps = (dispatch) => ({
-//   loadRoom: (roomData) => dispatch(loadRoom(roomData)),
-//   getUsers: (roomData) => dispatch(getUsers(roomData)),
-//   getMessages: (roomData) => dispatch(createMessage(roomData)),
-// });
 
 export default requireAuth(connect(mapStateToProps, { loadRoom, getUsers, createMessage })(ChatRoom));

@@ -54,34 +54,6 @@ io.on('connection', (socket) => {
     });
   });
 
-  // socket.on('currentUser', (user, callback) => {
-  //   userController.getUser(user, (newUser) => {
-  //     callback(newUser);
-  //   });
-  // });
-
-  // socket.on('getMessage', (callback) => {
-  //   messageController.getMessage((messages) => {
-  //     callback(messages);
-  //   });
-  // });
-
-  // socket.on('loadMessage', (message, cb) => {
-  //   loadMessage(message, (messageWithUsername) => {
-  //     cb(messageWithUsername);
-  //   });
-  // });
-
-  // socket.on('loadRoomMessages', (cb) => {
-  //   loadRoomMessages((roomData) => {
-  //     cb(roomData);
-  //   });
-  // });
-
-  // socket.on('joinChat', (newUser) => {
-  //   socket.broadcast.emit('userJoined', newUser);
-  // });
-
   socket.on('createMessage', (message, cb) => {
     createMessage(message, (newMessage) => {
       socket.broadcast.emit('sentMessage', newMessage);
