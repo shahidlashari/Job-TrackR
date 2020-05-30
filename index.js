@@ -35,51 +35,41 @@ mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/jobTrackR', {
 });
 
 // Socket.io Connection
-io.on('connection', (socket) => {
-  console.log('I am connected to the socket!');
+// io.on('connection', (socket) => {
+//   console.log('I am connected to the socket!');
 
-  socket.on('loadRoom', (userId, cb) => {
-    loadRoom(userId, (roomData) => {
-      if (userId) {
-        socket.broadcast.emit('userJoin');
-      }
-      cb(roomData);
-    });
-  });
+//   socket.on('currentUser', (user, callback) => {
+//     userController.getUser(user, (newUser) => {
+//       callback(newUser);
+//     });
+//   });
 
-  socket.on('leaveRoom', (userId) => {
-    leaveRoom(userId, (roomData) => {
-      socket.broadcast.emit('userLeft');
-      console.log(roomData);
-    });
-  });
+//   socket.on('getMessage', (callback) => {
+//     messageController.getMessage((messages) => {
+//       callback(messages);
+//     });
+//   });
 
-  // socket.on('currentUser', (user, callback) => {
-  //   userController.getUser(user, (newUser) => {
-  //     callback(newUser);
-  //   });
-  // });
+//   socket.on('joinChat', (newUser) => {
+//     socket.broadcast.emit('userJoined', newUser);
+//   });
 
-  // socket.on('getMessage', (callback) => {
-  //   messageController.getMessage((messages) => {
-  //     callback(messages);
-  //   });
-  // });
+//   socket.on('createMessage', (message, callback) => {
+//     messageController.createMessage(message, (newMessage) => {
+//       socket.broadcast.emit('sentMessage', newMessage);
+//       callback(newMessage);
+//     });
+//   });
 
-  // socket.on('joinChat', (newUser) => {
-  //   socket.broadcast.emit('userJoined', newUser);
-  // });
+//   socket.on('leaveRoom', (data) => {
+//     console.log(data);
+//     socket.broadcast.emit('userLeft', data);
+//   });
 
-  // socket.on('createMessage', (message, callback) => {
-  //   messageController.createMessage(message, (newMessage) => {
-  //     socket.broadcast.emit('sentMessage', newMessage);
-  //     callback(newMessage);
-  //   });
-  // });
 
-  socket.on('disconnect', () => {
-    console.log('I am disconnected from the socket!');
-  });
-});
-
+//   socket.on('disconnect', () => {
+//     console.log('I am disconnected from the socket!');
+//   });
+// });
 server.listen(PORT);
+// app.listen(PORT);

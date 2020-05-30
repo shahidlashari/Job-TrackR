@@ -22,9 +22,10 @@ export const getEmployerData = () => async (dispatch) => {
   }
 };
 export const getRegionalData = () => async (dispatch) => {
+  console.log("Happening");
   try {
     const { data } = await axios.get('/api/trending/regional');
-
+    console.log(data);
     dispatch({ type: GET_REGIONAL_DATA, payload: data });
   } catch (e) {
     dispatch({ type: GET_REGIONAL_DATA_ERROR, serverError: e, clientError: 'Something went wrong. Refresh the page and try again' });
