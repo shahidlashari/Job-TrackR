@@ -9,6 +9,9 @@ const MessageSchema = new Schema({
     type: Date,
     default: Date.now(),
   },
+  username: {
+    type: String,
+  },
   user: { type: Schema.Types.ObjectId, ref: 'User' },
 });
 
