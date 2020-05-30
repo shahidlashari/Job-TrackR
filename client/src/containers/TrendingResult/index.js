@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { Card, OverlayTrigger, Tooltip } from 'react-bootstrap';
-import SearchEmployerData from '../../components/TrendingEmployerData';
-import SerachRegionalData from '../../components/TrendingRegionalData';
-import SearchHistoricalData from '../../components/TrendingHistoricalData';
-import SearchHistogramData from '../../components/TrendingHistogramData';
+import SearchEmployerData from '../../components/SearchEmployerData';
+import SerachRegionalData from '../../components/SearchRegionalData';
+import SearchHistoricalData from '../../components/SearchHistoricalData';
+import SearchHistogramData from '../../components/SearchHistogramData';
 
 class TrendingResult extends Component {
   componentDidMount() {

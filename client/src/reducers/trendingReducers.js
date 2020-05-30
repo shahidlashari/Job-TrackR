@@ -20,6 +20,7 @@ import {
 const INITIAL_STATE = {
   employerData: [],
   regionalData: [],
+  regionalDataLocation: '',
   historicalData: [],
   histogramData: [],
   getEmployerServerError: '',
@@ -35,11 +36,11 @@ const INITIAL_STATE = {
 export default function (state = INITIAL_STATE, action) {
   switch (action.type) {
     case GET_EMPLOYER_DATA:
-      return { ...state, employerData: action.payload, getEmployerServerError: '', getEmployerClientError: '' };
+      return { ...state, employerData: action.payload.leaderboard, getEmployerServerError: '', getEmployerClientError: '' };
     case GET_EMPLOYER_DATA_ERROR:
       return { ...state, getEmployerServerError: action.serverError, getEmployerClientError: action.clientError };
     case GET_REGIONAL_DATA:
-      return { ...state, regionalData: action.payload, getRegionalServerError: '', getRegionalClientError: '' };
+      return { ...state, regionalData: action.payload, regionalDataLocation: action.location, getRegionalServerError: '', getRegionalClientError: '' };
     case GET_REGIONAL_DATA_ERROR:
       return { ...state, getRegionalServerError: action.serverError, getRegionalClientError: action.clientError };
     case GET_HISTORICAL_DATA:
