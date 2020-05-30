@@ -1,15 +1,15 @@
 .navbar-menu {
-  height: 11vh;
+	height: 11vh;
 }
 
 .navbar-logo {
-  margin-right: 1em;
-  margin-left: 1em;
+	margin-right: 1em;
+	margin-left: 1em;
 }
 
 .navbar-title {
-  margin-top: -3px;
-  margin-right: 1.5em;
+	margin-top: -3px;
+	margin-right: 1.5em;
 }
 
 .navbar-item-home,
@@ -17,5 +17,5 @@
 .navbar-item-dashboard,
 .navbar-item-chat,
 .navbar-item-trending {
-  font-size: 18px;
+	font-size: 18px;
 }

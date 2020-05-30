@@ -45,6 +45,8 @@
     "react-dnd-html5-backend": "^11.1.1",
     "react-drag-and-drop": "^3.0.0",
     "react-helmet": "^6.0.0",
+    "redux-form": "^8.3.5",
+    "semantic-ui-react": "^0.88.2",
     "socket.io": "^2.3.0",
     "uuidv4": "^6.1.0",
     "validator": "^13.0.0"

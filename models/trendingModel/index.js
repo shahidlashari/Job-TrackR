@@ -19,5 +19,4 @@ const TrendingSchema = new Schema({
   },
 });
 
-
 module.exports = model('Trending', TrendingSchema);

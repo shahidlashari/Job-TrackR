@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
-
 import ScrollToTop from '../../components/ScrollToTop';
 import Navbar from '../../components/Navbar';
 import Home from '../Home';

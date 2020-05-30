@@ -36,7 +36,7 @@ class Dashboard extends Component {
                 </Grid.Column>
                 <Grid.Column>
                   <Card color="yellow" header="Interviewing" />
-                  <JobList />
+                  {/* <JobList /> */}
                 </Grid.Column>
                 <Grid.Column>
                   <Card color="green" header="Offers" />

@@ -21,7 +21,7 @@ module.exports = {
     try {
       const room = await Room.findOne({ code: '12345' });
       room.users.pull(userId);
-      console.log(room);
+      // console.log(room);
       await room.save();
       cb(room);
     } catch (e) {

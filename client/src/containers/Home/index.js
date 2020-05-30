@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Segment, Container, Header, Message, Button, Image, Icon, Grid, Divider } from 'semantic-ui-react';
-import HomeExampleGraph from '../HomeExampleGraph';
 import HomeCarousel from '../HomeCarousel';
+import HomeExampleGraph from '../HomeExampleGraph';
 import chatRoom from '../../images/chatroom.png';
 import './style.css';
 
@@ -21,6 +21,7 @@ class Home extends Component {
           <Grid.Row>
             <Grid.Column>
               <Message
+                size="big"
                 icon="attention"
                 warning
                 onDismiss={this.handleDismiss}
@@ -44,7 +45,7 @@ class Home extends Component {
           textAlign="center"
           vertical
           style={{ minHeight: 600, padding: '1em 0em' }}
-          className="home-jumbotron"
+          id="home-jumbotron"
         >
           <Container text>
             <Header
@@ -105,7 +106,7 @@ class Home extends Component {
                   <Icon name="right arrow" />
                 </Button>
               </Grid.Column>
-              <Grid.Column floated="right" width={9}>
+              <Grid.Column floated="right" width={10}>
                 <HomeCarousel />
               </Grid.Column>
             </Grid.Row>
@@ -122,7 +123,7 @@ class Home extends Component {
               </Grid.Column>
             </Grid.Row>
             <Grid.Row>
-              <Grid.Column floated="left" width={9}>
+              <Grid.Column floated="left" width={10}>
                 <HomeExampleGraph />
               </Grid.Column>
               <Grid.Column width={4}>
@@ -166,7 +167,7 @@ class Home extends Component {
                   <Icon name="right arrow" />
                 </Button>}
               </Grid.Column>
-              <Grid.Column floated="right" width={9}>
+              <Grid.Column floated="right" width={10}>
                 <Segment inverted>
                   <Image src={chatRoom} />
                 </Segment>
@@ -185,7 +186,7 @@ class Home extends Component {
               </Grid.Column>
             </Grid.Row>
             <Grid.Row>
-              <Grid.Column floated="left" width={9}>
+              <Grid.Column floated="left" width={10}>
                 Placeholder Gif of Job Dashboard or something
               </Grid.Column>
               <Grid.Column width={4}>
@@ -205,7 +206,6 @@ class Home extends Component {
               </Grid.Column>
             </Grid.Row>
           </Grid>
-
         </Segment>
       </div>
     );

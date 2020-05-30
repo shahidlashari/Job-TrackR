@@ -22,5 +22,4 @@ router.route('/historical')
 router.route('/histogram')
   .get(getHistogramData);
 
-
 module.exports = router;

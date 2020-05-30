@@ -1,5 +1,4 @@
 import axios from 'axios';
-
 import {
   GET_EMPLOYER_DATA,
   GET_EMPLOYER_DATA_ERROR,
@@ -11,7 +10,6 @@ import {
   GET_HISTOGRAM_DATA_ERROR,
 } from '../types';
 
-
 export const getEmployerData = () => async (dispatch) => {
   try {
     const { data } = await axios.get('/api/trending/employer');
@@ -22,9 +20,10 @@ export const getEmployerData = () => async (dispatch) => {
   }
 };
 export const getRegionalData = () => async (dispatch) => {
+  console.log("Happening");
   try {
     const { data } = await axios.get('/api/trending/regional');
-
+    console.log(data);
     dispatch({ type: GET_REGIONAL_DATA, payload: data });
   } catch (e) {
     dispatch({ type: GET_REGIONAL_DATA_ERROR, serverError: e, clientError: 'Something went wrong. Refresh the page and try again' });

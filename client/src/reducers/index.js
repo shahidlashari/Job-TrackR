@@ -12,6 +12,7 @@ import boardsReducer from './boardsReducer';
 import boardOrderReducer from './boardOrderReducer';
 
 // import { ADD_USER_TODO } from '../actions/types';
+import { GET_MESSAGES } from '../actions/types';
 
 export default combineReducers({
   auth: authReducer,
@@ -34,4 +35,14 @@ export default combineReducers({
   //     }
   //   },
   // }),
+  form: formReducer.plugin({
+    messageInput: (state, action) => {
+      switch (action.type) {
+        case GET_MESSAGES:
+          return undefined;
+        default:
+          return state;
+      }
+    },
+  }),
 });

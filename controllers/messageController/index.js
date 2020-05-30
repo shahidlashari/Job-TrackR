@@ -1,18 +1,14 @@
-const { Message } = require('../../models');
+const { Message, Room } = require('../../models');
 
 module.exports = {
-  getMessage: async (callback) => {
-
-  },
-  createMessage: async (message, callback) => {
-    const { username, text, timeStamp, userId } = message;
+  createMessage: async (message, cb) => {
+    const { text, userId, username } = message;
     console.log(message);
-    const newMessage = await Message.create({
-      username,
-      text,
-      timeStamp,
-      userId,
-    });
+    const newMessage = await new Message({ text, user: userId, username }).save();
+    const room = await Room.findOne({ code: '12345' });
+    room.messages.push(newMessage._id);
+    await room.save();
     console.log(newMessage);
+    cb(newMessage);
   },
 };

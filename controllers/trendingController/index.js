@@ -17,21 +17,20 @@ module.exports = {
     }
   },
   getRegionalData: async (req, res) => {
-    // console.log(req.query);
     const { statenamer } = req.query;
+
     try {
       const { data } = await axios.get(`http://api.adzuna.com/v1/api/jobs/us/history?app_id=${AppId}&app_key=${ApiKey}&location0=us&location1=${statenamer}&content-type=application/json`);
-      console.log(data);
       return res.status(200).json(data);
     } catch (e) {
       return res.status(403).json({ e });
     }
   },
   getHistoricalData: async (req, res) => {
-    const { statenameh, citynameh } = req.query;
+    const { statenameh, jobcategory } = req.query;
+
     try {
-      const { data } = await axios.get(`http://api.adzuna.com/v1/api/jobs/us/history?app_id=${AppId}&app_key=${ApiKey}&location0=US&location1=${statenameh}&category=${citynameh}&content-type=application/json`);
-      console.log(data);
+      const { data } = await axios.get(`http://api.adzuna.com/v1/api/jobs/us/history?app_id=${AppId}&app_key=${ApiKey}&location0=US&location1=${statenameh}&category=${jobcategory}&content-type=application/json`);
       return res.status(200).json(data);
     } catch (e) {
       return res.status(403).json({ e });
