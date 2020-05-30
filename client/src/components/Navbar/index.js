@@ -1,5 +1,5 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import { React } from 'react';
+import { Link, NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Menu, Image, Icon, Button } from 'semantic-ui-react';
 import LogoImg from '../../images/logo.png';
@@ -7,9 +7,9 @@ import './style.css';
 
 // export default (props) => (
 //   <Menu widths={4}>
-//     { props.authenticated ? null : <Menu.Item as={Link} to="/" content="Sign Up" /> }
-//     { props.authenticated ? <Menu.Item as={Link} to="/signout" content="Sign Out" /> : <Menu.Item as={Link} to="/signin" content="Sign In" />}
-//     { props.authenticated ? <Menu.Item as={Link} to="/dashboard" content="Job Dashboard" /> : <Menu.Item as={Link} to="/" content="Dashboard" /> }
+//     { props.authenticated ? null : <Menu.Item as={NavLink} to="/" content="Sign Up" /> }
+//     { props.authenticated ? <Menu.Item as={NavLink} to="/signout" content="Sign Out" /> : <Menu.Item as={NavLink} to="/signin" content="Sign In" />}
+//     { props.authenticated ? <Menu.Item as={NavLink} to="/dashboard" content="Job Dashboard" /> : <Menu.Item as={NavLink} to="/" content="Dashboard" /> }
 //   </Menu>
 // );
 const Navbar = (props) => {
@@ -20,13 +20,14 @@ const Navbar = (props) => {
       pointing
       stackable
       size="huge"
+      activeClassName="active"
       className="navbar-menu"
     >
       <Menu.Item as={Link} to="/" header>
         <Image src={LogoImg} width="65" height="60" className="navbar-logo" />
         <h1 className="navbar-title">Job TrackR</h1>
       </Menu.Item>
-      <Menu.Item as={Link} to="/home" className="navbar-item-home">
+      <Menu.Item as={NavLink} to="/home" activeClassName="active" className="navbar-item-home">
         <Icon name="home" />
         Home
       </Menu.Item>
@@ -47,14 +48,14 @@ const Navbar = (props) => {
         Job Dashboard
       </Menu.Item> : null }
       <Menu.Item position="right">
-        { props.authenticated ? <Button as={Link} to="/signout" inverted>
+        { props.authenticated ? <Button as={NavLink} to="/signout" inverted>
           <Icon name="sign-out" />
           Sign Out
-        </Button> : <Button as={Link} to="/signin" inverted>
+        </Button> : <Button as={NavLink} to="/signin" inverted>
           <Icon name="sign-in" />
           Sign In
         </Button>}
-        { props.authenticated ? null : <Button as={Link} to="/signup" inverted style={{ marginLeft: '0.5em' }}>
+        { props.authenticated ? null : <Button as={NavLink} to="/signup" inverted style={{ marginLeft: '0.5em' }}>
           <Icon name="signup" />
           Sign Up
         </Button> }
