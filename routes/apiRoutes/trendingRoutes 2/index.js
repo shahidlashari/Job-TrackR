@@ -6,7 +6,7 @@ router.route('/employer')
   .get(trendingController.topEmployers);
 
 // /api/trending
-router.route('/regiona')
+router.route('/regional')
   .get(trendingController.regionalData);
 
 // /api/trending
