@@ -10,7 +10,7 @@ const io = require('socket.io')(server);
 
 const { loadRoom, leaveRoom } = require('./controllers/roomController');
 // const userController = require('./controllers/userController');
-// const messageController = require('./controllers/messageController');
+const { createMessage } = require('./controllers/messageController');
 
 const routes = require('./routes');
 
@@ -66,16 +66,28 @@ io.on('connection', (socket) => {
   //   });
   // });
 
+  // socket.on('loadMessage', (message, cb) => {
+  //   loadMessage(message, (messageWithUsername) => {
+  //     cb(messageWithUsername);
+  //   });
+  // });
+
+  // socket.on('loadRoomMessages', (cb) => {
+  //   loadRoomMessages((roomData) => {
+  //     cb(roomData);
+  //   });
+  // });
+
   // socket.on('joinChat', (newUser) => {
   //   socket.broadcast.emit('userJoined', newUser);
   // });
 
-  // socket.on('createMessage', (message, callback) => {
-  //   messageController.createMessage(message, (newMessage) => {
-  //     socket.broadcast.emit('sentMessage', newMessage);
-  //     callback(newMessage);
-  //   });
-  // });
+  socket.on('createMessage', (message, cb) => {
+    createMessage(message, (newMessage) => {
+      socket.broadcast.emit('sentMessage', newMessage);
+      cb(newMessage);
+    });
+  });
 
   socket.on('disconnect', () => {
     console.log('I am disconnected from the socket!');

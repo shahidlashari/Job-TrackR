@@ -5,7 +5,7 @@ import './style.css';
 
 class ChatRoomUsers extends Component {
   render() {
-    console.log(this.props.users);
+    // console.log(this.props.users);
     return (
       <div>
         <Grid textAlign="center" container stackable>
