@@ -9,7 +9,7 @@ import SearchHistoricalData from '../../components/SearchHistoricalData';
 import SearchEmployerData from '../../components/SearchEmployerData';
 import SerachRegionalData from '../../components/SearchRegionalData';
 import EmployerChart from '../EmployerChart';
-import RegionalChart from '../RegionalChart ';
+import RegionalChart from '../RegionalChart';
 import HistoricalChart from '../HistoricalChart';
 import HistogramChart from '../HistogramChart';
 
