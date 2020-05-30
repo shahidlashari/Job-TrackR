@@ -1,20 +1,37 @@
 import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
+import { connect } from 'react-redux';
+import { compose } from 'redux';
 import { Form, Segment } from 'semantic-ui-react';
 import { required } from 'redux-form-validators';
+import { createMessage } from '../../actions/chatActions';
+import { GET_MESSAGES, GET_MESSAGES_ERROR } from '../../actions/types';
 
 class ChatRoomMessageInput extends Component {
   onSubmit = async (formValues, dispatch) => {
-    console.log(formValues);
+    // console.log(formValues);
     // console.log(formsProps);
     try {
-      console.log(dispatch);
+      const message = {
+        text: formValues.message,
+        userId: this.props.user._id,
+        username: this.props.user.username,
+      };
+
+      this.props.socket.emit('createMessage', message, (newMessage) => {
+        console.log(newMessage);
+        this.props.socket.emit('loadRoom', null, (roomData) => {
+          console.log(roomData);
+          dispatch({ type: GET_MESSAGES, payload: roomData.messages });
+          // console.log('Room refreshed');
+        });
+      });
     } catch (e) {
-      // dispatch({ type: AUTH_USER_ERROR, payload: e });
+      dispatch({ type: GET_MESSAGES_ERROR, payload: e });
     }
   }
 
-  renderInput = ({ input, meta }) => {
+  renderInput = ({ input }) => {
     // console.log(formProps);
     // console.log(meta);
     return (
@@ -22,7 +39,6 @@ class ChatRoomMessageInput extends Component {
         <Form.Input
           {...input}
           fluid
-          error={meta.touched && meta.error}
           autoComplete="off"
           placeholder="Type a message here"
           action={{
@@ -34,6 +50,12 @@ class ChatRoomMessageInput extends Component {
         />
       </Segment>
     );
+  }
+
+  handlePressEnter(e) {
+    if (e.keyCode === 13 && !e.shiftKey) {
+      this.onSubmit(e);
+    }
   }
 
   render() {
@@ -52,4 +74,7 @@ class ChatRoomMessageInput extends Component {
   }
 }
 
-export default reduxForm({ form: 'SignIn ' })(ChatRoomMessageInput);
+export default compose(
+  connect(null, { createMessage }),
+  reduxForm({ form: 'SignIn ' }),
+)(ChatRoomMessageInput);

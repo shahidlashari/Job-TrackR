@@ -10,7 +10,7 @@ const io = require('socket.io')(server);
 
 const { loadRoom, leaveRoom } = require('./controllers/roomController');
 // const userController = require('./controllers/userController');
-// const messageController = require('./controllers/messageController');
+const { createMessage } = require('./controllers/messageController');
 
 const routes = require('./routes');
 
@@ -35,41 +35,64 @@ mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/jobTrackR', {
 });
 
 // Socket.io Connection
-// io.on('connection', (socket) => {
-//   console.log('I am connected to the socket!');
+io.on('connection', (socket) => {
+  console.log('I am connected to the socket!');
 
-//   socket.on('currentUser', (user, callback) => {
-//     userController.getUser(user, (newUser) => {
-//       callback(newUser);
-//     });
-//   });
+  socket.on('loadRoom', (userId, cb) => {
+    loadRoom(userId, (roomData) => {
+      if (userId) {
+        socket.broadcast.emit('userJoin');
+      }
+      cb(roomData);
+    });
+  });
 
-//   socket.on('getMessage', (callback) => {
-//     messageController.getMessage((messages) => {
-//       callback(messages);
-//     });
-//   });
+  socket.on('leaveRoom', (userId) => {
+    leaveRoom(userId, (roomData) => {
+      socket.broadcast.emit('userLeft');
+      console.log(roomData);
+    });
+  });
 
-//   socket.on('joinChat', (newUser) => {
-//     socket.broadcast.emit('userJoined', newUser);
-//   });
+  // socket.on('currentUser', (user, callback) => {
+  //   userController.getUser(user, (newUser) => {
+  //     callback(newUser);
+  //   });
+  // });
 
-//   socket.on('createMessage', (message, callback) => {
-//     messageController.createMessage(message, (newMessage) => {
-//       socket.broadcast.emit('sentMessage', newMessage);
-//       callback(newMessage);
-//     });
-//   });
+  // socket.on('getMessage', (callback) => {
+  //   messageController.getMessage((messages) => {
+  //     callback(messages);
+  //   });
+  // });
 
-//   socket.on('leaveRoom', (data) => {
-//     console.log(data);
-//     socket.broadcast.emit('userLeft', data);
-//   });
+  // socket.on('loadMessage', (message, cb) => {
+  //   loadMessage(message, (messageWithUsername) => {
+  //     cb(messageWithUsername);
+  //   });
+  // });
 
+  // socket.on('loadRoomMessages', (cb) => {
+  //   loadRoomMessages((roomData) => {
+  //     cb(roomData);
+  //   });
+  // });
 
-//   socket.on('disconnect', () => {
-//     console.log('I am disconnected from the socket!');
-//   });
-// });
+  // socket.on('joinChat', (newUser) => {
+  //   socket.broadcast.emit('userJoined', newUser);
+  // });
+
+  socket.on('createMessage', (message, cb) => {
+    createMessage(message, (newMessage) => {
+      socket.broadcast.emit('sentMessage', newMessage);
+      cb(newMessage);
+    });
+  });
+
+  socket.on('disconnect', () => {
+    console.log('I am disconnected from the socket!');
+  });
+});
+
 server.listen(PORT);
 // app.listen(PORT);

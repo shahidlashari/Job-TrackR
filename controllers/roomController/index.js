@@ -21,11 +21,20 @@ module.exports = {
     try {
       const room = await Room.findOne({ code: '12345' });
       room.users.pull(userId);
-      console.log(room);
+      // console.log(room);
       await room.save();
       cb(room);
     } catch (e) {
       cb(e);
     }
   },
+  // loadRoomMessages: async (cb) => {
+  //   try {
+  //     const roomData = await Room.findOne({ code: '12345' }).populate('users').populate('messages');
+  //     console.log(roomData);
+  //     cb(roomData);
+  //   } catch (e) {
+  //     cb(e);
+  //   }
+  // },
 };

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import io from 'socket.io-client';
 import { connect } from 'react-redux';
-import { ReactDOM } from 'react-dom';
+// import { ReactDOM } from 'react-dom';
 // import moment from 'moment';
 import { Grid, Segment, Divider } from 'semantic-ui-react';
 import ChatRoomUsers from '../../components/ChatRoomUsers';
@@ -9,7 +9,7 @@ import ChatRoomMessageBox from '../../components/ChatRoomMessageBox';
 import ChatRoomMessageInput from '../../components/ChatRoomMessageInput';
 import requireAuth from '../../hoc/requireAuth';
 import './style.css';
-import { getUsers } from '../../actions/chatActions';
+import { loadRoom, getUsers, createMessage } from '../../actions/chatActions';
 
 const socket = io();
 
@@ -18,12 +18,14 @@ class ChatRoom extends Component {
     socket.emit('connection', {});
     socket.emit('loadRoom', this.props.user._id, (roomData) => {
       this.props.loadRoom(roomData);
+      this.props.getUsers(roomData);
+      this.props.createMessage(roomData);
     });
 
     socket.on('userJoin', () => {
       // console.log('User has joined');
       socket.emit('loadRoom', null, (roomData) => {
-        this.props.newUser(roomData);
+        this.props.getUsers(roomData);
         // console.log('Room refreshed');
       });
     });
@@ -31,7 +33,15 @@ class ChatRoom extends Component {
     socket.on('userLeft', () => {
       // console.log('User has left');
       socket.emit('loadRoom', null, (roomData) => {
-        this.props.removeUser(roomData);
+        this.props.getUsers(roomData);
+        // console.log('Room refreshed');
+      });
+    });
+
+    socket.on('sentMessage', () => {
+      // console.log('User has left');
+      socket.emit('loadRoom', null, (roomData) => {
+        this.props.createMessage(roomData);
         // console.log('Room refreshed');
       });
     });
@@ -39,14 +49,6 @@ class ChatRoom extends Component {
 
   componentWillUnmount() {
     socket.emit('leaveRoom', this.props.user._id);
-  }
-
-  scrollToBottom = () => {
-    const chatTextArea = document.getElementById('message-container');
-    const { scrollHeight } = chatTextArea;
-    const height = chatTextArea.clientHeight;
-    const maxScrollTop = scrollHeight - height;
-    ReactDOM.findDOMNode(chatTextArea).scrollTop = maxScrollTop > 0 ? maxScrollTop : 0;
   }
 
   render() {
@@ -76,7 +78,7 @@ class ChatRoom extends Component {
                 </Grid.Row>
                 <Grid.Row centered>
                   <Grid.Column width={16}>
-                    <ChatRoomMessageInput />
+                    <ChatRoomMessageInput socket={socket} user={this.props.user} />
                   </Grid.Column>
                 </Grid.Row>
               </Grid>
@@ -94,10 +96,10 @@ function mapStateToProps(state) {
   };
 }
 
-const mapDispatchToProps = (dispatch) => ({
-  loadRoom: (roomData) => dispatch(getUsers(roomData)),
-  newUser: (roomData) => dispatch(getUsers(roomData)),
-  removeUser: (roomData) => dispatch(getUsers(roomData)),
-});
+// const mapDispatchToProps = (dispatch) => ({
+//   loadRoom: (roomData) => dispatch(loadRoom(roomData)),
+//   getUsers: (roomData) => dispatch(getUsers(roomData)),
+//   getMessages: (roomData) => dispatch(createMessage(roomData)),
+// });
 
-export default requireAuth(connect(mapStateToProps, mapDispatchToProps)(ChatRoom));
+export default requireAuth(connect(mapStateToProps, { loadRoom, getUsers, createMessage })(ChatRoom));
