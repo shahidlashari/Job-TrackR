@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 import { Menu, Image, Icon, Button } from 'semantic-ui-react';
 import LogoImg from '../../images/logo.png';
 import './style.css';
@@ -29,18 +30,18 @@ const Navbar = (props) => {
         <Icon name="home" />
         Home
       </Menu.Item>
-      <Menu.Item as={Link} to="/chatroom" className="navbar-item-chat">
-        <Icon name="chat" />
-        Chat Room
-      </Menu.Item>
-      {/* <Menu.Item as={Link} to="/trending" className="navbar-item-trending">
-        <Icon name="chart bar" />
-        Trending
-      </Menu.Item> */}
       <Menu.Item as={Link} to="/search" className="navbar-item-search">
         <Icon name="search" />
         Search
       </Menu.Item>
+      <Menu.Item as={Link} to="/trending" className="navbar-item-trending">
+        <Icon name="industry" />
+        Trending
+      </Menu.Item>
+      { props.authenticated ? <Menu.Item as={Link} to="/chatroom" className="navbar-item-chat">
+        <Icon name="chat" />
+        Chat Room
+      </Menu.Item> : null }
       { props.authenticated ? <Menu.Item as={Link} to="/dashboard" className="navbar-item-dashboard">
         <Icon name="cogs" />
         Job Dashboard
@@ -62,4 +63,8 @@ const Navbar = (props) => {
   );
 };
 
-export default Navbar;
+function mapStateToProps(state) {
+  return { authenticated: state.auth.authenticated };
+}
+
+export default connect(mapStateToProps, {})(Navbar);

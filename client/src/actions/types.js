@@ -6,6 +6,8 @@ export const AUTH_USER_ERROR = 'AUTH_USER_ERROR';
 export const SEARCH_JOBS = 'SEARCH_JOBS';
 export const SEARCH_JOBS_ERROR = 'SEARCH_JOBS_ERROR';
 
+export const GET_USERS = 'GET_USERS';
+export const GET_USERS_ERROR = 'GET_USERS_ERROR';
 
 // Authenticated user jobs
 export const GET_USER_JOBS = 'GET_USER_JOBS';
@@ -31,3 +33,6 @@ export const GET_HISTORICAL_DATA_ERROR = 'GET_HISTORICAL_DATA_ERROR';
 
 export const GET_HISTOGRAM_DATA = 'GET_HISTOGRAM_DATA';
 export const GET_HISTOGRAM_DATA_ERROR = 'GET_HISTOGRAM_DATA_ERROR';
+
+// Drag and drop action types
+export const MOVE_JOB_CARD = 'MOVE_JOB_CARD';

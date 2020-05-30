@@ -8,8 +8,9 @@ const app = express();
 const server = require('http').createServer(app);
 const io = require('socket.io')(server);
 
-const userController = require('./controllers/userController');
-const messageController = require('./controllers/messageController');
+const { loadRoom, leaveRoom } = require('./controllers/roomController');
+// const userController = require('./controllers/userController');
+// const messageController = require('./controllers/messageController');
 
 const routes = require('./routes');
 
@@ -37,38 +38,48 @@ mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/jobTrackR', {
 io.on('connection', (socket) => {
   console.log('I am connected to the socket!');
 
-  socket.on('currentUser', (user, callback) => {
-    userController.getUser(user, (newUser) => {
-      callback(newUser);
+  socket.on('loadRoom', (userId, cb) => {
+    loadRoom(userId, (roomData) => {
+      if (userId) {
+        socket.broadcast.emit('userJoin');
+      }
+      cb(roomData);
     });
   });
 
-  socket.on('getMessage', (callback) => {
-    messageController.getMessage((messages) => {
-      callback(messages);
+  socket.on('leaveRoom', (userId) => {
+    leaveRoom(userId, (roomData) => {
+      socket.broadcast.emit('userLeft');
+      console.log(roomData);
     });
   });
 
-  socket.on('joinChat', (newUser) => {
-    socket.broadcast.emit('userJoined', newUser);
-  });
+  // socket.on('currentUser', (user, callback) => {
+  //   userController.getUser(user, (newUser) => {
+  //     callback(newUser);
+  //   });
+  // });
 
-  socket.on('createMessage', (message, callback) => {
-    messageController.createMessage(message, (newMessage) => {
-      socket.broadcast.emit('sentMessage', newMessage);
-      callback(newMessage);
-    });
-  });
+  // socket.on('getMessage', (callback) => {
+  //   messageController.getMessage((messages) => {
+  //     callback(messages);
+  //   });
+  // });
 
-  socket.on('leaveRoom', (data) => {
-    console.log(data);
-    socket.broadcast.emit('userLeft', data);
-  });
+  // socket.on('joinChat', (newUser) => {
+  //   socket.broadcast.emit('userJoined', newUser);
+  // });
 
+  // socket.on('createMessage', (message, callback) => {
+  //   messageController.createMessage(message, (newMessage) => {
+  //     socket.broadcast.emit('sentMessage', newMessage);
+  //     callback(newMessage);
+  //   });
+  // });
 
   socket.on('disconnect', () => {
     console.log('I am disconnected from the socket!');
   });
 });
 
-app.listen(PORT);
+server.listen(PORT);

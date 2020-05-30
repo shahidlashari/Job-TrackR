@@ -21,7 +21,7 @@ export const getUserJobs = () => async dispatch => {
 
 export const updateJobById= (id, completed, text) => async dispatch => {
   try {
-    await axios.put(`/api/user/jobs/${id}`, {?, ?}, { headers: { 'authorization': localStorage.getItem('token') }});
+    await axios.put(`/api/user/jobs/${id}`, { headers: { 'authorization': localStorage.getItem('token') }});
     const { data } = await axios.get('/api/user/jobs', { headers: { 'authorization': localStorage.getItem('token') }});
     dispatch({ type: GET_USER_JOBS, payload: data });
   } catch (e) {
