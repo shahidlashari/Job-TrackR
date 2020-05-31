@@ -4,22 +4,22 @@ import { reducer as formReducer } from 'redux-form';
 import authReducer from './authReducer';
 import trendingReducers from './trendingReducers';
 import jobsReducer from './jobsReducers';
-
-// import { ADD_USER_TODO } from '../actions/types';
+import chatReducer from './chatReducer';
+import { GET_MESSAGES } from '../actions/types';
 
 export default combineReducers({
   auth: authReducer,
   data: trendingReducers,
   jobs: jobsReducer,
-  form: formReducer,
-  // .plugin({
-  //   addTodo: (state, action) => {
-  //     switch (action.type) {
-  //       case ADD_USER_TODO:
-  //         return undefined;
-  //       default:
-  //         return state;
-  //     }
-  //   },
-  // }),
+  chat: chatReducer,
+  form: formReducer.plugin({
+    messageInput: (state, action) => {
+      switch (action.type) {
+        case GET_MESSAGES:
+          return undefined;
+        default:
+          return state;
+      }
+    },
+  }),
 });

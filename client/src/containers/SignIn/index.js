@@ -17,6 +17,7 @@ class SignIn extends Component {
       dispatch({ type: AUTH_USER, payload: data });
       this.props.history.push('/dashboard');
     } catch (e) {
+      // dispatch({ type: AUTH_USER_ERROR, payload: e });
       throw new SubmissionError({
         email: 'Wrong email',
         password: 'Wrong password',
@@ -28,9 +29,21 @@ class SignIn extends Component {
   // set the token coming from data into localStorage under the key 'token'
   // Dispatch the action to the reducer to set the token as the state for authentication
   // Redirect the user to the '/counter' route
+  renderUsername = ({ input, meta }) => {
+    return (
+      <Form.Input
+        {...input}
+        fluid
+        error={meta.touched && meta.error}
+        icon="user"
+        iconPosition="left"
+        autoComplete="off"
+        placeholder="Username"
+      />
+    );
+  }
+
   renderEmail = ({ input, meta }) => {
-    // console.log(formProps);
-    // console.log(meta);
     return (
       <Form.Input
         {...input}
@@ -59,6 +72,12 @@ class SignIn extends Component {
     );
   }
 
+  handlePressEnter(e) {
+    if (e.keyCode === 13 && !e.shiftKey) {
+      this.onSubmit(e);
+    }
+  }
+
   render() {
     const { handleSubmit, invalid, submitting, submitFailed } = this.props;
     return (
@@ -74,6 +93,15 @@ class SignIn extends Component {
             </Header>
             <Form size="large" onSubmit={handleSubmit(this.onSubmit)}>
               <Segment stacked>
+                <Field
+                  name="username"
+                  validate={
+                    [
+                      required({ msg: 'Username is required' }),
+                    ]
+                  }
+                  component={this.renderUsername}
+                />
                 <Field
                   name="email"
                   component={this.renderEmail}
@@ -94,7 +122,6 @@ class SignIn extends Component {
                   }
                 />
                 <Button
-                  content="Sign In"
                   color="blue"
                   fluid
                   size="large"

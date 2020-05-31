@@ -10,11 +10,8 @@ import { AUTH_USER, AUTH_USER_ERROR } from '../../actions/types';
 
 class SignUp extends Component {
   onSubmit = async (formValues, dispatch) => {
-    // console.log(formValues);
-    // console.log(formsProps);
     try {
       const { data } = await axios.post('/api/auth/signup', formValues);
-      console.log(data);
       localStorage.setItem('token', data.token);
       dispatch({ type: AUTH_USER, payload: data });
       this.props.history.push('/dashboard');
@@ -24,8 +21,6 @@ class SignUp extends Component {
   }
 
   renderUsername = ({ input, meta }) => {
-    // console.log(formProps);
-    // console.log(meta);
     return (
       <Form.Input
         {...input}
@@ -40,8 +35,6 @@ class SignUp extends Component {
   }
 
   renderEmail = ({ input, meta }) => {
-    // console.log(formProps);
-    // console.log(meta);
     return (
       <Form.Input
         {...input}
@@ -68,6 +61,12 @@ class SignUp extends Component {
         placeholder="Password"
       />
     );
+  }
+
+  handlePressEnter(e) {
+    if (e.keyCode === 13 && !e.shiftKey) {
+      this.onSubmit(e);
+    }
   }
 
   render() {

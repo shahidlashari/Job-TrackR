@@ -1,3 +1,4 @@
+import axios from 'axios';
 import {
   SEARCH_JOBS,
   SEARCH_JOBS_ERROR,
@@ -8,8 +9,6 @@ import {
   UPDATE_JOBS_BY_ID_ERROR,
   DELETE_JOBS_BY_ID_ERROR,
 } from '../types';
-
-import axios from 'axios';
 
 export const getUserJobs = () => async dispatch => {
   try {

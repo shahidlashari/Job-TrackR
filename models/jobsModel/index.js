@@ -61,6 +61,4 @@ JobsSchema.virtual('jobUrl').get(function () {
   return `https://www.themuse.com/job/redirect/${this.publishedId.toString()}`;
 });
 
-const Jobs = model('Jobs', JobsSchema);
-
-module.exports = Jobs;
+module.exports = model('Jobs', JobsSchema);
