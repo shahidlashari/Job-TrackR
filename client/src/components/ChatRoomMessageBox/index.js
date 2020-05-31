@@ -44,7 +44,7 @@ class ChatRoomMessageBox extends Component {
                   <Grid.Row>
                     <Image src={defaultAvatar} circular height="50" width="50" style={{ marginLeft: '5px', marginRight: '5px' }} />
                     <p>
-                      <strong style={{ fontSize: '20px' }}>{message.username}</strong>
+                      <strong style={{ fontSize: '20px' }}>{message.username ? message.username : message.authUser }</strong>
                       <span style={{ fontSize: '12px', marginLeft: '3px' }}>{moment(message.date).format('l | dddd | h:m A')}</span>
                       <br />
                       <span style={{ fontSize: '16px' }}>{message.text}</span>

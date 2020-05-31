@@ -36,7 +36,7 @@ class ChatRoomUsers extends Component {
               <List.Item key={index}>
                 <Segment inverted>
                   <Icon name="user" />
-                  {user.username}
+                  { user.username }
                 </Segment>
               </List.Item>
             ))}

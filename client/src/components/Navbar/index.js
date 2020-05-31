@@ -1,11 +1,26 @@
 import React from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { Menu, Image, Icon, Button } from 'semantic-ui-react';
+import { Menu, Image, Icon, Button, Dropdown } from 'semantic-ui-react';
 import LogoImg from '../../images/logo.png';
 import './style.css';
 
 const Navbar = (props) => {
+  function getUsername() {
+    if (props.authenticated) {
+      const name = `Logged-in as: ${props.user.username}`;
+      return (
+        <Dropdown text={name} style={{ marginRight: '20px' }}>
+          <Dropdown.Menu>
+            <Dropdown.Item as={NavLink} to="/signout" icon="sign-out" text="Sign Out" />
+          </Dropdown.Menu>
+        </Dropdown>
+      );
+    } else {
+      return null;
+    }
+  }
+
   return (
     <Menu
       fixed="top"
@@ -40,16 +55,8 @@ const Navbar = (props) => {
         <Icon name="cogs" />
         Job Dashboard
       </Menu.Item> : null }
-      <Menu.Item position="right">
-        {/* <Dropdown text={props.user.username}>
-          <Dropdown.Menu>
-            <Dropdown.Item as={NavLink} to="/signout" icon="sign-out" text="Sign Out" />
-          </Dropdown.Menu>
-        </Dropdown> */}
-        { props.authenticated ? <Button as={NavLink} to="/signout" inverted>
-          <Icon name="sign-out" />
-          Sign Out
-        </Button> : <Button as={NavLink} to="/signin" inverted>
+      <Menu.Item position="right" header>
+        { props.authenticated ? getUsername() : <Button as={NavLink} to="/signin" inverted>
           <Icon name="sign-in" />
           Sign In
         </Button>}
@@ -63,7 +70,7 @@ const Navbar = (props) => {
 };
 
 function mapStateToProps(state) {
-  return { authenticated: state.auth.authenticated };
+  return { authenticated: state.auth.authenticated, user: state.auth.user };
 }
 
 export default connect(mapStateToProps, {})(Navbar);

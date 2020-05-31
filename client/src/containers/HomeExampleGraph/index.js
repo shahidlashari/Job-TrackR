@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
 const data = [
   {
@@ -41,7 +41,7 @@ const data = [
 ];
 
 export default class HomeExampleGraph extends PureComponent {
-  static jsfiddleUrl = 'https://jsfiddle.net/alidingling/xqjtetw0/';
+  static jsfiddleUrl = 'https://jsfiddle.net/alidingling/30763kr7/';
 
   render() {
     return (
@@ -49,7 +49,7 @@ export default class HomeExampleGraph extends PureComponent {
         <h2 style={{ marginLeft: '70px', textAlign: 'center', textDecoration: 'underline' }}>Historical Data</h2>
         <h2 style={{ marginLeft: '70px', textAlign: 'center' }}>IT Jobs in US, California for the Past Year </h2>
         <ResponsiveContainer>
-          <LineChart
+          <BarChart
             width={500}
             height={300}
             data={data}
@@ -62,8 +62,8 @@ export default class HomeExampleGraph extends PureComponent {
             <YAxis />
             <Tooltip />
             <Legend />
-            <Line type="monotone" dataKey="salary" stroke="#8884d8" activeDot={{ r: 8 }} />
-          </LineChart>
+            <Bar dataKey="salary" fill="#8884d8" />
+          </BarChart>
         </ResponsiveContainer>
       </div>
     );

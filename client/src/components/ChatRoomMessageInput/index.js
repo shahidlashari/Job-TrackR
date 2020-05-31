@@ -14,6 +14,7 @@ class ChatRoomMessageInput extends Component {
         text: formValues.message,
         userId: this.props.user._id,
         username: this.props.user.username,
+        authUser: this.props.user,
       };
 
       this.props.socket.emit('createMessage', message, () => {
