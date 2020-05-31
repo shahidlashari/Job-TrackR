@@ -9,11 +9,8 @@ class SearchRegionalData extends Component {
   // When the user submits the form, send the formValues to /api/trending/employer
   onSubmit = async (formValues, dispatch) => {
     const { statenamer } = formValues;
-    // console.log(statenamer);
     try {
       const { data } = await axios.get(`/api/trending/regional?statenamer=${statenamer}`);
-      // console.log(data);
-      console.log(data);
       dispatch({ type: GET_REGIONAL_DATA, payload: data.month, location: data.location.display_name });
     } catch (e) {
       throw new SubmissionError({
@@ -44,7 +41,7 @@ class SearchRegionalData extends Component {
       <div>
         <Form size="large" onSubmit={handleSubmit(this.onSubmit)}>
           <Segment stacked>
-            <p> This returns the number of jobs advertised in the sub-regions of any location.</p>
+            <p> This returns the number of jobs advertised in any state.</p>
             <Field
               name="statenamer"
               component={this.renderRegionalData}
@@ -55,7 +52,7 @@ class SearchRegionalData extends Component {
                   }
             />
             <Button
-              color="teal"
+              color="twitter"
               size="large"
               type="submit"
               disabled={submitting || submitFailed}

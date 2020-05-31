@@ -68,7 +68,7 @@ class SearchHistogramData extends Component {
                   }
             />
             <Button
-              color="teal"
+              color="green"
               size="large"
               type="submit"
               disabled={submitting || submitFailed}

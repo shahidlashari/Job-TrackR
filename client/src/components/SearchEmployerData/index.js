@@ -20,7 +20,6 @@ class SearchEmployerData extends Component {
   }
 
   renderEmployerData = ({ input, meta }) => {
-    //    console.log(meta);
     return (
       <>
         <Form.Input
@@ -45,7 +44,6 @@ class SearchEmployerData extends Component {
             <p> This returns top five employers by number of vacancies for job titles. </p>
             <Field
               name="jobtitle"
-                  // placeholder="Job Title e.g project manager"
               component={this.renderEmployerData}
               validate={
                     [
@@ -54,7 +52,7 @@ class SearchEmployerData extends Component {
                   }
             />
             <Button
-              color="teal"
+              color="purple"
               size="large"
               type="submit"
               disabled={submitting || submitFailed}

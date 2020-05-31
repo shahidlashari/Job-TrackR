@@ -1,3 +1,5 @@
+/* eslint-disable no-restricted-syntax */
+/* eslint-disable guard-for-in */
 import React, { PureComponent } from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import { connect } from 'react-redux';
@@ -16,7 +18,6 @@ class HistoricalChart extends PureComponent {
   }
 
   renderHistoricalChart = () => {
-    console.log(this.props.historicalData);
     return (
       <div style={{ width: '100%', height: 350, textAlign: 'center' }}>
         <h2> Historical salary 6-months data for specific Jobs category  </h2>
@@ -27,10 +28,9 @@ class HistoricalChart extends PureComponent {
             <YAxis />
             <Tooltip />
             <Legend />
-            <Bar dataKey="salary" fill="#8884d8" />
+            <Bar dataKey="salary" fill="#A52A2A" />
           </BarChart>
         </ResponsiveContainer>
-        <p>{this.props.location}</p>
       </div>
     );
   }
@@ -38,7 +38,6 @@ class HistoricalChart extends PureComponent {
   componentDidMount = () => {
     this.mapChartData();
   }
-
 
   mapChartData = () => {
     const historicalData = this.mapData();

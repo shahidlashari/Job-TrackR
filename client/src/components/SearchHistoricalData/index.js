@@ -44,7 +44,7 @@ class SearchHistoricalData extends Component {
 
         <Form size="large" onSubmit={handleSubmit(this.onSubmit)}>
           <Segment stacked>
-            <p> This returns salary and vacancy data for six months for job categories in a state.</p>
+            <p> This returns salary and vacancy data for six months for job categories in any state.</p>
             <Field
               name="jobcategoryh"
               placeholder="Enter job vategory e.g IT"
@@ -66,7 +66,7 @@ class SearchHistoricalData extends Component {
                   }
             />
             <Button
-              color="teal"
+              color="brown"
               size="large"
               type="submit"
               disabled={submitting || submitFailed}
