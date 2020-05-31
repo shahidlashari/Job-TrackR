@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import Slider from 'react-slick';
 import { Image } from 'semantic-ui-react';
-import carousel1 from '../../images/carousel1.jpg';
-import carousel2 from '../../images/carousel2.png';
-import carousel3 from '../../images/carousel3.jpg';
-import carousel4 from '../../images/carousel4.jpg';
-import carousel5 from '../../images/carousel5.jpg';
-import carousel6 from '../../images/carousel6.png';
-import carousel7 from '../../images/carousel7.png';
-import carousel8 from '../../images/carousel8.jpg';
+import carousel1 from '../../images/Carousel1.jpg';
+import carousel2 from '../../images/Carousel2.png';
+import carousel3 from '../../images/Carousel3.jpg';
+import carousel4 from '../../images/Carousel4.jpg';
+import carousel5 from '../../images/Carousel5.jpg';
+import carousel6 from '../../images/Carousel6.png';
+import carousel7 from '../../images/Carousel7.png';
+import carousel8 from '../../images/Carousel8.jpg';
 
 export default class AutoPlay extends Component {
   render() {
