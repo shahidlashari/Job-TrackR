@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import moment from 'moment';
 import { Segment, Image, Grid } from 'semantic-ui-react';
 import chatBot from '../../images/chatBot.png';
-import defaultAvatar from '../../images/defaultAvatar.png';
+import defaultAvatar from '../../images/defaultavatar.png';
 import './style.css';
 
 class ChatRoomMessageBox extends Component {
