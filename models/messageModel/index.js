@@ -12,6 +12,9 @@ const MessageSchema = new Schema({
   username: {
     type: String,
   },
+  authUser: {
+    type: String,
+  },
   user: { type: Schema.Types.ObjectId, ref: 'User' },
 });
 
