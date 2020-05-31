@@ -27,10 +27,9 @@ module.exports = {
     }
   },
   getHistoricalData: async (req, res) => {
-    const { statenameh, jobcategory } = req.query;
-
+    const { statenameh, jobcategoryh } = req.query;
     try {
-      const { data } = await axios.get(`http://api.adzuna.com/v1/api/jobs/us/history?app_id=${AppId}&app_key=${ApiKey}&location0=US&location1=${statenameh}&category=${jobcategory}&content-type=application/json`);
+      const { data } = await axios.get(`http://api.adzuna.com/v1/api/jobs/us/history?app_id=${AppId}&app_key=${ApiKey}&location0=US&location1=${statenameh}&category=${jobcategoryh}&content-type=application/json`);
       return res.status(200).json(data);
     } catch (e) {
       return res.status(403).json({ e });
