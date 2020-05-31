@@ -21,10 +21,10 @@ const Footer = () => {
                   Job TrackR
                 </Header>
                 <p>
-                  Job TrackR allows you to search specific job categories in the area of your choice to find the job that's right for you.
+                  Job TrackR allows you to search specific job categories in the area of your choice to find the job that's right for you and keep track of them all. JobTrackR also allows you to view trendings of jobs and salaries.
                 </p>
                 <p>
-                  Register and ramp-up your job search with Job TrackR tools: collaborative live chat messaging with other users, access to relevant job trends, and track and update job search details to make proress in your Job Dashboard page!
+                  Register and ramp-up your job search with Job TrackR tools: collaborative live chat messaging with other users, access to relevant job trends, and track and update job search details to make progress in your Job Dashboard page!
                 </p>
               </Grid.Column>
               <Grid.Column width={3}>
@@ -79,9 +79,8 @@ const Footer = () => {
             <Divider />
           </Grid>
           <Segment textAlign="center" inverted style={{ background: '#37373b' }}>
-            Copyright
             <Icon name="copyright outline" style={{ marginLeft: '3px' }} />
-            2020. All rights reserved.
+            Copyright 2020. All rights reserved.
           </Segment>
         </Container>
       </Segment>

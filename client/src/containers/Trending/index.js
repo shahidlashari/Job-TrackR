@@ -60,10 +60,10 @@ class Trending extends Component {
         <Helmet>
           <style>{'body { background-color: #37373b; }'}</style>
         </Helmet>
-        <Grid textAlign="center" style={{ height: '20vh' }} verticalAlign="middle">
+        <Grid textAlign="center" style={{ height: '5vh' }} verticalAlign="middle">
           <Grid.Column style={{ maxWidth: 200 }} />
         </Grid>
-        <Grid container stackable style={{ marginTop: '1em' }}>
+        <Grid container stackable style={{ marginTop: '3em' }}>
           <Grid.Row>
             <Grid.Column width={8}>
               <Header
@@ -108,7 +108,7 @@ class Trending extends Component {
                   fontSize: '32px',
                   fontWeight: 'bold',
                   marginBottom: 0,
-                  marginTop: '1.3em',
+                  marginTop: '1em',
                 }}
               />
               <SearchHistoricalData />
@@ -123,7 +123,7 @@ class Trending extends Component {
                   fontSize: '32px',
                   fontWeight: 'bold',
                   marginBottom: 0,
-                  marginTop: '1.3em',
+                  marginTop: '1em',
                 }}
               />
               <SearchHistogramData />

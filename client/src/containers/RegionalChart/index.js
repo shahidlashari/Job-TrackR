@@ -1,10 +1,11 @@
+/* eslint-disable no-restricted-syntax */
+/* eslint-disable guard-for-in */
 import React, { PureComponent } from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import { connect } from 'react-redux';
 import { Container } from 'semantic-ui-react';
 
 class RegionalChart extends PureComponent {
-  // Logic that renders the Result Chart (Rechart npm package)
   state = {
     isMapped: false,
     regionalData: [],
@@ -17,7 +18,6 @@ class RegionalChart extends PureComponent {
   }
 
   renderRegionalChart = () => {
-    console.log(this.state.regionalData);
     return (
       <div style={{ width: '100%', height: 350, textAlign: 'center' }}>
         <h2> Salary view for 12 months Regional Data </h2>
@@ -28,10 +28,9 @@ class RegionalChart extends PureComponent {
             <YAxis />
             <Tooltip />
             <Legend />
-            <Bar dataKey="salary" fill="#8884d8" />
+            <Bar dataKey="salary" fill="#00acee" />
           </BarChart>
         </ResponsiveContainer>
-        <p>{ this.props.location}</p>
       </div>
     );
   }
@@ -40,10 +39,8 @@ class RegionalChart extends PureComponent {
     this.mapChartData();
   }
 
-
   mapChartData = () => {
     const regionalData = this.mapData();
-    console.log(regionalData);
     this.setState({ regionalData, isMapped: true });
   }
 
@@ -56,7 +53,6 @@ class RegionalChart extends PureComponent {
   }
 
   render() {
-    console.log(this.props.location);
     return (
       <Container>
         {this.state.isMapped ? this.renderRegionalChart() : null}
