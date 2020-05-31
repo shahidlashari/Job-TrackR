@@ -1,6 +1,8 @@
 import {
   SEARCH_JOBS,
   SEARCH_JOBS_ERROR,
+  SAVE_USER_JOB,
+  SAVE_USER_JOB_ERROR,
   GET_USER_JOBS,
   GET_USER_JOBS_ERROR,
   ADD_USER_JOBS,
@@ -12,7 +14,7 @@ import {
 const INITIAL_STATE = {
   searchJob: [],
   searchJobError: '',
-  jobs: [],
+  searchJobResults: [],
   userJobs: [],
   searchJobServerError: '',
   searchJobClientError: '',
@@ -31,7 +33,7 @@ export default function (state = INITIAL_STATE, action) {
     // case GET_ALL_JOBS_ERROR:
     //   return {...state, getAllJobsError: action.payload };
     case SEARCH_JOBS:
-      return { ...state, searchJob: action.payload, searchJobError: '' };
+      return { ...state, searchJob: action.payload, searchJobResults: action.payload.data.results, searchJobError: '' };
     case SEARCH_JOBS_ERROR:
       return { ...state, searchJobServerError: action.serverError, searchJobClientError: action.clientError };
     case GET_USER_JOBS:

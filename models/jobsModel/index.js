@@ -11,7 +11,6 @@ const JobsSchema = new Schema(
     },
     publishedDate: {
       type: Date,
-      unique: true,
     },
     level: {
       type: String,

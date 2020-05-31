@@ -6,8 +6,10 @@ export const AUTH_USER_ERROR = 'AUTH_USER_ERROR';
 export const SEARCH_JOBS = 'SEARCH_JOBS';
 export const SEARCH_JOBS_ERROR = 'SEARCH_JOBS_ERROR';
 
-
 // Authenticated user jobs
+export const SAVE_USER_JOB = 'SAVE_USER_JOB';
+export const SAVE_USER_JOB_ERROR = 'SAVE_USER_JOB_ERROR';
+
 export const GET_USER_JOBS = 'GET_USER_JOBS';
 export const GET_USER_JOBS_ERROR = 'GET_USER_JOBS_ERROR';
 
