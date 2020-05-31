@@ -31,7 +31,7 @@ class ChatRoomMessageBox extends Component {
                   <Image src={chatBot} circular height="50" width="50" style={{ marginLeft: '5px', marginRight: '5px' }} />
                   <p>
                     <strong style={{ fontSize: '20px' }}>Chat Bot</strong>
-                    <span style={{ fontSize: '12px', marginLeft: '3px' }}>5/27/2020 | 10:00pm</span>
+                    <span style={{ fontSize: '12px', marginLeft: '3px' }}>{moment().format('l | dddd | h:m A')}</span>
                     <br />
                     <span style={{ fontSize: '16px' }}>Welcome to the Chat Room!</span>
                   </p>
