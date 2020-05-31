@@ -11,7 +11,7 @@ module.exports = {
       }
       // console.log(room);
       const roomData = await Room.findOne({ code: '12345' }).populate('users').populate('messages');
-      console.log(roomData);
+      // console.log(roomData);
       cb(roomData);
     } catch (e) {
       cb(e);

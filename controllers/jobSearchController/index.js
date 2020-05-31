@@ -5,17 +5,11 @@ const { Jobs, User } = require('../../models');
 module.exports = {
   jobSearch: async (req, res) => {
     const { role, level, location } = req.query;
-    console.log(role, level, location);
-    console.log(location);
     const newRole = role.replace(' ', '%20').replace(',', '%2C');
     const newLevel = level.replace(' ', '%20').replace(',', '%2C');
     const newLocation = location.replace(' ', '%20').replace(',', '%2C').replace(' ', '%20');
-    console.log(newLocation);
-
     try {
-      const { data } = await axios.get(`https://www.themuse.com/api/public/jobs?location=${newLocation}&page=2`);
-
-      // const { data } = await axios.get(`https://www.themuse.com/api/public/jobs?category=${newRole}&level=${newLevel}&location=${newLocation}&page=1`);
+      const { data } = await axios.get(`https://www.themuse.com/api/public/jobs?category=${newRole}&level=${newLevel}&location=${newLocation}&page=1`);
       return res.status(200).json({ data });
     } catch (e) {
       return res.status(403).json({ e });
@@ -23,11 +17,14 @@ module.exports = {
   },
 
   jobSave: async (req, res) => {
-    const { jobTitle, publishedId, publishedDate, level, categories, location, companyName, description, coverLetter, resume, deadline, salary, note } = req.body;
-    console.log(jobTitle);
+    console.log('Im hit');
+    const { job } = req.body;
+    console.log(job);
     try {
-      const saveJobs = new Jobs({ jobTitle, publishedId, publishedDate, level, categories, location, companyName, description, coverLetter, resume, deadline, salary, note, user: req.user._id });
-      saveJobs.save();
+      const saveJobs = await new Jobs({ jobTitle: job.name, publishedId: job.id, publishedDate: job.publication_date, level: job.levels[0].name, categories: job.categories[0].name, location: job.locations[0].name, companyName: job.company.name, description: job.contents, user: req.user._id }).save();
+      console.log(saveJobs);
+      req.user.jobs.push(saveJobs);
+      await req.user.save();
       return res.status(200).json({ saveJobs });
     } catch (e) {
       return res.status(403).json(e);

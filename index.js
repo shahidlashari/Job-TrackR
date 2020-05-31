@@ -36,7 +36,7 @@ mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/jobTrackR', {
 
 // Socket.io Connection
 io.on('connection', (socket) => {
-  console.log('I am connected to the socket!');
+  // console.log('I am connected to the socket!');
 
   socket.on('loadRoom', (userId, cb) => {
     loadRoom(userId, (roomData) => {
@@ -48,9 +48,9 @@ io.on('connection', (socket) => {
   });
 
   socket.on('leaveRoom', (userId) => {
-    leaveRoom(userId, (roomData) => {
+    leaveRoom(userId, () => {
       socket.broadcast.emit('userLeft');
-      console.log(roomData);
+      // console.log(roomData);
     });
   });
 
@@ -62,7 +62,7 @@ io.on('connection', (socket) => {
   });
 
   socket.on('disconnect', () => {
-    console.log('I am disconnected from the socket!');
+    // console.log('I am disconnected from the socket!');
   });
 });
 
