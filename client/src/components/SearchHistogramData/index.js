@@ -6,12 +6,13 @@ import axios from 'axios';
 import { GET_HISTOGRAM_DATA } from '../../actions/types';
 
 class SearchHistogramData extends Component {
-  // When the user submits the form, send the formValues to /api/trending/employer
+  // When the user submits the form, send the formValues to /api/trending/histogram
   onSubmit = async (formValues, dispatch) => {
     const { statename, jobtitleh } = formValues;
     console.log(formValues);
     try {
-      const { data } = await axios.get(`/api/trending/histogram?statename=${statename}&jobtitle=${jobtitleh}`);
+      const { data } = await axios.get(`/api/trending/histogram?statename=${statename}&jobtitleh=${jobtitleh}`);
+      console.log(data);
       dispatch({ type: GET_HISTOGRAM_DATA, payload: data });
       // this.props.history.push('/search');
     } catch (e) {
@@ -47,16 +48,6 @@ class SearchHistogramData extends Component {
           <Segment stacked>
             <p> This returns the current distribution of salaries for a job category in any state. </p>
             <Field
-              name="statename"
-              placeholder="Enter state e.g california"
-              component={this.renderHistogramData}
-              validate={
-                    [
-                      required({ msg: 'State is required' }),
-                    ]
-                  }
-            />
-            <Field
               name="jobtitleh"
               placeholder="Enter Job Category e.g project manager"
               component={this.renderHistogramData}
@@ -66,13 +57,23 @@ class SearchHistogramData extends Component {
                     ]
                   }
             />
+            <Field
+              name="statename"
+              placeholder="Enter state e.g california"
+              component={this.renderHistogramData}
+              validate={
+                    [
+                      required({ msg: 'State is required' }),
+                    ]
+                  }
+            />
             <Button
               color="teal"
               size="large"
               type="submit"
               disabled={submitting || submitFailed}
             >
-              <Icon name="history" />
+              <Icon name="search" />
               Search Histogram Data
             </Button>
           </Segment>

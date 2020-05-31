@@ -11,21 +11,17 @@ import {
   GET_HISTOGRAM_DATA_ERROR,
 } from '../types';
 
-
 export const getEmployerData = () => async (dispatch) => {
   try {
     const { data } = await axios.get('/api/trending/employer');
-
     dispatch({ type: GET_EMPLOYER_DATA, payload: data });
   } catch (e) {
     dispatch({ type: GET_EMPLOYER_DATA_ERROR, serverError: e, clientError: 'Something went wrong. Refresh the page and try again' });
   }
 };
 export const getRegionalData = () => async (dispatch) => {
-  console.log("Happening");
   try {
     const { data } = await axios.get('/api/trending/regional');
-    console.log(data);
     dispatch({ type: GET_REGIONAL_DATA, payload: data });
   } catch (e) {
     dispatch({ type: GET_REGIONAL_DATA_ERROR, serverError: e, clientError: 'Something went wrong. Refresh the page and try again' });
@@ -34,7 +30,6 @@ export const getRegionalData = () => async (dispatch) => {
 export const getHistoricalData = () => async (dispatch) => {
   try {
     const { data } = await axios.get('/api/trending/historical');
-
     dispatch({ type: GET_HISTORICAL_DATA, payload: data });
   } catch (e) {
     dispatch({ type: GET_HISTORICAL_DATA_ERROR, serverError: e, clientError: 'Something went wrong. Refresh the page and try again' });
@@ -43,7 +38,6 @@ export const getHistoricalData = () => async (dispatch) => {
 export const getHistogramData = () => async (dispatch) => {
   try {
     const { data } = await axios.get('/api/trending/histogram');
-
     dispatch({ type: GET_HISTOGRAM_DATA, payload: data });
   } catch (e) {
     dispatch({ type: GET_HISTOGRAM_DATA_ERROR, serverError: e, clientError: 'Something went wrong. Refresh the page and try again' });

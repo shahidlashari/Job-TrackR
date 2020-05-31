@@ -48,7 +48,6 @@ class Trending extends Component {
     <Grid.Row>
       <Grid.Column width={16}>
         <Segment style={{ minHeight: 450 }}>
-          <HistoricalChart />
           <HistogramChart />
         </Segment>
       </Grid.Column>
@@ -65,10 +64,6 @@ class Trending extends Component {
           <Grid.Column style={{ maxWidth: 200 }} />
         </Grid>
         <Grid container stackable style={{ marginTop: '1em' }}>
-          {this.props.employer.length === 0 ? null : this.renderEmployerChart()}
-          {this.props.regional.length === 0 ? null : this.renderRegionalChart()}
-          {/* {this.props.historical.length === 0 ? null : this.renderHistoricalChart()}
-          {this.props.histogram.length === 0 ? null : this.renderHistogramChart()} */}
           <Grid.Row>
             <Grid.Column width={8}>
               <Header
@@ -134,6 +129,10 @@ class Trending extends Component {
               <SearchHistogramData />
             </Grid.Column>
           </Grid.Row>
+          {this.props.employer.length === 0 ? null : this.renderEmployerChart()}
+          {this.props.regional.length === 0 ? null : this.renderRegionalChart()}
+          {this.props.historical.length === 0 ? null : this.renderHistoricalChart()}
+          {this.props.histogram.length === 0 ? null : this.renderHistogramChart()}
         </Grid>
       </div>
     );
@@ -143,6 +142,8 @@ function mapStateToProps(state) {
   return {
     employer: state.data.employerData,
     regional: state.data.regionalData,
+    historical: state.data.historicalData,
+    histogram: state.data.histogramData,
   };
 }
 export default compose(
