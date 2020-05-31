@@ -2,7 +2,7 @@ import { CONSTANTS } from '../actions/draganddropActions';
 
 const initialState = {
   'card-0': {
-    text: 'Last Episode',
+    text: 'Google',
     id: 'card-0',
     list: 'list-0',
   },

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Button, Form, Icon } from 'semantic-ui-react';
+import { Button, Form, Icon, FormInput } from 'semantic-ui-react';
 import { addList, addCard } from '../../actions/draganddropActions';
 import JobForm from '../JobForm';
 
@@ -62,7 +62,7 @@ class JobCreator extends Component {
 
     return (
       <Button onClick={this.openForm}>
-        <Icon>add</Icon>
+        <Icon>Add</Icon>
         <p style={{ flexShrink: 0 }}>{buttonText}</p>
       </Button>
     );
@@ -83,7 +83,11 @@ class JobCreator extends Component {
       </JobForm>
     ) : (
       <Form list={list} onClick={this.openForm}>
-        {list ? 'Add another list' : 'Add another card'}
+        <FormInput>
+          <Button>
+            {list ? 'Add another list' : 'Add another card'}
+          </Button>
+        </FormInput>
       </Form>
     );
   }

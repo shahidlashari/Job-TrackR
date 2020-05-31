@@ -1,10 +1,10 @@
 import { CONSTANTS } from '../actions/draganddropActions';
 
 const initialState = {
-  'board-0': {
-    id: 'board-0',
+  'board-1': {
+    id: 'board-1',
     lists: ['list-0'],
-    title: 'myboard',
+    title: 'FirstBoard',
   },
 };
 

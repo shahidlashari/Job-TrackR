@@ -1,7 +1,6 @@
-import uuid from 'uuidv4';
 import { CONSTANTS } from '../actions/draganddropActions';
 
-const initialState = ['board-0'];
+const initialState = ['board-1'];
 
 const boardOrderReducer = (state = initialState, action) => {
   switch (action.type) {
