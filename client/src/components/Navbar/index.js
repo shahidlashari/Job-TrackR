@@ -7,7 +7,7 @@ import './style.css';
 
 const Navbar = (props) => {
   function getUsername() {
-    if (props.authenticated) {
+    if (props.authenticated && props.user) {
       const name = `Logged-in as: ${props.user.username}`;
       return (
         <Dropdown text={name} style={{ marginRight: '20px' }}>
@@ -56,10 +56,11 @@ const Navbar = (props) => {
         Job Dashboard
       </Menu.Item> : null }
       <Menu.Item position="right" header>
-        { props.authenticated ? getUsername() : <Button as={NavLink} to="/signin" inverted>
+        { props.authenticated && props.user ? getUsername() : null }
+        { props.authenticated ? null : <Button as={NavLink} to="/signin" inverted>
           <Icon name="sign-in" />
           Sign In
-        </Button>}
+        </Button> }
         { props.authenticated ? null : <Button as={NavLink} to="/signup" inverted style={{ marginLeft: '0.5em' }}>
           <Icon name="signup" />
           Sign Up
