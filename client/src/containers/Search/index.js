@@ -30,7 +30,6 @@ import { SEARCH_JOBS, SEARCH_JOBS_ERROR } from '../../actions/types';
 const { window } = new JSDOM('');
 const DOMPurify = createDOMPurify(window);
 
-//  54295
 class Search extends Component {
   state = {
     loading: false,
@@ -50,7 +49,6 @@ class Search extends Component {
   };
 
   // const { jobTitle, publishedId, publishedDate, level, categories, location, companyName, contents, coverLetter, resume, deadline, salary, note } = req.body;
-
   saveJob = async (job) => {
     console.log(job);
     try {
@@ -60,6 +58,10 @@ class Search extends Component {
       if (e) throw e;
     }
   };
+
+  jobCompanyURL = async (id) => {
+    window.location.href = `https://www.themuse.com/job/redirect/${id}`;
+  }
 
   renderDropdown = (field) => {
     return (
@@ -127,7 +129,6 @@ class Search extends Component {
             </Form>
           </Grid.Column>
         </Grid>
-
         <Grid container centered relaxed stackable textAlign="center">
           <Grid.Row columns={3} style={{ padding: '1em 0em', marginLeft: '75px' }}>
             { this.props.jobs?.map((job, idx) => {
@@ -154,13 +155,11 @@ class Search extends Component {
                           <p style={{ fontSize: '24px' }}>{job.name}</p>
                           <p>{job.locations[0].name}</p>
                         </Modal.Header>
-
                         <Modal.Content>
                           <Modal.Description>
                             <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(job.contents) }} style={{ fontSize: '20px' }} />
                           </Modal.Description>
                         </Modal.Content>
-
                         <Modal.Actions>
                           <Button
                             color="blue"

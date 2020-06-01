@@ -42,7 +42,6 @@ class Dashboard extends Component {
             <Container fluid style={{ marginTop: '4em', marginBottom: '5em' }}>
               <Header as="h1" textAlign="center">Job TrackR Dashboard</Header>
               {/* <JobBoard /> */}
-
               <Grid container stackable>
                 <GridRow columns={7}>
                   <GridColumn>
