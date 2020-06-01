@@ -1,5 +1,3 @@
-/* eslint-disable no-restricted-syntax */
-/* eslint-disable guard-for-in */
 import React, { PureComponent } from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import { connect } from 'react-redux';
@@ -7,8 +5,8 @@ import { Container } from 'semantic-ui-react';
 
 class RegionalChart extends PureComponent {
   state = {
-    isMapped: false,
     regionalData: [],
+    isMapped: false,
   }
 
   componentDidUpdate(prevProps) {
@@ -20,7 +18,7 @@ class RegionalChart extends PureComponent {
   renderRegionalChart = () => {
     return (
       <div style={{ width: '100%', height: 350, textAlign: 'center' }}>
-        <h2> Salary view for 12 months Regional Data </h2>
+        <h2> Regional Data Salary in the Past Year </h2>
         <ResponsiveContainer>
           <BarChart width={730} height={250} data={this.state.regionalData}>
             <CartesianGrid strokeDasharray="3 3" />
@@ -54,16 +52,18 @@ class RegionalChart extends PureComponent {
 
   render() {
     return (
-      <Container>
+      <Container className="regional-chart">
         {this.state.isMapped ? this.renderRegionalChart() : null}
       </Container>
     );
   }
 }
+
 function mapStateToProps(state) {
   return {
     regional: state.data.regionalData,
     location: state.data.regionalDataLocation,
   };
 }
+
 export default connect(mapStateToProps, {})(RegionalChart);

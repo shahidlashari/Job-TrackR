@@ -1,3 +1,7 @@
+html {
+  scroll-behavior: smooth;
+}
+
 #home-jumbotron {
   background-image: url("../../images/jumbotron1.svg");
   background-position: center center;

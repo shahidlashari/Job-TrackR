@@ -32,6 +32,8 @@
         "no-shadow": ["off"],
         "no-throw-literal": ["off"],
         "no-underscore-dangle": ["off"],
+        "no-restricted-syntax": ["off"],
+        "guard-for-in": ["off"],
         "max-len": ["off"],
         "operator-linebreak": ["off"],
         "import/prefer-default-export": ["off"],
