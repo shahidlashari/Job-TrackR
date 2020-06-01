@@ -31,7 +31,6 @@ import { SEARCH_JOBS, SEARCH_JOBS_ERROR } from '../../actions/types';
 const { window } = new JSDOM('');
 const DOMPurify = createDOMPurify(window);
 
-//  54295
 class Search extends Component {
   state = {
     loading: false,
@@ -57,7 +56,6 @@ class Search extends Component {
   };
 
   // const { jobTitle, publishedId, publishedDate, level, categories, location, companyName, contents, coverLetter, resume, deadline, salary, note } = req.body;
-
   saveJob = async (job) => {
     console.log(job);
     try {
@@ -187,13 +185,11 @@ class Search extends Component {
                           <p style={{ fontSize: '24px' }}>{job.name}</p>
                           <p>{job.locations[0].name}</p>
                         </Modal.Header>
-
                         <Modal.Content>
                           <Modal.Description>
                             <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(job.contents) }} style={{ fontSize: '20px' }} />
                           </Modal.Description>
                         </Modal.Content>
-
                         <Modal.Actions>
                           <Button
                             color="blue"

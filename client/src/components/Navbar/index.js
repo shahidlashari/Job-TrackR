@@ -55,6 +55,10 @@ const Navbar = (props) => {
         <Icon name="cogs" />
         Job Dashboard
       </Menu.Item> : null }
+      { props.authenticated ? <Menu.Item as={NavLink} to="/dashboard1" activeclassname="active" className="navbar-item-dashboard1">
+        <Icon name="cogs" />
+        Job Dashboard1
+      </Menu.Item> : null }
       <Menu.Item position="right" header>
         { props.authenticated && props.user ? getUsername() : null }
         { props.authenticated ? null : <Button as={NavLink} to="/signin" inverted>
