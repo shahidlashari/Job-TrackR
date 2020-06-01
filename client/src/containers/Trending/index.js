@@ -63,7 +63,7 @@ class Trending extends Component {
         <Grid textAlign="center" style={{ height: '5vh' }} verticalAlign="middle">
           <Grid.Column style={{ maxWidth: 200 }} />
         </Grid>
-        <Grid container stackable style={{ marginTop: '3em' }}>
+        <Grid container stackable textAlign="center" style={{ marginTop: '3em', marginBottom: '3em' }}>
           <Grid.Row>
             <Grid.Column width={8}>
               <Header
@@ -78,7 +78,7 @@ class Trending extends Component {
                   marginTop: '1.3em',
                 }}
               />
-              <SearchEmployerData />
+              <SearchEmployerData employer={this.props.employer} />
             </Grid.Column>
             <Grid.Column width={8}>
               <Header
@@ -93,7 +93,7 @@ class Trending extends Component {
                   marginTop: '1.3em',
                 }}
               />
-              <SerachRegionalData />
+              <SerachRegionalData regional={this.props.regional} />
             </Grid.Column>
           </Grid.Row>
 
@@ -111,7 +111,7 @@ class Trending extends Component {
                   marginTop: '1em',
                 }}
               />
-              <SearchHistoricalData />
+              <SearchHistoricalData historical={this.props.historical} />
             </Grid.Column>
             <Grid.Column width={8}>
               <Header
@@ -126,7 +126,7 @@ class Trending extends Component {
                   marginTop: '1em',
                 }}
               />
-              <SearchHistogramData />
+              <SearchHistogramData histogram={this.props.histogram} />
             </Grid.Column>
           </Grid.Row>
           {this.props.employer.length === 0 ? null : this.renderEmployerChart()}

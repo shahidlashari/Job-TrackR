@@ -17,10 +17,9 @@ class EmployerChart extends PureComponent {
   }
 
   renderEmployerChart = () => {
-    console.log(this.state.employerData);
     return (
       <div style={{ width: '100%', height: 350, textAlign: 'center' }}>
-        <h2> Jobs for 5 Top Companies </h2>
+        <h2> Top 5 Companies by # of Vacancies of that Job </h2>
         <ResponsiveContainer>
           <BarChart width={730} height={250} data={this.state.employerData}>
             <CartesianGrid strokeDasharray="3 3" />
@@ -41,36 +40,33 @@ class EmployerChart extends PureComponent {
 
   mapChartData = () => {
     const employerData = this.mapData();
-    console.log(employerData);
     this.setState({ employerData, isMapped: true });
   }
 
   mapData() {
     const employerArr = [];
-    console.log('mapData');
     this.props.employer.forEach((element) => {
       const dataObj = {};
       dataObj.name = element.canonical_name;
       dataObj.numberOfJobs = element.count;
       employerArr.push(dataObj);
     });
-    console.log(employerArr);
     return employerArr;
   }
 
   render() {
     return (
-      <Container>
-
+      <Container className="employer-chart">
         {this.state.isMapped ? this.renderEmployerChart() : null}
-
       </Container>
     );
   }
 }
+
 function mapStateToProps(state) {
   return {
     employer: state.data.employerData,
   };
 }
+
 export default connect(mapStateToProps, {})(EmployerChart);

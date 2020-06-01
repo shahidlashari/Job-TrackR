@@ -1,5 +1,3 @@
-/* eslint-disable no-restricted-syntax */
-/* eslint-disable guard-for-in */
 import React, { PureComponent } from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import { connect } from 'react-redux';
@@ -7,9 +5,8 @@ import { Container } from 'semantic-ui-react';
 
 class HistogramChart extends PureComponent {
   state = {
-    isMapped: false,
-    // eslint-disable-next-line react/no-unused-state
     histogramData: [],
+    isMapped: false,
   }
 
   componentDidUpdate(prevProps) {
@@ -21,7 +18,7 @@ class HistogramChart extends PureComponent {
   renderHistogramChart = () => {
     return (
       <div style={{ width: '100%', height: 350, textAlign: 'center' }}>
-        <h2> Histogram salary 6-months data for specific Jobs category  </h2>
+        <h2> Histogram Salary for that Specific Job Category in the Past 6 Months </h2>
         <ResponsiveContainer>
           <BarChart width={730} height={250} data={this.state.histogramData}>
             <CartesianGrid strokeDasharray="3 3" />
@@ -55,16 +52,18 @@ class HistogramChart extends PureComponent {
 
   render() {
     return (
-      <Container>
+      <Container className="histogram-chart">
         {this.state.isMapped ? this.renderHistogramChart() : null}
       </Container>
     );
   }
 }
+
 function mapStateToProps(state) {
   return {
     histogram1: state.data.histogramData.histogram,
     location: state.data.histogramDataLocation,
   };
 }
+
 export default connect(mapStateToProps, {})(HistogramChart);

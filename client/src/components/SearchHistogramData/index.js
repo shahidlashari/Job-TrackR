@@ -1,29 +1,48 @@
 import React, { Component } from 'react';
-import { Field, reduxForm, SubmissionError } from 'redux-form';
-import { Form, Segment, Button, Icon } from 'semantic-ui-react';
+import { Field, reduxForm } from 'redux-form';
+import { Form, Segment, Message, Button, Icon } from 'semantic-ui-react';
 import { required } from 'redux-form-validators';
 import axios from 'axios';
-import { GET_HISTOGRAM_DATA } from '../../actions/types';
+import { GET_HISTOGRAM_DATA, GET_HISTOGRAM_DATA_ERROR } from '../../actions/types';
 
 class SearchHistogramData extends Component {
+  state = {
+    loading: false,
+    searchError: false,
+  }
+
   // When the user submits the form, send the formValues to /api/trending/histogram
   onSubmit = async (formValues, dispatch) => {
     const { statename, jobtitleh } = formValues;
-    console.log(formValues);
     try {
+      this.setState({ loading: true });
       const { data } = await axios.get(`/api/trending/histogram?statename=${statename}&jobtitleh=${jobtitleh}`);
-      console.log(data);
       dispatch({ type: GET_HISTOGRAM_DATA, payload: data });
-      // this.props.history.push('/search');
+      this.setState({ loading: false });
+      if (Object.keys(this.props.histogram).length === 0) {
+        this.setState({ searchError: true });
+      } else {
+        this.setState({ searchError: false });
+      }
+      this.scrollToChart();
     } catch (e) {
-      throw new SubmissionError({
-        _error: 'Trending Search failed!',
-      });
+      dispatch({ type: GET_HISTOGRAM_DATA_ERROR, payload: e });
+    }
+  }
+
+  scrollToChart = () => {
+    if (!document.querySelector('.employer-chart') && !document.querySelector('.historical-chart')) {
+      window.scrollTo(0, document.querySelector('.histogram-chart').scrollHeight);
+    } else {
+      const chart = document.querySelector('.histogram-chart');
+      const offset = 40;
+      const chartPosition = chart.getBoundingClientRect().top;
+      const offsetPosition = chartPosition - offset;
+      window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
     }
   }
 
   renderHistogramData = ({ input, meta, placeholder }) => {
-    // console.log(meta);
     return (
       <>
         <Form.Input
@@ -39,14 +58,30 @@ class SearchHistogramData extends Component {
     );
   }
 
+  renderError = () => {
+    if (this.state.searchError) {
+      return (
+        <Message
+          size="small"
+          icon="x"
+          negative
+          onDismiss={this.handleDismiss}
+          header="Failed to find result!"
+          content="Please try again by searching something different"
+        />
+      );
+    } else {
+      return null;
+    }
+  }
+
   render() {
     const { handleSubmit, submitting, submitFailed } = this.props;
-    // console.log(this.props);
     return (
       <div>
         <Form size="large" onSubmit={handleSubmit(this.onSubmit)}>
           <Segment stacked>
-            <p> This returns the current distribution of salaries for a job category in any state. </p>
+            <h3 style={{ fontSize: '16px' }}> This returns the current distribution of salaries for a job category in any state. </h3>
             <Field
               name="jobtitleh"
               placeholder="Enter Job Category e.g project manager"
@@ -68,6 +103,7 @@ class SearchHistogramData extends Component {
                   }
             />
             <Button
+              loading={this.state.loading}
               color="green"
               size="large"
               type="submit"
@@ -76,6 +112,7 @@ class SearchHistogramData extends Component {
               <Icon name="search" />
               Search Histogram Data
             </Button>
+            { this.state.searchError ? this.renderError() : null }
           </Segment>
         </Form>
       </div>
