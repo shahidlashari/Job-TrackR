@@ -11,13 +11,13 @@ import {
 
 const INITIAL_STATE = {
   employerData: [],
-  employerDataLocation: '',
+  employerDataLocation: [],
   regionalData: [],
-  regionalDataLocation: '',
+  regionalDataLocation: [],
   historicalData: [],
-  historicalDataLocation: '',
+  historicalDataLocation: [],
   histogramData: [],
-  histogramDataLocation: '',
+  histogramDataLocation: [],
   getEmployerServerError: '',
   getEmployerClientError: '',
   getRegionalServerError: '',
@@ -31,19 +31,19 @@ const INITIAL_STATE = {
 export default function (state = INITIAL_STATE, action) {
   switch (action.type) {
     case GET_EMPLOYER_DATA:
-      return { ...state, employerData: action.payload.leaderboard, employerDataLocation: action.location, getEmployerServerError: '', getEmployerClientError: '' };
+      return { ...state, employerData: action.payload.leaderboard, employerDataLocation: action.payload.location, getEmployerServerError: '', getEmployerClientError: '' };
     case GET_EMPLOYER_DATA_ERROR:
       return { ...state, getEmployerServerError: action.serverError, getEmployerClientError: action.clientError };
     case GET_REGIONAL_DATA:
-      return { ...state, regionalData: action.payload, regionalDataLocation: action.location, getRegionalServerError: '', getRegionalClientError: '' };
+      return { ...state, regionalData: action.payload, regionalDataLocation: action.payload.location, getRegionalServerError: '', getRegionalClientError: '' };
     case GET_REGIONAL_DATA_ERROR:
       return { ...state, getRegionalServerError: action.serverError, getRegionalClientError: action.clientError };
     case GET_HISTORICAL_DATA:
-      return { ...state, historicalData: action.payload.month, historicalDataLocation: action.location, getHistoricalServerError: '', getHistoricalClientError: '' };
+      return { ...state, historicalData: action.payload.month, historicalDataLocation: action.payload.location, getHistoricalServerError: '', getHistoricalClientError: '' };
     case GET_HISTORICAL_DATA_ERROR:
       return { ...state, getHistoricalServerError: action.serverError, getHistoricalClientError: action.clientError };
     case GET_HISTOGRAM_DATA:
-      return { ...state, histogramData: action.payload, histogramDataLocation: action.location, getHistogramServerError: '', getHistogramClientError: '' };
+      return { ...state, histogramData: action.payload, histogramDataLocation: action.payload.location, getHistogramServerError: '', getHistogramClientError: '' };
     case GET_HISTOGRAM_DATA_ERROR:
       return { ...state, getHistogramServerError: action.serverError, getHistogramClientError: action.clientError };
     default:

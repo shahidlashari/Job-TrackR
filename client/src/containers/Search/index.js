@@ -13,6 +13,7 @@ import {
   Modal,
   Header,
   Segment,
+  Message,
   Button,
   Card,
 } from 'semantic-ui-react';
@@ -33,6 +34,7 @@ const DOMPurify = createDOMPurify(window);
 class Search extends Component {
   state = {
     loading: false,
+    searchError: false,
   }
 
   onSubmit = async (formValues, dispatch) => {
@@ -43,6 +45,11 @@ class Search extends Component {
       console.log(data);
       dispatch({ type: SEARCH_JOBS, payload: data });
       this.setState({ loading: false });
+      if (this.props.jobs.length === 0) {
+        this.setState({ searchError: true });
+      } else {
+        this.setState({ searchError: false });
+      }
     } catch (e) {
       dispatch({ type: SEARCH_JOBS_ERROR, payload: e });
     }
@@ -59,8 +66,28 @@ class Search extends Component {
     }
   };
 
-  jobCompanyURL = async (id) => {
-    window.location.href = `https://www.themuse.com/job/redirect/${id}`;
+  renderError = () => {
+    if (this.state.searchError) {
+      return (
+        <Grid container stackable>
+          <Grid.Row>
+            <Grid.Column>
+              <Message
+                size="large"
+                icon="x"
+                negative
+                onDismiss={this.handleDismiss}
+                header="Failed to find result!"
+                content="Please try again by searching something different"
+                style={{ marginLeft: '15px' }}
+              />
+            </Grid.Column>
+          </Grid.Row>
+        </Grid>
+      );
+    } else {
+      return null;
+    }
   }
 
   renderDropdown = (field) => {
@@ -89,7 +116,7 @@ class Search extends Component {
         </Helmet>
         <Grid textAlign="center" style={{ height: '450px', padding: '9em 0em' }}>
           <Grid.Column style={{ maxWidth: 500 }}>
-            <Header color="blue" textAlign="center" style={{ fontSize: '52px' }}>
+            <Header textAlign="center" style={{ fontSize: '52px', color: 'skyblue' }}>
               Job Search
             </Header>
             <Form
@@ -118,7 +145,7 @@ class Search extends Component {
                 <Button
                   loading={this.state.loading}
                   color="blue"
-                  size="large"
+                  size="huge"
                   type="submit"
                   disabled={submitting || submitFailed}
                 >
@@ -129,12 +156,15 @@ class Search extends Component {
             </Form>
           </Grid.Column>
         </Grid>
+
+        { this.state.searchError ? this.renderError() : null }
+
         <Grid container centered relaxed stackable textAlign="center">
           <Grid.Row columns={3} style={{ padding: '1em 0em', marginLeft: '75px' }}>
             { this.props.jobs?.map((job, idx) => {
               return (
-                <Grid.Column stretched textAlign="center" style={{ padding: '1em 0em', maxWidth: 500 }}>
-                  <Card textAlign="center" key={idx}>
+                <Grid.Column key={idx} stretched style={{ padding: '1em 0em', maxWidth: 500 }}>
+                  <Card key={idx}>
                     <Card.Content as="h1">{job.name}</Card.Content>
                     <Card.Content>Company: {job.company.name}</Card.Content>
                     <Card.Content style={{ textAlign: 'center' }}>
