@@ -5,6 +5,8 @@ import {
   SAVE_USER_JOB_ERROR,
   GET_USER_JOBS,
   GET_USER_JOBS_ERROR,
+  MOVE_JOBS,
+  MOVE_JOBS_ERROR,
   ADD_USER_JOBS,
   ADD_USER_JOBS_ERROR,
   UPDATE_JOBS_BY_ID_ERROR,
@@ -16,6 +18,28 @@ const INITIAL_STATE = {
   searchJobError: '',
   searchJobResults: [],
   userJobs: [],
+  columnsJobs: {
+    savedjobs: {
+      id: 'savedjobs',
+      jobIds: [],
+    },
+    applying: {
+      id: 'applying',
+      jobIds: [],
+    },
+    interviewing: {
+      id: 'interviewing',
+      jobIds: [],
+    },
+    offers: {
+      id: 'offers',
+      jobIds: [],
+    },
+    rejected: {
+      id: 'rejected',
+      jobIds: [],
+    },
+  },
   searchJobServerError: '',
   searchJobClientError: '',
   getUserJobsServerError: '',
@@ -33,13 +57,86 @@ export default function (state = INITIAL_STATE, action) {
     // case GET_ALL_JOBS_ERROR:
     //   return {...state, getAllJobsError: action.payload };
     case SEARCH_JOBS:
-      return { ...state, searchJob: action.payload, searchJobResults: action.payload.data.results, searchJobError: '' };
+      return {
+        ...state,
+        searchJob: action.payload,
+        searchJobResults: action.payload.data.results,
+        searchJobError: '',
+      };
     case SEARCH_JOBS_ERROR:
-      return { ...state, searchJobServerError: action.serverError, searchJobClientError: action.clientError };
+      return {
+        ...state,
+        searchJobServerError: action.serverError,
+        searchJobClientError: action.clientError,
+      };
     case GET_USER_JOBS:
-      return { ...state, userJobs: action.payload, getUserJobsClientError: '', getUserJobsServerError: '', updateJobsCompleteError: '', deleteJobsError: '' };
+      return {
+        ...state,
+        userJobs: action.payload,
+        getUserJobsClientError: '',
+        getUserJobsServerError: '',
+        updateJobsCompleteError: '',
+        deleteJobsError: '',
+      };
     case GET_USER_JOBS_ERROR:
-      return { ...state, getUserJobsServerError: action.serverError, getUserJobsClientError: action.clientError };
+      return {
+        ...state,
+        getUserJobsServerError: action.serverError,
+        getUserJobsClientError: action.clientError,
+      };
+    case MOVE_JOBS:
+      const { droppableIdStart, droppableIdEnd, droppableIndexEnd, droppableIndexStart, draggableId } = action.payload;
+      // console.log(action.payload);
+      if (droppableIdStart !== droppableIdEnd) {
+        // console.log('I am hit');
+        // droppableIdEnd === 'applying'
+        // console.log(droppableIdStart);
+        if (droppableIdStart === 'savedjobs') {
+          const indexToMove = state.userJobs.findIndex(
+            (job) => job.publishedId.toString() === draggableId,
+          );
+          console.log(indexToMove);
+          const jobCard = state.userJobs[indexToMove];
+          state.userJobs.splice(indexToMove, 1);
+          const { columnsJobs } = state;
+          console.log(columnsJobs[droppableIdStart].jobIds);
+          console.log(columnsJobs);
+          return {
+            ...state,
+            columnsJobs: {
+              ...columnsJobs,
+              [droppableIdEnd]: {
+                id: droppableIdEnd,
+                jobIds: [...columnsJobs[droppableIdStart].jobIds, jobCard],
+              },
+            },
+          };
+        }
+        const indexToMove = state.columnsJobs[
+          droppableIdStart
+        ].jobIds.findIndex((job) => job.publishedId.toString() === draggableId);
+        const jobCard = state.columnsJobs[droppableIdStart].jobIds[indexToMove];
+        state.columnsJobs[droppableIdStart].jobIds.splice(indexToMove, 1);
+        const sourceEnd = state.columnsJobs[1];
+        // console.log(state.columnsJobs);
+        // // console.log(state.columnsJobs[droppableIdEnd]);
+        const { columnsJobs } = state;
+        console.log(columnsJobs[droppableIdStart].jobIds);
+        console.log(columnsJobs);
+        return {
+          ...state,
+          columnsJobs: {
+            ...columnsJobs,
+            [droppableIdEnd]: {
+              id: droppableIdEnd,
+              jobIds: [...columnsJobs[droppableIdStart].jobIds, jobCard],
+            },
+          },
+        };
+      }
+      return state;
+    case MOVE_JOBS_ERROR:
+      return { ...state, columnsJobs: action.serverError };
     case UPDATE_JOBS_BY_ID_ERROR:
       return { ...state, updateJobsCompleteError: action.payload };
     case ADD_USER_JOBS:

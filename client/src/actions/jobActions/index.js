@@ -4,6 +4,7 @@ import {
   SEARCH_JOBS_ERROR,
   GET_USER_JOBS,
   GET_USER_JOBS_ERROR,
+  MOVE_JOBS,
   // ADD_USER_JOBS,
   // ADD_USER_JOBS_ERROR,
   UPDATE_JOBS_BY_ID_ERROR,
@@ -28,6 +29,20 @@ export const updateJobById = (id, text) => async (dispatch) => {
     dispatch({ type: UPDATE_JOBS_BY_ID, payload: data });
   } catch (e) {
     dispatch({ type: UPDATE_JOBS_BY_ID_ERROR, payload: e });
+  }
+};
+
+export const sort = (droppableIdStart, droppableIdEnd, droppableIndexStart, droppableIndexEnd, draggableId) => {
+  console.log(droppableIdStart);
+  return {
+    type: MOVE_JOBS,
+    payload: {
+      droppableIdStart,
+      droppableIdEnd,
+      droppableIndexEnd,
+      droppableIndexStart,
+      draggableId,
+    }
   }
 };
 
