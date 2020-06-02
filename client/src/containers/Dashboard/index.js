@@ -204,7 +204,7 @@ class UserJobList extends Component {
                             <Grid textAlign="center" column={1}>
                               <Grid.Row>
                                 <Grid.Column width={16}>
-                                  <Button type="submit" color="blue" size="large">Submit</Button>
+                                  <Button type="submit" color="blue" size="large">Update</Button>
                                 </Grid.Column>
                               </Grid.Row>
                             </Grid>
