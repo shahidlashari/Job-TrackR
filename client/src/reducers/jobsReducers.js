@@ -5,6 +5,8 @@ import {
   SAVE_USER_JOB_ERROR,
   GET_USER_JOBS,
   GET_USER_JOBS_ERROR,
+  MOVE_JOBS,
+  MOVE_JOBS_ERROR,
   ADD_USER_JOBS,
   ADD_USER_JOBS_ERROR,
   UPDATE_JOBS_BY_ID_ERROR,
@@ -16,6 +18,28 @@ const INITIAL_STATE = {
   searchJobError: '',
   searchJobResults: [],
   userJobs: [],
+  columnsJobs: {
+    savedjobs: {
+      id: 'savedjobs',
+      jobIds: [],
+    },
+    applying: {
+      id: 'applying',
+      jobIds: [],
+    },
+    interviewing: {
+      id: 'interviewing',
+      jobIds: [],
+    },
+    offers: {
+      id: 'offers',
+      jobIds: [],
+    },
+    rejected: {
+      id: 'rejected',
+      jobIds: [],
+    },
+  },
   searchJobServerError: '',
   searchJobClientError: '',
   getUserJobsServerError: '',
@@ -37,9 +61,22 @@ export default function (state = INITIAL_STATE, action) {
     case SEARCH_JOBS_ERROR:
       return { ...state, searchJobServerError: action.serverError, searchJobClientError: action.clientError };
     case GET_USER_JOBS:
-      return { ...state, userJobs: action.payload, getUserJobsClientError: '', getUserJobsServerError: '', updateJobsCompleteError: '', deleteJobsError: '' };
+      return { ...state, userJobs: action.payload, columnsJobs: action.payload, getUserJobsClientError: '', getUserJobsServerError: '', updateJobsCompleteError: '', deleteJobsError: '' };
     case GET_USER_JOBS_ERROR:
       return { ...state, getUserJobsServerError: action.serverError, getUserJobsClientError: action.clientError };
+    case MOVE_JOBS:
+      const { droppableIdStart, droppableIdEnd, droppableIndexEnd, droppableIndexStart } = action.payload;
+      if (droppableIdStart !== droppableIdEnd) {
+        const sourceStart = state.columnsJobs[droppableIdStart];
+        const jobCard = sourceStart.jobIds.splice(droppableIndexStart, 1);
+        const sourceEnd = state.columnsJobs[droppableIdEnd];
+
+        sourceEnd.jobIds.splice(droppableIndexEnd, 0, ...jobCard);
+        return { ...state, [droppableIdStart]: sourceStart, [droppableIdEnd]: sourceEnd};
+      }
+      return state;
+    case MOVE_JOBS_ERROR:
+      return { ...state, columnsJobs: action.serverError };
     case UPDATE_JOBS_BY_ID_ERROR:
       return { ...state, updateJobsCompleteError: action.payload };
     case ADD_USER_JOBS:
