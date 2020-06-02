@@ -23,8 +23,8 @@ class EmployerChart extends PureComponent {
         <ResponsiveContainer>
           <BarChart width={730} height={250} data={this.state.employerData}>
             <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="name" />
-            <YAxis />
+            <XAxis dataKey="name" type="category" />
+            <YAxis type="number" />
             <Tooltip />
             <Legend />
             <Bar dataKey="numberOfJobs" fill="#800080" />

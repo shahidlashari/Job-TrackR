@@ -11,34 +11,60 @@ import cardsReducer from './cardsReducer';
 import boardsReducer from './boardsReducer';
 import boardOrderReducer from './boardOrderReducer';
 
-// import { ADD_USER_TODO } from '../actions/types';
-import { GET_MESSAGES } from '../actions/types';
+import {
+  GET_MESSAGES,
+  GET_EMPLOYER_DATA,
+  GET_REGIONAL_DATA,
+  GET_HISTORICAL_DATA,
+  GET_HISTOGRAM_DATA,
+} from '../actions/types';
 
 export default combineReducers({
   auth: authReducer,
   data: trendingReducers,
   jobs: jobsReducer,
   chat: chatReducer,
-  // form: formReducer,
   list: listsReducer,
   cards: cardsReducer,
   boards: boardsReducer,
   boardOrder: boardOrderReducer,
   activeBoard: activeBoardReducer,
-  // .plugin({
-  //   addTodo: (state, action) => {
-  //     switch (action.type) {
-  //       case ADD_USER_TODO:
-  //         return undefined;
-  //       default:
-  //         return state;
-  //     }
-  //   },
-  // }),
   form: formReducer.plugin({
     messageInput: (state, action) => {
       switch (action.type) {
         case GET_MESSAGES:
+          return undefined;
+        default:
+          return state;
+      }
+    },
+    SearchEmployerData: (state, action) => {
+      switch (action.type) {
+        case GET_EMPLOYER_DATA:
+          return undefined;
+        default:
+          return state;
+      }
+    },
+    SearchRegionalData: (state, action) => {
+      switch (action.type) {
+        case GET_REGIONAL_DATA:
+          return undefined;
+        default:
+          return state;
+      }
+    },
+    SearchHistoricalData: (state, action) => {
+      switch (action.type) {
+        case GET_HISTORICAL_DATA:
+          return undefined;
+        default:
+          return state;
+      }
+    },
+    SearchHistogramData: (state, action) => {
+      switch (action.type) {
+        case GET_HISTOGRAM_DATA:
           return undefined;
         default:
           return state;

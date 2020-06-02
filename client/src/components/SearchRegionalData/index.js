@@ -7,25 +7,25 @@ import { GET_REGIONAL_DATA, GET_REGIONAL_DATA_ERROR } from '../../actions/types'
 
 class SearchRegionalData extends Component {
   state = {
-    loading: false,
     searchError: false,
+    messageDismiss: true,
   }
+
+  loading = false;
 
   // When the user submits the form, send the formValues to /api/trending/employer
   onSubmit = async (formValues, dispatch) => {
     const { statenamer } = formValues;
     try {
-      this.setState({ loading: true });
+      this.loading = true;
       const { data } = await axios.get(`/api/trending/regional?statenamer=${statenamer}`);
       dispatch({ type: GET_REGIONAL_DATA, payload: data.month, location: data.location.display_name });
-      this.setState({ loading: false });
-      if (this.props.regional.length === 0) {
-        this.setState({ searchError: true });
-      } else {
-        this.setState({ searchError: false });
-      }
+      this.loading = false;
       this.scrollToChart();
+      this.setState({ searchError: false, messageDismiss: false });
     } catch (e) {
+      this.loading = false;
+      this.setState({ searchError: true, messageDismiss: true });
       dispatch({ type: GET_REGIONAL_DATA_ERROR, payload: e });
     }
   }
@@ -35,7 +35,7 @@ class SearchRegionalData extends Component {
       window.scrollTo(0, document.querySelector('.regional-chart').scrollHeight);
     } else {
       const chart = document.querySelector('.regional-chart');
-      const offset = 40;
+      const offset = 200;
       const chartPosition = chart.getBoundingClientRect().top;
       const offsetPosition = chartPosition - offset;
       window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
@@ -52,14 +52,16 @@ class SearchRegionalData extends Component {
           icon="search"
           iconPosition="left"
           autoComplete="off"
-          placeholder="Enter state e.g california"
+          placeholder="Enter State (e.g. California)"
         />
       </>
     );
   }
 
+  handleDismiss = () => { this.setState({ messageDismiss: false }); }
+
   renderError = () => {
-    if (this.state.searchError) {
+    if (this.state.messageDismiss && this.state.searchError) {
       return (
         <Message
           size="small"
@@ -68,6 +70,7 @@ class SearchRegionalData extends Component {
           onDismiss={this.handleDismiss}
           header="Failed to find result!"
           content="Please try again by searching something different"
+          style={{ textAlign: 'left' }}
         />
       );
     } else {
@@ -76,7 +79,7 @@ class SearchRegionalData extends Component {
   }
 
   render() {
-    const { handleSubmit, submitting, submitFailed } = this.props;
+    const { handleSubmit, invalid, submitting, submitFailed } = this.props;
     return (
       <div>
         <Form size="large" onSubmit={handleSubmit(this.onSubmit)}>
@@ -92,11 +95,11 @@ class SearchRegionalData extends Component {
                   }
             />
             <Button
-              loading={this.state.loading}
+              loading={this.loading}
               color="twitter"
               size="large"
               type="submit"
-              disabled={submitting || submitFailed}
+              disabled={invalid || submitting || submitFailed}
             >
               <Icon name="search" />
               Search Regional Data
@@ -109,4 +112,4 @@ class SearchRegionalData extends Component {
   }
 }
 
-export default reduxForm({ form: 'SearchRegionalData ' })(SearchRegionalData);
+export default reduxForm({ form: 'SearchRegionalData' })(SearchRegionalData);

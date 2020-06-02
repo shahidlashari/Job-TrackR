@@ -18,6 +18,7 @@ export const getEmployerData = () => async (dispatch) => {
     dispatch({ type: GET_EMPLOYER_DATA_ERROR, serverError: e, clientError: 'Something went wrong. Refresh the page and try again' });
   }
 };
+
 export const getRegionalData = () => async (dispatch) => {
   try {
     const { data } = await axios.get('/api/trending/regional');
@@ -26,6 +27,7 @@ export const getRegionalData = () => async (dispatch) => {
     dispatch({ type: GET_REGIONAL_DATA_ERROR, serverError: e, clientError: 'Something went wrong. Refresh the page and try again' });
   }
 };
+
 export const getHistoricalData = () => async (dispatch) => {
   try {
     const { data } = await axios.get('/api/trending/historical');
@@ -34,6 +36,7 @@ export const getHistoricalData = () => async (dispatch) => {
     dispatch({ type: GET_HISTORICAL_DATA_ERROR, serverError: e, clientError: 'Something went wrong. Refresh the page and try again' });
   }
 };
+
 export const getHistogramData = () => async (dispatch) => {
   try {
     const { data } = await axios.get('/api/trending/histogram');

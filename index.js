@@ -8,7 +8,7 @@ const app = express();
 const server = require('http').createServer(app);
 const io = require('socket.io')(server);
 
-const { loadRoom, leaveRoom } = require('./controllers/roomController');
+const { loadRoom, leaveRoom, seedRoom } = require('./controllers/roomController');
 // const userController = require('./controllers/userController');
 const { createMessage } = require('./controllers/messageController');
 
@@ -65,5 +65,8 @@ io.on('connection', (socket) => {
     // console.log('I am disconnected from the socket!');
   });
 });
+
+// Invoke room controller function to drop and restart room database
+seedRoom();
 
 server.listen(PORT);

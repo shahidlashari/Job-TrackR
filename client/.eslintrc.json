@@ -37,6 +37,7 @@
         "max-len": ["off"],
         "operator-linebreak": ["off"],
         "import/prefer-default-export": ["off"],
+        "react/require-default-props": ["off"],
         "react/jsx-filename-extension": ["off"],
         "react/jsx-wrap-multilines": ["off"],
         "react/jsx-closing-tag-location": ["off"],
