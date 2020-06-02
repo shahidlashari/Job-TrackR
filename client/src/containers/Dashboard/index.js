@@ -2,7 +2,8 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { Component } from 'react';
 import { reduxForm, Field } from 'redux-form';
-import { Grid, Icon, Form, Modal, Input, TextArea, Header, Segment, Button, Card, GridColumn, ModalDescription, Message } from 'semantic-ui-react';
+import { Helmet } from 'react-helmet';
+import { Grid, Icon, Form, Modal, Input, TextArea, Header, Segment, Button, Card, GridColumn, ModalDescription } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import createDOMPurify from 'dompurify';
@@ -111,7 +112,7 @@ class UserJobList extends Component {
         <Helmet>
           <style>{'body { background-color: #37373b; }'}</style>
         </Helmet>
-        <Grid container centered divided stackable textalign="center">
+        <Grid container centered divided stackable textAlign="center">
           <Grid.Row columns={5} style={{ padding: '7em 0em', marginLeft: '75px' }}>
             <Grid.Column textalign="center" style={{ padding: '1em 1em', maxWidth: 500 }}>
               <Card color="black" header="Saved Jobs" />
