@@ -57,7 +57,6 @@ class Search extends Component {
 
   // const { jobTitle, publishedId, publishedDate, level, categories, location, companyName, contents, coverLetter, resume, deadline, salary, note } = req.body;
   saveJob = async (job) => {
-    console.log(job);
     try {
       const savedData = await axios.post('/api/job/save', { job }, { headers: { authorization: localStorage.getItem('token') } });
       console.log(savedData);

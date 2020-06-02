@@ -8,13 +8,10 @@ import Search from '../Search';
 import Trending from '../Trending';
 import ChatRoom from '../ChatRoom';
 import Dashboard from '../Dashboard';
-import Dashboard1 from '../Dashbord1';
 import SignIn from '../SignIn';
 import SignUp from '../SignUp';
 import SignOut from '../SignOut';
 import Footer from '../../components/Footer';
-import JobBoard from '../JobBoard';
-// import JobBoardHome from '../JobBoardHome';
 
 
 class App extends Component {
@@ -29,8 +26,6 @@ class App extends Component {
         <Route exact path="/trending" component={Trending} />
         <Route exact path="/chatroom" component={ChatRoom} />
         <Route exact path="/dashboard" component={Dashboard} />
-        <Route exact path="/dashboard1" component={Dashboard1} />
-        <Route exact path="/dashboard/:boardId" component={JobBoard} />
         <Route exact path="/signin" component={SignIn} />
         <Route exact path="/signup" component={SignUp} />
         <Route exact path="/signout" component={SignOut} />
