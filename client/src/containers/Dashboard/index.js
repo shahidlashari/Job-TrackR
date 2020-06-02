@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { reduxForm, Field } from 'redux-form';
+import { Helmet } from 'react-helmet';
 import { Grid, Icon, Form, Modal, Input, TextArea, Header, Segment, Button, Card, GridColumn, ModalDescription } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
@@ -50,6 +51,9 @@ class UserJobList extends Component {
 
     return (
       <>
+        <Helmet>
+          <style>{'body { background-color: #37373b; }'}</style>
+        </Helmet>
         <Grid container centered divided stackable textAlign="center">
           <Grid.Row columns={5} style={{ padding: '7em 0em', marginLeft: '75px' }}>
             <Grid.Column textAlign="center" style={{ padding: '1em 1em', maxWidth: 500 }}>
