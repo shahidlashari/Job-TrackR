@@ -2,7 +2,6 @@ require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const path = require('path');
-const cors = require('cors');
 
 const PORT = process.env.PORT || 3001;
 
@@ -18,7 +17,6 @@ const routes = require('./routes');
 // Setup middlewares
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(cors());
 
 // Production
 if (process.env.NODE_ENV === 'production') {
