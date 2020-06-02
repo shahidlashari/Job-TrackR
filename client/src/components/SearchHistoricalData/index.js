@@ -7,26 +7,26 @@ import { GET_HISTORICAL_DATA, GET_HISTORICAL_DATA_ERROR } from '../../actions/ty
 
 class SearchHistoricalData extends Component {
   state = {
-    loading: false,
     searchError: false,
+    messageDismiss: true,
   }
+
+  loading = false;
 
   // When the user submits the form, send the formValues to /api/trending/historical
   onSubmit = async (formValues, dispatch) => {
     const { statenameh, jobcategoryh } = formValues;
     const jobcategory1 = `${jobcategoryh}-jobs`;
     try {
-      this.setState({ loading: true });
+      this.loading = true;
       const { data } = await axios.get(`/api/trending/historical?statenameh=${statenameh}&jobcategoryh=${jobcategory1}`);
       dispatch({ type: GET_HISTORICAL_DATA, payload: data });
-      this.setState({ loading: false });
-      if (Object.keys(this.props.historical).length === 0) {
-        this.setState({ searchError: true });
-      } else {
-        this.setState({ searchError: false });
-      }
+      this.loading = false;
       this.scrollToChart();
+      this.setState({ searchError: false, messageDismiss: false });
     } catch (e) {
+      this.loading = false;
+      this.setState({ searchError: true, messageDismiss: true });
       dispatch({ type: GET_HISTORICAL_DATA_ERROR, payload: e });
     }
   }
@@ -36,7 +36,7 @@ class SearchHistoricalData extends Component {
       window.scrollTo(0, document.querySelector('.historical-chart').scrollHeight);
     } else {
       const chart = document.querySelector('.historical-chart');
-      const offset = 40;
+      const offset = 200;
       const chartPosition = chart.getBoundingClientRect().top;
       const offsetPosition = chartPosition - offset;
       window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
@@ -59,8 +59,10 @@ class SearchHistoricalData extends Component {
     );
   }
 
+  handleDismiss = () => { this.setState({ messageDismiss: false }); }
+
   renderError = () => {
-    if (this.state.searchError) {
+    if (this.state.messageDismiss && this.state.searchError) {
       return (
         <Message
           size="small"
@@ -69,6 +71,7 @@ class SearchHistoricalData extends Component {
           onDismiss={this.handleDismiss}
           header="Failed to find result!"
           content="Please try again by searching something different"
+          style={{ textAlign: 'left' }}
         />
       );
     } else {
@@ -77,7 +80,7 @@ class SearchHistoricalData extends Component {
   }
 
   render() {
-    const { handleSubmit, submitting, submitFailed } = this.props;
+    const { handleSubmit, invalid, submitting, submitFailed } = this.props;
     return (
       <div>
         <Form size="large" onSubmit={handleSubmit(this.onSubmit)}>
@@ -85,7 +88,7 @@ class SearchHistoricalData extends Component {
             <h3 style={{ fontSize: '16px' }}> This returns salary and vacancy data for six months for job categories in any state.</h3>
             <Field
               name="jobcategoryh"
-              placeholder="Enter job vategory e.g IT"
+              placeholder="Enter Job Category (e.g. IT)"
               component={this.renderHistoricalData}
               validate={
                     [
@@ -95,7 +98,7 @@ class SearchHistoricalData extends Component {
             />
             <Field
               name="statenameh"
-              placeholder="Enter state e.g california"
+              placeholder="Enter State (e.g. New York)"
               component={this.renderHistoricalData}
               validate={
                     [
@@ -104,11 +107,11 @@ class SearchHistoricalData extends Component {
                   }
             />
             <Button
-              loading={this.state.loading}
+              loading={this.loading}
               color="brown"
               size="large"
               type="submit"
-              disabled={submitting || submitFailed}
+              disabled={invalid || submitting || submitFailed}
             >
               <Icon name="search" />
               Search Historical Data
@@ -121,4 +124,4 @@ class SearchHistoricalData extends Component {
   }
 }
 
-export default reduxForm({ form: 'SearchHistoricalData ' })(SearchHistoricalData);
+export default reduxForm({ form: 'SearchHistoricalData' })(SearchHistoricalData);

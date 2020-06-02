@@ -7,35 +7,35 @@ import { GET_HISTOGRAM_DATA, GET_HISTOGRAM_DATA_ERROR } from '../../actions/type
 
 class SearchHistogramData extends Component {
   state = {
-    loading: false,
     searchError: false,
+    messageDismiss: true,
   }
+
+  loading = false;
 
   // When the user submits the form, send the formValues to /api/trending/histogram
   onSubmit = async (formValues, dispatch) => {
     const { statename, jobtitleh } = formValues;
     try {
-      this.setState({ loading: true });
+      this.loading = true;
       const { data } = await axios.get(`/api/trending/histogram?statename=${statename}&jobtitleh=${jobtitleh}`);
       dispatch({ type: GET_HISTOGRAM_DATA, payload: data });
-      this.setState({ loading: false });
-      if (Object.keys(this.props.histogram).length === 0) {
-        this.setState({ searchError: true });
-      } else {
-        this.setState({ searchError: false });
-      }
+      this.loading = false;
       this.scrollToChart();
+      this.setState({ searchError: false, messageDismiss: false });
     } catch (e) {
+      this.loading = false;
+      this.setState({ searchError: true, messageDismiss: true });
       dispatch({ type: GET_HISTOGRAM_DATA_ERROR, payload: e });
     }
   }
 
   scrollToChart = () => {
-    if (!document.querySelector('.employer-chart') && !document.querySelector('.historical-chart')) {
+    if (!document.querySelector('.employer-chart') && !document.querySelector('.regional-chart') && !document.querySelector('.historical-chart')) {
       window.scrollTo(0, document.querySelector('.histogram-chart').scrollHeight);
     } else {
       const chart = document.querySelector('.histogram-chart');
-      const offset = 40;
+      const offset = 200;
       const chartPosition = chart.getBoundingClientRect().top;
       const offsetPosition = chartPosition - offset;
       window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
@@ -58,8 +58,10 @@ class SearchHistogramData extends Component {
     );
   }
 
+  handleDismiss = () => { this.setState({ messageDismiss: false }); }
+
   renderError = () => {
-    if (this.state.searchError) {
+    if (this.state.messageDismiss && this.state.searchError) {
       return (
         <Message
           size="small"
@@ -68,6 +70,7 @@ class SearchHistogramData extends Component {
           onDismiss={this.handleDismiss}
           header="Failed to find result!"
           content="Please try again by searching something different"
+          style={{ textAlign: 'left' }}
         />
       );
     } else {
@@ -76,7 +79,7 @@ class SearchHistogramData extends Component {
   }
 
   render() {
-    const { handleSubmit, submitting, submitFailed } = this.props;
+    const { handleSubmit, invalid, submitting, submitFailed } = this.props;
     return (
       <div>
         <Form size="large" onSubmit={handleSubmit(this.onSubmit)}>
@@ -84,7 +87,7 @@ class SearchHistogramData extends Component {
             <h3 style={{ fontSize: '16px' }}> This returns the current distribution of salaries for a job category in any state. </h3>
             <Field
               name="jobtitleh"
-              placeholder="Enter Job Category e.g project manager"
+              placeholder="Enter Job Category (e.g. Sales)"
               component={this.renderHistogramData}
               validate={
                     [
@@ -94,7 +97,7 @@ class SearchHistogramData extends Component {
             />
             <Field
               name="statename"
-              placeholder="Enter state e.g california"
+              placeholder="Enter State (e.g. Florida)"
               component={this.renderHistogramData}
               validate={
                     [
@@ -103,11 +106,11 @@ class SearchHistogramData extends Component {
                   }
             />
             <Button
-              loading={this.state.loading}
+              loading={this.loading}
               color="green"
               size="large"
               type="submit"
-              disabled={submitting || submitFailed}
+              disabled={invalid || submitting || submitFailed}
             >
               <Icon name="search" />
               Search Histogram Data
@@ -119,4 +122,5 @@ class SearchHistogramData extends Component {
     );
   }
 }
-export default reduxForm({ form: 'SearchHistogramData ' })(SearchHistogramData);
+
+export default reduxForm({ form: 'SearchHistogramData' })(SearchHistogramData);

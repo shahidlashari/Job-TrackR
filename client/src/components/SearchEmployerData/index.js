@@ -7,22 +7,24 @@ import { GET_EMPLOYER_DATA, GET_EMPLOYER_DATA_ERROR } from '../../actions/types'
 
 class SearchEmployerData extends Component {
   state = {
-    loading: false,
     searchError: false,
+    messageDismiss: true,
   }
+
+  loading = false;
 
   // When the user submits the form, send the formValues to /api/trending/employer
   onSubmit = async (formValues, dispatch) => {
     const { jobtitle } = formValues;
     try {
-      this.setState({ loading: true });
+      this.loading = true;
       const { data } = await axios.get(`/api/trending/employer?jobtitle=${jobtitle}`);
       dispatch({ type: GET_EMPLOYER_DATA, payload: data });
-      this.setState({ loading: false });
+      this.loading = false;
       if (this.props.employer.length === 0) {
-        this.setState({ searchError: true });
+        this.setState({ searchError: true, messageDismiss: true });
       } else {
-        this.setState({ searchError: false });
+        this.setState({ searchError: false, messageDismiss: false });
       }
       window.scrollTo(0, document.querySelector('.employer-chart').scrollHeight);
     } catch (e) {
@@ -40,14 +42,16 @@ class SearchEmployerData extends Component {
           icon="search"
           iconPosition="left"
           autoComplete="off"
-          placeholder="Enter Job Title e.g project manager"
+          placeholder="Enter Job Title (e.g. Project Manager)"
         />
       </>
     );
   }
 
+  handleDismiss = () => { this.setState({ messageDismiss: false }); }
+
   renderError = () => {
-    if (this.state.searchError) {
+    if (this.state.messageDismiss && this.state.searchError) {
       return (
         <Message
           size="small"
@@ -56,6 +60,7 @@ class SearchEmployerData extends Component {
           onDismiss={this.handleDismiss}
           header="Failed to find result!"
           content="Please try again by searching something different"
+          style={{ textAlign: 'left' }}
         />
       );
     } else {
@@ -64,7 +69,7 @@ class SearchEmployerData extends Component {
   }
 
   render() {
-    const { handleSubmit, submitting, submitFailed } = this.props;
+    const { handleSubmit, invalid, submitting, submitFailed } = this.props;
     return (
       <div>
         <Form size="large" onSubmit={handleSubmit(this.onSubmit)}>
@@ -80,11 +85,11 @@ class SearchEmployerData extends Component {
                   }
             />
             <Button
-              loading={this.state.loading}
+              loading={this.loading}
               color="purple"
               size="large"
               type="submit"
-              disabled={submitting || submitFailed}
+              disabled={invalid || submitting || submitFailed}
             >
               <Icon name="search" />
               Search Employer Data
@@ -97,4 +102,4 @@ class SearchEmployerData extends Component {
   }
 }
 
-export default reduxForm({ form: 'SearchEmployerData ' })(SearchEmployerData);
+export default reduxForm({ form: 'SearchEmployerData' })(SearchEmployerData);

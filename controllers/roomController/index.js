@@ -1,4 +1,4 @@
-const { Room } = require('../../models');
+const { Room, Message } = require('../../models');
 
 module.exports = {
   loadRoom: async (userId, cb) => {
@@ -47,6 +47,15 @@ module.exports = {
       cb(room);
     } catch (e) {
       cb(e);
+    }
+  },
+  seedRoom: async () => {
+    try {
+      await Room.deleteMany();
+      await Message.deleteMany();
+      await new Room({ text: 'Career and Advice Chat', code: '12345' }).save();
+    } catch (e) {
+      if (e) throw e;
     }
   },
 };

@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import { connect } from 'react-redux';
 import { Container } from 'semantic-ui-react';
 
@@ -20,14 +20,14 @@ class HistogramChart extends PureComponent {
       <div style={{ width: '100%', height: 350, textAlign: 'center' }}>
         <h2> Histogram Salary for that Specific Job Category in the Past 6 Months </h2>
         <ResponsiveContainer>
-          <BarChart width={730} height={250} data={this.state.histogramData}>
+          <AreaChart width={730} height={250} data={this.state.histogramData}>
             <CartesianGrid strokeDasharray="3 3" />
             <XAxis dataKey="HistoMonth" />
             <YAxis />
             <Tooltip />
             <Legend />
-            <Bar dataKey="SalaryHistogram" fill="#008000" />
-          </BarChart>
+            <Area type="monotone" dataKey="SalaryHistogram" fill="#008000" />
+          </AreaChart>
         </ResponsiveContainer>
       </div>
     );
@@ -44,8 +44,8 @@ class HistogramChart extends PureComponent {
 
   mapData() {
     const histogramArr = [];
-    for (const key in this.props.histogram1) {
-      histogramArr.push({ HistoMonth: key, SalaryHistogram: this.props.histogram1[key] });
+    for (const key in this.props.histogram) {
+      histogramArr.push({ HistoMonth: key, SalaryHistogram: this.props.histogram[key] });
     }
     return histogramArr;
   }
@@ -61,7 +61,7 @@ class HistogramChart extends PureComponent {
 
 function mapStateToProps(state) {
   return {
-    histogram1: state.data.histogramData.histogram,
+    histogram: state.data.histogramData.histogram,
     location: state.data.histogramDataLocation,
   };
 }

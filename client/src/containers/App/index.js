@@ -14,7 +14,7 @@ import SignUp from '../SignUp';
 import SignOut from '../SignOut';
 import Footer from '../../components/Footer';
 import JobBoard from '../JobBoard';
-import JobBoardHome from '../JobBoardHome';
+// import JobBoardHome from '../JobBoardHome';
 
 
 class App extends Component {
