@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { reduxForm } from 'redux-form';
+import { reduxForm, Field } from 'redux-form';
 import { Helmet } from 'react-helmet';
-import { Grid, Form, Modal, Input, Segment, Button, Card, GridColumn } from 'semantic-ui-react';
+import { Grid, Form, Modal, Input, Segment, Label, Button, Card, GridColumn } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import createDOMPurify from 'dompurify';
@@ -17,21 +17,40 @@ class UserJobList extends Component {
     this.props.getUserJobs();
   }
 
-  handleClose = async () => {
+  onSubmit = async (formValues) => {
     console.log('Hi, I can make an api call and do everything from here');
+    console.log(formValues);
   };
 
-  // renderData = (field) => {
-  //   console.log(field);
-  //   return (
-  //     <Form.Field
-  //       {...field.input}
-  //       value={field.input.value}
-  //       onClose={(params, data) => field.input.onClose(data.value)}
-  //       defaultValue={field.defaultValue}
-  //     />
-  //   );
-  // }
+  renderData = (field) => {
+    // console.log(field);
+    return (
+      <div>
+        <Label>{field.label}</Label>
+        <Form.Input
+          {...field.input}
+          value={field.input.value || field.defaultValue}
+          // onClose={(params, data) => field.input.onClose(data.value)}
+          defaultValue={field.defaultValue}
+        />
+      </div>
+    );
+  }
+
+  renderTextArea = (field) => {
+    // console.log(field);
+    return (
+      <div>
+        <Label>{field.label}</Label>
+        <Form.TextArea
+          {...field.input}
+          value={field.input.value || field.defaultValue}
+          // onClose={(params, data) => field.input.onClose(data.value)}
+          defaultValue={field.defaultValue}
+        />
+      </div>
+    );
+  }
 
   renderField = ({ input, name, type }) => (
     <div>
@@ -42,7 +61,6 @@ class UserJobList extends Component {
   );
 
   render() {
-    console.log(this.props.userJobs);
     const { handleSubmit } = this.props;
     return (
       <div>
@@ -81,25 +99,23 @@ class UserJobList extends Component {
                           <p>{job.jobTitle}</p>
                           <p>{job.locations}</p>
                         </Modal.Header>
-                        <Form onSubmit={handleSubmit(this.handleClose())}>
+                        <Form onSubmit={handleSubmit(this.onSubmit)}>
                           <Segment stacked>
                             <Grid column={2} textAlign="center">
                               <Grid.Row>
                                 <Grid.Column width={8}>
-                                  <Form.Field
+                                  <Field
                                     name="jobTitle"
                                     component={this.renderData}
                                     defaultValue={job.jobTitle}
-                                    control={Input}
                                     label="Job Title"
                                   />
                                 </Grid.Column>
                                 <Grid.Column width={8}>
-                                  <Form.Field
+                                  <Field
                                     name="location"
                                     component={this.renderData}
                                     defaultValue={job.location}
-                                    control={Input}
                                     label="Location"
                                   />
                                 </Grid.Column>
@@ -108,19 +124,18 @@ class UserJobList extends Component {
                             <Grid column={2} textAlign="center">
                               <Grid.Row>
                                 <Grid.Column width={8}>
-                                  <Form.Field
+                                  <Field
                                     name="companyName"
+                                    component={this.renderData}
                                     defaultValue={job.companyName}
-                                    control={Input}
                                     label="Company Name"
                                   />
                                 </Grid.Column>
                                 <Grid.Column width={8}>
-                                  <Form.Field
+                                  <Field
                                     name="jobURL"
                                     component={this.renderData}
                                     defaultValue={job.jobUrl}
-                                    control={Input}
                                     label="Post URL"
                                   />
                                 </Grid.Column>
@@ -129,20 +144,18 @@ class UserJobList extends Component {
                             <Grid column={2} textAlign="center">
                               <Grid.Row>
                                 <Grid.Column width={8}>
-                                  <Form.Field
+                                  <Field
                                     name="level"
                                     component={this.renderData}
                                     defaultValue={job.level}
-                                    control={Input}
                                     label="Level"
                                   />
                                 </Grid.Column>
                                 <Grid.Column width={8}>
-                                  <Form.Field
+                                  <Field
                                     name="publishedDate"
                                     component={this.renderData}
                                     defaultValue={job.publishedDate}
-                                    control={Input}
                                     label="PublishedDate"
                                   />
                                 </Grid.Column>
@@ -151,14 +164,18 @@ class UserJobList extends Component {
                             <Grid column={2} textAlign="center">
                               <Grid.Row>
                                 <Grid.Column width={8}>
-                                  <Form.TextArea
+                                  <Field
+                                    name="resume"
                                     label="Resume"
+                                    component={this.renderTextArea}
                                     placeholder="Prepare your resume..."
                                   />
                                 </Grid.Column>
                                 <Grid.Column width={8}>
-                                  <Form.TextArea
-                                    label="CoverLeter"
+                                  <Field
+                                    name="coverletter"
+                                    label="CoverLetter"
+                                    component={this.renderTextArea}
                                     placeholder="Prepare your Cover Letter..."
                                   />
                                 </Grid.Column>
@@ -167,18 +184,27 @@ class UserJobList extends Component {
                             <Grid column={2} textAlign="center">
                               <Grid.Row>
                                 <Grid.Column width={8}>
-                                  <Form.TextArea
+                                  <Field
+                                    name="notes"
                                     label="Notes"
+                                    component={this.renderTextArea}
                                     placeholder="Add your note..."
                                   />
                                 </Grid.Column>
                                 <Grid.Column width={8}>
-                                  <Form.Field
+                                  <Field
+                                    component={this.renderData}
                                     name="deadline"
-                                    control={Input}
                                     label="Deadline"
                                     placeholder="Select a date for deadline"
                                   />
+                                </Grid.Column>
+                              </Grid.Row>
+                            </Grid>
+                            <Grid textAlign="center" column={1}>
+                              <Grid.Row>
+                                <Grid.Column width={16}>
+                                  <Button type="submit" color="blue" size="large">Update</Button>
                                 </Grid.Column>
                               </Grid.Row>
                             </Grid>
