@@ -1,7 +1,6 @@
 const { isEmail, isLength } = require('validator');
 const jwt = require('jwt-simple');
 const { User } = require('../../models');
-const { secret } = require('../../config');
 
 function tokenForUser(user) {
   // 1st argument is the information we want to encode
@@ -14,7 +13,7 @@ function tokenForUser(user) {
   // jwt.encode takes 2 parameters:
   // 1st is what you want the token to look like, as well as the values for each field
   // 2nd parameter is the secret you want to use to encode the token
-  return jwt.encode({ sub: user._id, iat: timeStamp }, secret);
+  return jwt.encode({ sub: user._id, iat: timeStamp }, process.env.SECRET);
 }
 
 module.exports = {
