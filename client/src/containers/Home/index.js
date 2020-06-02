@@ -5,6 +5,7 @@ import { Segment, Container, Header, Message, Button, Image, Icon, Grid, Divider
 import HomeCarousel from '../HomeCarousel';
 import HomeExampleGraph from '../HomeExampleGraph';
 import chatRoom from '../../images/chatroom.png';
+import dashboard from '../../images/dashboard.png';
 import './style.css';
 
 class Home extends Component {
@@ -187,14 +188,14 @@ class Home extends Component {
             </Grid.Row>
             <Grid.Row>
               <Grid.Column floated="left" width={10}>
-                Placeholder Gif of Job Dashboard or something
+                <Image src={dashboard} />
               </Grid.Column>
               <Grid.Column width={4}>
                 <Header as="h3" style={{ fontSize: '2em' }}>
                   Start Tracking Your Job Applications and Searches
                 </Header>
                 <p style={{ fontSize: '1.33em' }}>
-                  Placeholder Text
+                  View your saved jobs that you can drag and drop into other columns! Edit your resume, cover letter, notes, etc.
                 </p>
                 { this.props.authenticated ? <Button as={Link} to="/dashboard" size="large" color="blue">
                   Head to Dashboard
