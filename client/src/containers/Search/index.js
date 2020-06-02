@@ -79,7 +79,7 @@ class Search extends Component {
         {...field.input}
         error={field.meta.touched && field.meta.error}
         fluid
-        updata
+        search
         selection
         options={field.data}
         value={field.input.value}
