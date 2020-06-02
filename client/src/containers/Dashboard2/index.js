@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { Card, Grid, Header, Container, GridColumn, GridRow } from 'semantic-ui-react';
-import { DragDropContext, Droppable } from 'react-beautiful-dnd';
+// import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import { connect } from 'react-redux';
-import CardExampleGroups from '../JobCards';
+// import CardExampleGroups from '../JobCards';
 import requireAuth from '../../hoc/requireAuth';
 import { sort } from '../../actions/draganddropActions';
 import './style.css';
-import { Example } from '../Drag';
-import JobBoard from '../JobBoard';
+// import { Example } from '../Drag';
+// import JobBoard from '../JobBoard';
 import JobBoardHome from '../JobBoardHome';
 import JobList from '../JobList';
 import JobCreator from '../JobCreator';

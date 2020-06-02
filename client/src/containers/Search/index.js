@@ -40,6 +40,7 @@ class Search extends Component {
 
   // const { jobTitle, publishedId, publishedDate, level, categories, location, companyName, contents, coverLetter, resume, deadline, salary, note } = req.body;
   saveJob = async (job) => {
+    console.log(job);
     try {
       const savedData = await axios.post('/api/job/save', { job }, { headers: { authorization: localStorage.getItem('token') } });
       console.log(savedData);
@@ -78,7 +79,7 @@ class Search extends Component {
         {...field.input}
         error={field.meta.touched && field.meta.error}
         fluid
-        search
+        updata
         selection
         options={field.data}
         value={field.input.value}
