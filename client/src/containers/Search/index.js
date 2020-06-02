@@ -3,29 +3,12 @@ import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
+import axios from 'axios';
 import createDOMPurify from 'dompurify';
 import { JSDOM } from 'jsdom';
 import { Helmet } from 'react-helmet';
-import {
-  Grid,
-  Icon,
-  Form,
-  Modal,
-  Header,
-  Segment,
-  Message,
-  Button,
-  Card,
-} from 'semantic-ui-react';
-import axios from 'axios';
-import {
-  jobOptions,
-  levelOptions,
-  locationOptions,
-} from '../../static/location';
-// import levelOptions from '../../static/location';
-// import jobOptions from '../../static/location';
-
+import { Grid, Icon, Form, Modal, Header, Segment, Message, Button, Card } from 'semantic-ui-react';
+import { jobOptions, levelOptions, locationOptions } from '../../static/location';
 import { SEARCH_JOBS, SEARCH_JOBS_ERROR } from '../../actions/types';
 
 const { window } = new JSDOM('');
@@ -33,18 +16,18 @@ const DOMPurify = createDOMPurify(window);
 
 class Search extends Component {
   state = {
-    loading: false,
     searchError: false,
   }
+
+  loading = false;
 
   onSubmit = async (formValues, dispatch) => {
     const { role, level, location } = formValues;
     try {
-      this.setState({ loading: true });
+      this.loading = true;
       const { data } = await axios.get(`/api/job/search?role=${role}&level=${level}&location=${location}`);
-      console.log(data);
       dispatch({ type: SEARCH_JOBS, payload: data });
-      this.setState({ loading: false });
+      this.loading = false;
       if (this.props.jobs.length === 0) {
         this.setState({ searchError: true });
       } else {
@@ -113,7 +96,7 @@ class Search extends Component {
         <Helmet>
           <style>{'body { background-color: #37373b; }'}</style>
         </Helmet>
-        <Grid textAlign="center" style={{ height: '450px', padding: '9em 0em' }}>
+        <Grid textAlign="center" style={{ height: '487px', padding: '9em 0em' }}>
           <Grid.Column style={{ maxWidth: 500 }}>
             <Header textAlign="center" style={{ fontSize: '52px', color: 'skyblue' }}>
               Job Search
@@ -142,7 +125,7 @@ class Search extends Component {
                   placeholder="select location"
                 />
                 <Button
-                  loading={this.state.loading}
+                  loading={this.loading}
                   color="blue"
                   size="huge"
                   type="submit"
@@ -158,11 +141,11 @@ class Search extends Component {
 
         { this.state.searchError ? this.renderError() : null }
 
-        <Grid container centered relaxed stackable textAlign="center">
+        <Grid container relaxed stackable textAlign="center">
           <Grid.Row columns={3} style={{ padding: '1em 0em', marginLeft: '75px' }}>
             { this.props.jobs?.map((job, idx) => {
               return (
-                <Grid.Column key={idx} stretched style={{ padding: '1em 0em', maxWidth: 500 }}>
+                <Grid.Column key={idx} stretched style={{ padding: '1em 0em', maxWidth: 500, marginTop: '-10px' }}>
                   <Card key={idx}>
                     <Card.Content as="h1">{job.name}</Card.Content>
                     <Card.Content>Company: {job.company.name}</Card.Content>
@@ -190,17 +173,18 @@ class Search extends Component {
                           </Modal.Description>
                         </Modal.Content>
                         <Modal.Actions>
-                          <Button
-                            color="blue"
-                            type="submit"
-                            floated="right"
-                            size="huge"
-                            style={{ marginBottom: '10px' }}
-                            onClick={() => this.saveJob(job)}
-                          >
-                            <Icon name="save" />
-                            Save Job
-                          </Button>
+                          <div style={{ textAlign: 'center' }}>
+                            <Button
+                              color="blue"
+                              type="submit"
+                              size="massive"
+                              onClick={() => this.saveJob(job)}
+                              style={{ marginBottom: '10px' }}
+                            >
+                              <Icon name="save" />
+                              Save Job
+                            </Button>
+                          </div>
                         </Modal.Actions>
                       </Modal>
                     </Card.Content>
