@@ -65,10 +65,6 @@ class NavbarMobile extends Component {
             <Icon name="cogs" />
             Job Dashboard
           </Menu.Item> : null }
-          { this.props.authenticated ? <Menu.Item as={NavLink} to="/dashboard1" activeclassname="active" className="navbar-item-dashboard1">
-            <Icon name="cogs" />
-            Job Dashboard1
-          </Menu.Item> : null }
           <Menu.Item position="right" header>
             { this.props.authenticated && this.props.user ? this.getUsername() : null }
             { this.props.authenticated ? null : <Button as={NavLink} to="/signin" inverted style={{ marginBottom: '10px' }}>
@@ -82,7 +78,7 @@ class NavbarMobile extends Component {
           </Menu.Item>
         </Sidebar>
 
-        <Sidebar.Pusher dimmed={this.state.sidebarOpened} className="sidebar-pusher">
+        <Sidebar.Pusher dimmed={this.state.sidebarOpened} style={{ minHeight: '100vh' }} className="sidebar-pusher">
           <Menu
             inverted
             pointing
