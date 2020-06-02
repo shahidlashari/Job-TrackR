@@ -1,6 +1,6 @@
 const axios = require('axios');
 
-const { Jobs, User } = require('../../models');
+const { Jobs } = require('../../models');
 
 module.exports = {
   jobSearch: async (req, res) => {
@@ -15,11 +15,8 @@ module.exports = {
       return res.status(403).json({ e });
     }
   },
-
   jobSave: async (req, res) => {
-    console.log('Im hit');
     const { job } = req.body;
-    console.log(job);
     try {
       const saveJobs = await new Jobs({ jobTitle: job.name, publishedId: job.id, publishedDate: job.publication_date, level: job.levels[0].name, categories: job.categories[0].name, location: job.locations[0].name, companyName: job.company.name, description: job.contents, user: req.user._id }).save();
       console.log(saveJobs);
@@ -39,9 +36,7 @@ module.exports = {
     }
   },
   updateSavedJob: async (req, res) => {
-    console.log('Im hi');
     const { jobId } = req.body;
-    console.log(jobId);
     const { jobTitle, publishedId, publishedDate, level, categories, location, companyName, description, status, coverLetter, resume } = req.body;
     try {
       const updatedJob = await Jobs.findByIdAndUpdate(jobId,

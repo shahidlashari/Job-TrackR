@@ -40,6 +40,7 @@ class NavbarMobile extends Component {
         <Sidebar
           as={Menu}
           animation="overlay"
+          direction="right"
           inverted
           onHide={this.handleSidebarHide}
           vertical
@@ -86,11 +87,11 @@ class NavbarMobile extends Component {
             activeclassname="active"
             className="navbar-menu"
           >
-            <Menu.Item as={Link} to="/">
+            <Menu.Item as={Link} to="/" position="left">
               <Image src={LogoImg} width="65" height="60" className="navbar-logo" />
               <h1 className="navbar-title">Job TrackR</h1>
             </Menu.Item>
-            <Menu.Item onClick={this.handleToggle}>
+            <Menu.Item onClick={this.handleToggle} position="right">
               <Icon name="sidebar" />
             </Menu.Item>
           </Menu>

@@ -138,6 +138,7 @@ class Trending extends Component {
     );
   }
 }
+
 function mapStateToProps(state) {
   return {
     employer: state.data.employerData,
@@ -146,6 +147,7 @@ function mapStateToProps(state) {
     histogram: state.data.histogramData,
   };
 }
+
 export default compose(
   connect(mapStateToProps, {}),
   reduxForm({ form: 'Trending' }),

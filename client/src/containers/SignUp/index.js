@@ -15,7 +15,7 @@ class SignUp extends Component {
       localStorage.setItem('token', data.token);
       localStorage.setItem('user', JSON.stringify(data.user));
       dispatch({ type: AUTH_USER, payload: data });
-      this.props.history.push('/dashboard');
+      this.props.history.push('/home');
     } catch (e) {
       dispatch({ type: AUTH_USER_ERROR, payload: e });
     }
@@ -62,12 +62,6 @@ class SignUp extends Component {
         placeholder="Password"
       />
     );
-  }
-
-  handlePressEnter(e) {
-    if (e.keyCode === 13 && !e.shiftKey) {
-      this.onSubmit(e);
-    }
   }
 
   render() {

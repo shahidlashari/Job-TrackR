@@ -35,7 +35,7 @@ class SearchRegionalData extends Component {
       window.scrollTo(0, document.querySelector('.regional-chart').scrollHeight);
     } else {
       const chart = document.querySelector('.regional-chart');
-      const offset = 200;
+      const offset = 100;
       const chartPosition = chart.getBoundingClientRect().top;
       const offsetPosition = chartPosition - offset;
       window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
@@ -52,7 +52,7 @@ class SearchRegionalData extends Component {
           icon="search"
           iconPosition="left"
           autoComplete="off"
-          placeholder="Enter State (e.g. California)"
+          placeholder="Enter State (e.g. New York)"
         />
       </>
     );
