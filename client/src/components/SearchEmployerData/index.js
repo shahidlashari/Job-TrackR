@@ -28,6 +28,8 @@ class SearchEmployerData extends Component {
       }
       window.scrollTo(0, document.querySelector('.employer-chart').scrollHeight);
     } catch (e) {
+      this.loading = false;
+      this.setState({ searchError: true, messageDismiss: true });
       dispatch({ type: GET_EMPLOYER_DATA_ERROR, payload: e });
     }
   }

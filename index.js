@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
@@ -9,7 +10,6 @@ const server = require('http').createServer(app);
 const io = require('socket.io')(server);
 
 const { loadRoom, leaveRoom, seedRoom } = require('./controllers/roomController');
-// const userController = require('./controllers/userController');
 const { createMessage } = require('./controllers/messageController');
 
 const routes = require('./routes');

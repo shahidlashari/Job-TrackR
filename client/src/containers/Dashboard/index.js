@@ -57,7 +57,7 @@ class UserJobList extends Component {
               {this.props.userJobs?.map((job, idx) => {
                 return (
                 // <Draggable draggableId={job.publishedId}>
-                  <Card textAlign="center" key={idx}>
+                  <Card key={idx}>
                     <Card.Content as="h1">{job.jobTitle}</Card.Content>
                     <Card.Content>Company: {job.companyName}</Card.Content>
                     <Card.Content>Location: {job.location}</Card.Content>
@@ -69,14 +69,13 @@ class UserJobList extends Component {
                           color="blue"
                           size="medium"
                           type="submit"
-                          textAlign="center"
                         >
                           View Job
                         </Button>}
                         onClose={this.handleClose}
                       >
                         <Modal.Header style={{ textAlign: 'center' }}>
-                          <p style={{ fontSize: '24px' }}>{job.jobTitle}</p>
+                          <p>{job.jobTitle}</p>
                           <p>{job.locations}</p>
                         </Modal.Header>
                         <Form

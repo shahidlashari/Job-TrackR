@@ -36,7 +36,7 @@ class SearchHistoricalData extends Component {
       window.scrollTo(0, document.querySelector('.historical-chart').scrollHeight);
     } else {
       const chart = document.querySelector('.historical-chart');
-      const offset = 200;
+      const offset = 100;
       const chartPosition = chart.getBoundingClientRect().top;
       const offsetPosition = chartPosition - offset;
       window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
@@ -98,7 +98,7 @@ class SearchHistoricalData extends Component {
             />
             <Field
               name="statenameh"
-              placeholder="Enter State (e.g. New York)"
+              placeholder="Enter State (e.g. California)"
               component={this.renderHistoricalData}
               validate={
                     [

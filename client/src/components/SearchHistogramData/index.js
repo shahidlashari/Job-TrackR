@@ -35,7 +35,7 @@ class SearchHistogramData extends Component {
       window.scrollTo(0, document.querySelector('.histogram-chart').scrollHeight);
     } else {
       const chart = document.querySelector('.histogram-chart');
-      const offset = 200;
+      const offset = 50;
       const chartPosition = chart.getBoundingClientRect().top;
       const offsetPosition = chartPosition - offset;
       window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
