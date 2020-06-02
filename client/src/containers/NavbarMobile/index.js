@@ -40,6 +40,7 @@ class NavbarMobile extends Component {
         <Sidebar
           as={Menu}
           animation="overlay"
+          direction="right"
           inverted
           onHide={this.handleSidebarHide}
           vertical
@@ -65,10 +66,6 @@ class NavbarMobile extends Component {
             <Icon name="cogs" />
             Job Dashboard
           </Menu.Item> : null }
-          { this.props.authenticated ? <Menu.Item as={NavLink} to="/dashboard1" activeclassname="active" className="navbar-item-dashboard1">
-            <Icon name="cogs" />
-            Job Dashboard1
-          </Menu.Item> : null }
           <Menu.Item position="right" header>
             { this.props.authenticated && this.props.user ? this.getUsername() : null }
             { this.props.authenticated ? null : <Button as={NavLink} to="/signin" inverted style={{ marginBottom: '10px' }}>
@@ -82,7 +79,7 @@ class NavbarMobile extends Component {
           </Menu.Item>
         </Sidebar>
 
-        <Sidebar.Pusher dimmed={this.state.sidebarOpened} className="sidebar-pusher">
+        <Sidebar.Pusher dimmed={this.state.sidebarOpened} style={{ minHeight: '100vh' }} className="sidebar-pusher">
           <Menu
             inverted
             pointing
@@ -90,11 +87,11 @@ class NavbarMobile extends Component {
             activeclassname="active"
             className="navbar-menu"
           >
-            <Menu.Item as={Link} to="/">
+            <Menu.Item as={Link} to="/" position="left">
               <Image src={LogoImg} width="65" height="60" className="navbar-logo" />
               <h1 className="navbar-title">Job TrackR</h1>
             </Menu.Item>
-            <Menu.Item onClick={this.handleToggle}>
+            <Menu.Item onClick={this.handleToggle} position="right">
               <Icon name="sidebar" />
             </Menu.Item>
           </Menu>

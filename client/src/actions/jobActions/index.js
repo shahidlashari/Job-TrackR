@@ -5,7 +5,6 @@ import {
   GET_USER_JOBS,
   GET_USER_JOBS_ERROR,
   MOVE_JOBS,
-  MOVE_JOBS_ERROR,
   // ADD_USER_JOBS,
   // ADD_USER_JOBS_ERROR,
   UPDATE_JOBS_BY_ID_ERROR,
@@ -32,43 +31,17 @@ export const updateJobById = (id, text) => async (dispatch) => {
   }
 };
 
-// export const moveJob = (state, source, destination) => async (dispatch) => {
-//   try {
-//     const sourceColumn = [...state[source.droppableId]];
-//     const destinationColumn = source.droppableId === destination.droppableId ? sourceColumn : [...state[destination.droppableId]];
-//     const [movedJob] = sourceColumn.splice(source.index, 1);
-//     destinationColumn.splice(destination.index, 0, movedJob);
-//     dispatch({ type: MOVE_JOBS, payload: { [source.droppableId]: sourceColumn, ...sourceColumn(source.droppableId === destination.droppableId) } });
-//   } catch (e) {
-//     dispatch({ type: MOVE_JOBS_ERROR, payload: e});
-//   }
-// };
+export const sort = (droppableIdStart, droppableIdEnd, droppableIndexStart, droppableIndexEnd, draggableId) => {
 
-export const sort = (droppableIdStart, droppableIdEnd, droppableIndexStart, droppableIndexEnd, draggableId) => async (dispatch) => {
-  try {
-    dispatch({
-      type: MOVE_JOBS,
-      payload: {
-        droppableIdStart,
-        droppableIdEnd,
-        droppableIndexEnd,
-        droppableIndexStart,
-        draggableId,
-      },
-    });
-  } catch (e) {
-    dispatch({ type: MOVE_JOBS_ERROR, payload: e});
+  console.log(droppableIdStart);
+  return {
+    type: MOVE_JOBS,
+    payload: {
+      droppableIdStart,
+      droppableIdEnd,
+      droppableIndexEnd,
+      droppableIndexStart,
+      draggableId,
+    }
   }
 };
-
-// export const deleteJobsById= id => async dispatch => {
-
-//   try {
-//     await axios.delete(`/api/user/jobs/${id}`, { headers: { 'authorization': localStorage.getItem('token') }});
-//     const { data } = await axios.get('/api/user/jobs', { headers: { 'authorization': localStorage.getItem('token') }});
-//     dispatch({ type: GET_USER_JOBS, payload: data });
-//   } catch (e) {
-//     dispatch({ type: DELETE_JOBS_BY_ID_ERROR, payload: e });
-//   }
-
-// };

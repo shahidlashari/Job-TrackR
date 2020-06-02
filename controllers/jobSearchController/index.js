@@ -42,10 +42,10 @@ module.exports = {
     console.log('Im hi');
     const { jobId } = req.body;
     console.log(jobId);
-    const { status, coverLetter, resume } = req.body;
+    const { jobTitle, publishedId, publishedDate, level, categories, location, companyName, description, status, coverLetter, resume } = req.body;
     try {
       const updatedJob = await Jobs.findByIdAndUpdate(jobId,
-        { status, coverLetter, resume },
+        { jobTitle, publishedId, publishedDate, level, categories, location, companyName, description, status, coverLetter, resume },
         { new: true });
       return res.json(updatedJob);
     } catch (e) {

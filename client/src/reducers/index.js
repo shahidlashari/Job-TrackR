@@ -5,11 +5,6 @@ import authReducer from './authReducer';
 import trendingReducers from './trendingReducers';
 import jobsReducer from './jobsReducers';
 import chatReducer from './chatReducer';
-import activeBoardReducer from './activeBoardReducer';
-import listsReducer from './listsReducer';
-import cardsReducer from './cardsReducer';
-import boardsReducer from './boardsReducer';
-import boardOrderReducer from './boardOrderReducer';
 
 import {
   GET_MESSAGES,
@@ -24,11 +19,6 @@ export default combineReducers({
   data: trendingReducers,
   jobs: jobsReducer,
   chat: chatReducer,
-  list: listsReducer,
-  cards: cardsReducer,
-  boards: boardsReducer,
-  boardOrder: boardOrderReducer,
-  activeBoard: activeBoardReducer,
   form: formReducer.plugin({
     messageInput: (state, action) => {
       switch (action.type) {

@@ -61,18 +61,41 @@ export default function (state = INITIAL_STATE, action) {
     case SEARCH_JOBS_ERROR:
       return { ...state, searchJobServerError: action.serverError, searchJobClientError: action.clientError };
     case GET_USER_JOBS:
-      return { ...state, userJobs: action.payload, columnsJobs: action.payload, getUserJobsClientError: '', getUserJobsServerError: '', updateJobsCompleteError: '', deleteJobsError: '' };
+      return { ...state, userJobs: action.payload, getUserJobsClientError: '', getUserJobsServerError: '', updateJobsCompleteError: '', deleteJobsError: '' };
     case GET_USER_JOBS_ERROR:
       return { ...state, getUserJobsServerError: action.serverError, getUserJobsClientError: action.clientError };
     case MOVE_JOBS:
-      const { droppableIdStart, droppableIdEnd, droppableIndexEnd, droppableIndexStart } = action.payload;
+      const { droppableIdStart, droppableIdEnd, droppableIndexEnd, droppableIndexStart, draggableId } = action.payload;
+      console.log(action.payload);
       if (droppableIdStart !== droppableIdEnd) {
-        const sourceStart = state.columnsJobs[droppableIdStart];
-        const jobCard = sourceStart.jobIds.splice(droppableIndexStart, 1);
-        const sourceEnd = state.columnsJobs[droppableIdEnd];
-
-        sourceEnd.jobIds.splice(droppableIndexEnd, 0, ...jobCard);
-        return { ...state, [droppableIdStart]: sourceStart, [droppableIdEnd]: sourceEnd};
+        // droppableIdEnd === 'applying'
+        if (droppableIdStart === 'savedjobs') {
+          const indexToMove = state.userJobs.findIndex((job) => job.publishedId.toString() === draggableId );
+          const jobCard = state.userJobs[indexToMove];
+          state.userJobs.splice(indexToMove, 1);
+          const { columnsJobs } = state;
+          return {
+            ...state,
+            columnsJobs: {
+              ...columnsJobs,
+              [droppableIdEnd]: { id: droppableIdEnd, jobIds: [...columnsJobs[droppableIdStart].jobIds, jobCard ] }
+            }
+          };
+        }
+        const indexToMove = state.columnsJobs[droppableIdStart].jobIds.findIndex((job) => job.publishedId.toString() === draggableId );
+        const jobCard = state.columnsJobs[droppableIdStart].jobIds[indexToMove];
+        state.columnsJobs[droppableIdStart].jobIds.splice(indexToMove, 1);
+        const sourceEnd = state.columnsJobs[1];
+        // console.log(state.columnsJobs);
+        // // console.log(state.columnsJobs[droppableIdEnd]);
+        const { columnsJobs } = state;
+        return { 
+          ...state, 
+          columnsJobs: { 
+            ...columnsJobs, 
+            [droppableIdEnd]: { id: droppableIdEnd, jobIds: [...columnsJobs[droppableIdStart].jobIds, jobCard ] }
+          }
+        }
       }
       return state;
     case MOVE_JOBS_ERROR:

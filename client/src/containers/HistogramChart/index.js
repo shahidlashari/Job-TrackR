@@ -10,7 +10,7 @@ class HistogramChart extends PureComponent {
   }
 
   componentDidUpdate(prevProps) {
-    if (this.props.historical !== prevProps.historical) {
+    if (this.props.histogram !== prevProps.histogram) {
       this.mapChartData();
     }
   }
