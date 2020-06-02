@@ -6,8 +6,9 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import createDOMPurify from 'dompurify';
 import { JSDOM } from 'jsdom';
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import requireAuth from '../../hoc/requireAuth';
-import { getUserJobs } from '../../actions/jobActions';
+import { getUserJobs, sort } from '../../actions/jobActions';
 
 const { window } = new JSDOM('');
 const DOMPurify = createDOMPurify(window);
@@ -20,6 +21,14 @@ class UserJobList extends Component {
   onSubmit = async (formValues) => {
     console.log('Hi, I can make an api call and do everything from here');
     console.log(formValues);
+  };
+
+  onDragEnd = (result) => {
+    const { destination, source, draggableId } = result;
+    if (!destination) {
+      return;
+    }
+    this.props.sort(source.droppableId, destination.droppableId, source.index, destination.index, draggableId);
   };
 
   renderData = (field) => {
@@ -51,14 +60,6 @@ class UserJobList extends Component {
       </div>
     );
   }
-
-  renderField = ({ input, name, type }) => (
-    <div>
-      <div>
-        <input {...input} placeholder={name} type={type} />
-      </div>
-    </div>
-  );
 
   render() {
     const { handleSubmit } = this.props;

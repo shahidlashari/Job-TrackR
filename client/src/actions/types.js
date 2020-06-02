@@ -12,6 +12,10 @@ export const GET_USERS_ERROR = 'GET_USERS';
 export const GET_MESSAGES = 'GET_MESSAGES';
 export const GET_MESSAGES_ERROR = 'GET_MESSAGES_ERROR';
 
+// Drag and Drop
+export const MOVE_JOBS = 'MOVE_JOBS';
+export const MOVE_JOBS_ERROR = 'MOVE_JOBS_ERROR';
+
 // Search for a job action type
 export const SEARCH_JOBS = 'SEARCH_JOBS';
 export const SEARCH_JOBS_ERROR = 'SEARCH_JOBS_ERROR';
