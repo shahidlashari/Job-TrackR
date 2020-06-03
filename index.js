@@ -32,7 +32,7 @@ app.use(routes);
 require('./services/passport');
 
 // Connect database
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://robustallies:all123456@ds141208.mlab.com:41208/heroku_5hsf2fk0', {
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/jobTrackR', {
   useNewUrlParser: true,
   useCreateIndex: true,
   useUnifiedTopology: true,
